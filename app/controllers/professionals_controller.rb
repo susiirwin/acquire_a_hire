@@ -9,7 +9,7 @@ class ProfessionalsController < ApplicationController
     @user = User.new(user_params)
     @user.roles << Role.find_or_create_by(name: 'professional')
 
-    if @user.save
+    if @user.create_professional
       session[:user_id] = @user.id
       redirect_to professionals_dashboard_path
     else
