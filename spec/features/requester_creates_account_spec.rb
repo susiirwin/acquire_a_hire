@@ -17,7 +17,7 @@ describe 'guest creates requester account' do
       fill_in 'user_zipcode', with: '80202'
 
       click_on 'Create Account'
-
+save_and_open_page
       user = User.last
       expect(page).to have_content(user.first_name)
       expect(page).to have_content(user.last_name)
