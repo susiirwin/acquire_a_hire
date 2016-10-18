@@ -7,16 +7,16 @@ describe 'guest creates requester account' do
       within('div.requester') do
         click_on 'Sign Up'
       end
+      fill_in 'user_first_name', with: 'Chad'
+      fill_in 'user_last_name', with: 'Clancey'
+      fill_in 'user_email', with: 'cclancey007@test.com'
+      fill_in 'user_phone', with: '555-555-1234'
+      fill_in 'user_street_address', with: '123 Test St.'
+      fill_in 'user_city', with: 'Denver'
+      fill_in 'user_state', with: 'Colorado'
+      fill_in 'user_zipcode', with: '80202'
 
-      fill_in 'first_name', with: 'Chad'
-      fill_in 'last_name', with: 'Clancey'
-      fill_in 'email', with: 'cclancey007@test.com'
-      fill_in 'street_address', with: '123 Test St.'
-      fill_in 'city', with: 'Denver'
-      fill_in 'state', with: 'Colorado'
-      fill_in 'zipcode', with: '80202'
-
-      click_on 'Submit'
+      click_on 'Create Account'
 
       user = User.last
       expect(page).to have_content(user.first_name)
