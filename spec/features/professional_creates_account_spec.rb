@@ -36,7 +36,8 @@ describe 'guest creates professional account' do
   end
 
   context "user enters partial info" do
-    xit "returns to the new professional form" do
+    it "returns to the new professional form" do
+      Skill.create(name: "Espionage")
       visit root_path
       within('div.professional') do
         click_on 'Sign Up'
@@ -46,7 +47,6 @@ describe 'guest creates professional account' do
       fill_in 'user_last_name', with: 'Clancey'
       fill_in 'user_phone', with: '555-555-1234'
       fill_in 'user_street_address', with: '123 Test St.'
-      fill_in 'user_city', with: 'Denver'
       fill_in 'user_state', with: 'Colorado'
       fill_in 'user_zipcode', with: '80202'
 

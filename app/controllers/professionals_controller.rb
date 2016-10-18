@@ -1,7 +1,8 @@
 class ProfessionalsController < ApplicationController
+  before_action :set_skills
+
   def new
     @user = User.new
-    @skills = Skill.all
   end
 
   def create
@@ -32,5 +33,9 @@ class ProfessionalsController < ApplicationController
         :password_confirmation,
         skill_ids: []
       )
+    end
+
+    def set_skills
+      @skills = Skill.all
     end
 end
