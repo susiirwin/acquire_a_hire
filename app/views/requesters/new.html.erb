@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, url: requesters_path) do |f| %>
   <%= f.label :first_name %>
   <%= f.text_field :first_name %>
 
@@ -20,8 +20,8 @@
   <%= f.label :state %>
   <%= f.text_field :state %>
 
-  <%= f.label :zip %>
-  <%= f.text_field :zip %>
+  <%= f.label :zipcode %>
+  <%= f.text_field :zipcode %>
 
-  <%= f.submit %>
+  <%= f.submit "Create Account" %>
 <% end %>
