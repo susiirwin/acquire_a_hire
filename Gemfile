@@ -35,6 +35,9 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'rspec-rails', '~> 3.5'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'simplecov', :require => false, :group => :test
 end
 
 group :development do
