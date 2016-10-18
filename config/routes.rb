@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   namespace :requesters do
     get '/dashboard', to: 'users#show'
   end
+
+  namespace :professionals do
+    get '/dashboard', to: 'users#show'
+  end
 end
