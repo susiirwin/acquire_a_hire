@@ -4,11 +4,11 @@ class RequestersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    user.roles << Role.find_or_create_by(name: "requester")
+    @user = User.new(user_params)
+    @user.roles << Role.find_or_create_by(name: "requester")
 
-    if user.save
-      session[:user_id] = user.id
+    if @user.save
+      session[:user_id] = @user.id
       redirect_to requesters_dashboard_path
     else
       render :new
