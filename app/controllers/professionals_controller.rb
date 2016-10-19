@@ -28,7 +28,7 @@ class ProfessionalsController < ApplicationController
       redirect_to professionals_dashboard_path
     else
       set_flash_errors
-      render :new
+      render :edit
     end
   end
 

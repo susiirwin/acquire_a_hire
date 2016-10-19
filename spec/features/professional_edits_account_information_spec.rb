@@ -39,7 +39,7 @@ describe 'professional edits account' do
       uncheck "skill-#{skill.id}"
       click_on 'Save Changes'
 
-      expect(page).to have_button('Create Account')
+      expect(page).to have_button('Save Changes')
       expect(page).to have_content('You must select at least one skill')
     end
   end
