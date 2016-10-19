@@ -2,7 +2,7 @@
 <h3><%= @user.first_name %> <%= @user.last_name %></h3>
 <p><%= link_to 'Edit Account', edit_professional_path(@user) %>
 <p>
-  <%= @user.full_address %>    
+  <%= render partial: "shared/address", locals: {user: @user} %>
 </p>
 <h3>Skills Offered</h3>
 <ul>
