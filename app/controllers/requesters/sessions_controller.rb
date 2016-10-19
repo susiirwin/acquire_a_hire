@@ -16,8 +16,25 @@ class Requesters::SessionsController < ApplicationController
 
   def destroy
     session.clear
-    flash[:info] = "You have logged out"
+    flash[:info] = "You have logged out."
     redirect_to root_path
+  end
+
+  def confirm
+  end
+
+  def validate
+    validation = AuthyService.new(current_user)
+    if validation.verify(params[:submitted_token])
+      session[:confirm] = true
+      redirect_to requesters_dashboard_path
+    else
+      user = current_user
+      user.destroy
+      session.clear
+      flash[:error] = "You entered the incorrect token."
+      redirect_to new_requester_path
+    end
   end
 
   private

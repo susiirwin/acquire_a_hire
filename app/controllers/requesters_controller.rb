@@ -9,7 +9,12 @@ class RequestersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to requesters_dashboard_path
+      session[:confirm] = false
+      service = AuthyService.new(@user)
+      @user.authy_id = service.create_user
+      @user.save
+      service.send_token
+      redirect_to requesters_confirmation_path
     else
       render :new
     end

@@ -3,6 +3,10 @@ require 'rails_helper'
 describe 'guest creates requester account' do
   context 'user enters all necessary information' do
     it 'clicks sign up and creates account' do
+      AuthyService.any_instance.stubs(:create_user).returns("11111")
+      AuthyService.any_instance.stubs(:send_token).returns("true")
+      AuthyService.any_instance.stubs(:verify).returns("true")
+
       visit root_path
       within('div.requester') do
         click_on 'Sign Up'
@@ -22,9 +26,11 @@ describe 'guest creates requester account' do
 
       click_on 'Create Account'
 
-#      expect(page).to have_current_path('/confirmation')
-#      fill_in 'confirmation_code', with: '54321'
-#      click_on 'Submit'
+      expect(page).to have_current_path('/requesters/confirmation')
+      fill_in 'submitted_token', with: '54321'
+      click_on 'Submit'
+
+      expect(current_path).to eq(requesters_dashboard_path)
 
       user = User.last
       expect(page).to have_content(user.first_name)
@@ -35,7 +41,7 @@ describe 'guest creates requester account' do
   end
 
   context "user enters partial info" do
-    it "returns to the new requester form" do
+    xit "returns to the new requester form" do
       visit root_path
       within('div.requester') do
         click_on 'Sign Up'

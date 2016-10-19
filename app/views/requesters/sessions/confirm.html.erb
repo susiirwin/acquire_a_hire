@@ -1,0 +1,6 @@
+<h1>Confirm your Login</h1>
+
+<%= form_tag('/requesters/validate')  %>
+  <%= label_tag "Confirmation Code" %>
+  <%= text_field_tag "submitted_token" %>
+  <%= button_tag "Submit" %>
