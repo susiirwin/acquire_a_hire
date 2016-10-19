@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   end
 
   namespace :professionals do
+    get '/login',     to: 'sessions#new',    as: 'login'
+    post '/login',    to: 'sessions#create'
+    delete '/login',  to: 'sessions#destroy', as: 'destroy_login'
     get '/dashboard', to: 'users#show'
   end
 end
