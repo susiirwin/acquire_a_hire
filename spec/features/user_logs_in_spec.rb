@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "user log in" do
   it "successfully logs in requester with proper username and password" do
     user = create(:user)
+    user.roles << Role.find_or_create_by(name: "requester")
 
     visit requesters_login_path
 
@@ -19,6 +20,7 @@ describe "user log in" do
 
   it "successfully logs in professional with proper username and password" do
     user = create(:user)
+    user.roles << Role.find_or_create_by(name: "professional")
 
     visit professionals_login_path
 
