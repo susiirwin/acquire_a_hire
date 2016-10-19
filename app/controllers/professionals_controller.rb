@@ -55,7 +55,7 @@ class ProfessionalsController < ApplicationController
     end
 
     def set_flash_errors
-      if params[:skill_ids].nil?
+      if user_params[:skill_ids].nil?
         flash.now[:alert] = @user.errors.full_messages.push('You must select at least one skill').join(', ')
       else
         flash.now[:alert] = @user.errors.full_messages.join(', ')
