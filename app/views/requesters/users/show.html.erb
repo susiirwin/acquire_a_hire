@@ -3,3 +3,15 @@
 <p>
   <%= render partial: "shared/address", locals: {user: @user} %>
 </p>
+<h3>Your Posted Jobs</h3>
+<div class="jobs">
+  <% @user.jobs.each do |job| %>
+    <ul>
+      <h4><%= job.title %></h4>
+      <li>Skill: <%= job.skill.name %></li>
+      <li>Price: $<%= job.min_price / 100.0 %> - $<%= job.max_price / 100.0 %></li>
+      <li>Assigned to: <%= job.assigned_professional_name %></li>
+      <p><%= job.description %></p>
+    </ul>
+  <% end %>
+</div>
