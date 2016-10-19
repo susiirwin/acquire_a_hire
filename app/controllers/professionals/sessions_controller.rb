@@ -4,7 +4,7 @@ class Professionals::SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email])
-    if user && user.authenticate(params[:session][:password])
+    if is_valid_professional?(user)
       session[:user_id] = user.id
       redirect_to professionals_dashboard_path
     else
@@ -12,4 +12,11 @@ class Professionals::SessionsController < ApplicationController
       render :new
     end
   end
+
+  private
+    def is_valid_professional?(user)
+      user &&
+      user.authenticate(params[:session][:password]) &&
+      user.roles.pluck(:name).include?("professional")
+    end
 end

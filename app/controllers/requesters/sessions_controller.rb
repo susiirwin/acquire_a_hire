@@ -4,7 +4,7 @@ class Requesters::SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email])
-    if user && user.authenticate(params[:session][:password])
+    if is_valid_requester?(user)
       session[:user_id] = user.id
       redirect_to requesters_dashboard_path
     else
@@ -12,4 +12,11 @@ class Requesters::SessionsController < ApplicationController
       render :new
     end
   end
+
+  private
+    def is_valid_requester?(user)
+      user &&
+      user.authenticate(params[:session][:password]) &&
+      user.roles.pluck(:name).include?("requester")
+    end
 end
