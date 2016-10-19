@@ -1,5 +1,9 @@
 class AuthyService
-  def create_user(user, country_code = 1)
+  def initialize(user)
+    @user = user
+  end
+
+  def create_user(country_code = 1)
 #    conn = Faraday.new(url: 'https://api.authy.com/protected/json') do |faraday|
 #      faraday.request :url_encoded
 #      faraday.adapter Faraday.default_adapter
@@ -15,4 +19,19 @@ class AuthyService
 
     JSON.parse(response.body, symbolize_names: true)[:user][:id].to_s
   end
+
+  def send_token
+    response = Faraday.get("https://api.authy.com/protected/json/sms/#{user.authy_id}?api_key=#{ENV['authy_api_key']}")
+
+    JSON.parse(response.body, symbolize_names: true)[:success]
+  end
+
+  def verify(submitted_token)
+    response = Faraday.get("https://api.authy.com/protected/json/verify/#{submitted_token}/#{user.authy_id}?api_key=#{ENV['authy_api_key']}")
+
+    JSON.parse(response.body, symbolize_names: true)[:success]
+  end
+
+  private
+    attr_reader :user
 end
