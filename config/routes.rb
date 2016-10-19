@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   namespace :requesters do
     get '/login',     to: 'sessions#new',    as: 'login'
     post '/login',    to: 'sessions#create'
-    delete '/login',  to: 'sessions#destroy', as: 'destroy_login'
+    get '/logout',    to: 'sessions#destroy', as: 'logout'
     get '/dashboard', to: 'users#show'
   end
 
   namespace :professionals do
     get '/login',     to: 'sessions#new',    as: 'login'
     post '/login',    to: 'sessions#create'
-    delete '/login',  to: 'sessions#destroy', as: 'destroy_login'
+    get '/logout',    to: 'sessions#destroy', as: 'logout'
     get '/dashboard', to: 'users#show'
   end
 end
