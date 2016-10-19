@@ -53,6 +53,8 @@ describe 'guest creates professional account' do
       check "skill-#{skill.id}"
 
       click_on 'Create Account'
+      expect(page).to have_content("Email can't be blank")
+      expect(page).to have_content("City can't be blank")
       expect(page).to have_button('Create Account')
     end
 
@@ -77,6 +79,7 @@ describe 'guest creates professional account' do
 
       click_on 'Create Account'
       expect(page).to have_button('Create Account')
+      expect(page).to have_content('You must select at least one skill')
     end
   end
 end

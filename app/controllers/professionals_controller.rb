@@ -13,6 +13,7 @@ class ProfessionalsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to professionals_dashboard_path
     else
+      set_flash_errors
       render :new
     end
   end
@@ -37,5 +38,13 @@ class ProfessionalsController < ApplicationController
 
     def set_skills
       @skills = Skill.all
+    end
+
+    def set_flash_errors
+      if @user.skills.empty?
+        flash.now[:alert] = @user.errors.full_messages.push('You must select at least one skill').join(', ')
+      else
+        flash.now[:alert] = @user.errors.full_messages.join(', ')
+      end
     end
 end
