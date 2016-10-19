@@ -19,4 +19,12 @@ class User < ApplicationRecord
       save
     end
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def full_address
+    "#{street_address}\n#{city} #{state} #{zipcode}"
+  end
 end

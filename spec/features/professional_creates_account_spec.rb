@@ -23,6 +23,7 @@ describe 'guest creates professional account' do
       check "skill-#{skill.id}"
 
       click_on 'Create Account'
+save_and_open_page
 
       user = User.last
       expect(page).to have_content(user.first_name)

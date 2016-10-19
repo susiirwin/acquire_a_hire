@@ -2,8 +2,7 @@
 <h3><%= @user.first_name %> <%= @user.last_name %></h3>
 <p><%= link_to 'Edit Account', edit_professional_path(@user) %>
 <p>
-  <%= @user.street_address %><br>
-  <%= @user.city %>, <%= @user.state %> <%= @user.zipcode %>
+  <%= @user.full_address %>    
 </p>
 <h3>Skills Offered</h3>
 <ul>
