@@ -55,6 +55,7 @@ describe 'guest creates professional account' do
       click_on 'Create Account'
       expect(page).to have_content("Email can't be blank")
       expect(page).to have_content("City can't be blank")
+      expect(page).to_not have_content('You must select at least one skill')
       expect(page).to have_button('Create Account')
     end
 

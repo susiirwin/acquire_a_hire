@@ -18,6 +18,20 @@ class ProfessionalsController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if !user_params[:skill_ids].nil? && @user.update(user_params)
+      redirect_to professionals_dashboard_path
+    else
+      set_flash_errors
+      render :edit
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(
@@ -41,7 +55,7 @@ class ProfessionalsController < ApplicationController
     end
 
     def set_flash_errors
-      if @user.skills.empty?
+      if user_params[:skill_ids].nil?
         flash.now[:alert] = @user.errors.full_messages.push('You must select at least one skill').join(', ')
       else
         flash.now[:alert] = @user.errors.full_messages.join(', ')
