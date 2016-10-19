@@ -37,6 +37,7 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
   gem 'mocha'
   gem 'database_cleaner'
   gem 'simplecov', :require => false, :group => :test
