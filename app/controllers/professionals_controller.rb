@@ -29,7 +29,7 @@ class ProfessionalsController < ApplicationController
   def update
     @user = current_user
     if !user_params[:skill_ids].nil? && @user.update(user_params)
-      redirect_to dashboard_by_role
+      redirect_to professionals_dashboard_path
     else
       set_flash_errors
       render :edit
@@ -53,10 +53,6 @@ class ProfessionalsController < ApplicationController
         skill_ids: []
       )
     end
-
-    # def dashboard_by_role
-    #   return professionals_dashboard_path if
-    # end
 
     def set_skills
       @skills = Skill.all

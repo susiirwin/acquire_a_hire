@@ -58,7 +58,7 @@ def create_professional
     password: '12345',
     password_confirmation: '12345'
   )
-  pro.roles << Role.find_or_create_by(name: 'professional')
+  pro.update_attribute(:role, "professional")
   pro.skills << Skill.create(name: 'Professional Skill')
   pro.save
   pro
