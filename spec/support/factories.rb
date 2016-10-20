@@ -7,7 +7,7 @@ FactoryGirl.define do
     phone '555-555-1234'
     street_address '123 Test St.'
     city 'Denver'
-    state 'Colorado'
+    state 'CO'
     zipcode '80202'
     password '12345'
     password_confirmation '12345'
