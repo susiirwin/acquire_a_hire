@@ -40,7 +40,8 @@ describe 'guest creates professional account' do
       expect(page).to have_content(user.street_address)
       expect(page).to have_content(user.business_name)
       expect(page).to have_content(skill.name)
-      expect(user.roles.pluck(:name)).to include("professional")
+      expect(user.role).to eq("professional")
+      expect(user.verified).to be(true)
     end
   end
 

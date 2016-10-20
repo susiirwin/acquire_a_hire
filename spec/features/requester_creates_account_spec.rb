@@ -36,7 +36,7 @@ describe 'guest creates requester account' do
       expect(page).to have_content(user.first_name)
       expect(page).to have_content(user.last_name)
       expect(page).to have_content(user.street_address)
-      expect(user.roles.pluck(:name)).to include("requester")
+      expect(user.role).to eq("requester")
       expect(user.verified).to be(true)
     end
   end

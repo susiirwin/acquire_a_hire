@@ -9,7 +9,7 @@ class RequestersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      @user.roles << Role.new(name: "requester")
+      @user.update_attribute(:role, "requester")
       session[:user_id] = @user.id
       session[:confirm] = false
       service = AuthyService.new(@user)

@@ -15,16 +15,18 @@ class User < ApplicationRecord
   has_many :skills, through: :user_skills
   has_many :jobs, foreign_key: 'requester_id'
 
+  enum role: [:requester, :professional , :admin]
+
   def create_professional
     if valid? && !skills.empty?
       save
     end
   end
 
-  def set_final_parameters(role)
+  def set_final_parameters
     unless verified
       self.verified = true
-      self.roles << Role.find_or_create_by(name: role)
+      # self.roles << Role.find_or_create_by(name: role)
       self.save!
     end
   end

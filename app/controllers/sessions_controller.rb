@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if is_valid_professional?(user)
       session[:user_id] = user.id
       session[:confirm] = false
-      redirect_to professionals_confirmation_path
+      redirect_to dashboard_by_role(user)
     else
       flash.now[:danger] = "Username and/or Password is invalid. Try again."
       render :new
@@ -23,13 +23,13 @@ class SessionsController < ApplicationController
   def validate
     validation = AuthyService.new(current_user)
     if validation.verify(params[:submitted_token]) == 'true'
-      current_user.set_final_parameters("professional")
+      current_user.set_final_parameters
       session[:confirm] = true
-      redirect_to professionals_dashboard_path
+      redirect_to dashboard_by_role(current_user)
     elsif current_user.verified
       too_many_incorrect_attempts
       flash[:error] = "The key you entered is incorrect.\nWe are sending you a new key now."
-      redirect_to professionals_confirmation_path
+      redirect_to dashboard_by_role(current_user)
     else
       current_user.clear_professional_skills
       current_user.destroy
@@ -50,6 +50,11 @@ class SessionsController < ApplicationController
       user &&
       user.authenticate(params[:session][:password]) &&
       user.roles.pluck(:name).include?("professional")
+    end
+
+    def dashboard_by_role(user)
+      return requesters_dashboard_path if user.role == "requester"
+      return professionals_dashboard_path if user.role == "professional"
     end
 
     def too_many_incorrect_attempts
