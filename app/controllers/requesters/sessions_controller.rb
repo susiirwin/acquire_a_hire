@@ -30,7 +30,7 @@ class Requesters::SessionsController < ApplicationController
   def validate
     validation = AuthyService.new(current_user)
     if validation.verify(params[:submitted_token]) == 'true'
-      current_user.set_verified_true
+      current_user.set_final_parameters("requester")
       session[:confirm] = true
       redirect_to requesters_dashboard_path
     elsif current_user.verified

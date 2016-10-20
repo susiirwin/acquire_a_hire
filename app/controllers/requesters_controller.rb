@@ -16,6 +16,7 @@ class RequestersController < ApplicationController
       @user.save
       redirect_to requesters_confirmation_path
     else
+      flash.now[:error] = errors.full_messages.join(", ")
       render :new
     end
   end
