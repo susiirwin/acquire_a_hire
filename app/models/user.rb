@@ -33,6 +33,7 @@ class User < ApplicationRecord
     self.user_skills.each do |us|
       us.destroy
     end
+  end
 
   def full_name
     "#{first_name} #{last_name}"
