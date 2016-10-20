@@ -11,7 +11,6 @@ class ProfessionalsController < ApplicationController
     if @user.create_professional
       @user.update_attribute(:role, "professional")
       session[:user_id] = @user.id
-      session[:confirm] = false
       service = AuthyService.new(@user)
       @user.authy_id = service.create_user
       @user.save

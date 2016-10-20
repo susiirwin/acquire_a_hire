@@ -11,7 +11,6 @@ class RequestersController < ApplicationController
     if @user.save
       @user.update_attribute(:role, "requester")
       session[:user_id] = @user.id
-      session[:confirm] = false
       service = AuthyService.new(@user)
       @user.authy_id = service.create_user
       @user.save

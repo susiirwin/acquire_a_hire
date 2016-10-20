@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if is_valid_professional?(user)
       session[:user_id] = user.id
-      session[:confirm] = false
       redirect_to confirmation_path
     else
       flash.now[:danger] = "Username and/or Password is invalid. Try again."
@@ -24,12 +23,11 @@ class SessionsController < ApplicationController
     validation = AuthyService.new(current_user)
     if validation.verify(params[:submitted_token]) == 'true'
       current_user.set_final_parameters
-      session[:confirm] = true
       redirect_to dashboard_by_role(current_user)
     elsif current_user.verified
       too_many_incorrect_attempts
       flash[:error] = "The key you entered is incorrect.\nWe are sending you a new key now."
-      redirect_to dashboard_by_role(current_user)
+      redirect_back(fallback_location: root_path)
     else
       current_user.clear_professional_skills
       current_user.destroy
