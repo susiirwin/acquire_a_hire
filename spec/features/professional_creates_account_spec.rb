@@ -13,6 +13,8 @@ describe 'guest creates professional account' do
         click_on 'Sign Up'
       end
 
+      # expect(current_path).to eq("users/new")
+
       fill_in 'user_first_name', with: 'Chad'
       fill_in 'user_last_name', with: 'Clancey'
       fill_in 'user_business_name', with: 'Clancey Spies'
@@ -28,7 +30,7 @@ describe 'guest creates professional account' do
 
       click_on 'Create Account'
 
-      expect(page).to have_current_path('/professionals/confirmation')
+      expect(page).to have_current_path('/confirmation')
       fill_in 'submitted_token', with: '54321'
       click_on 'Submit'
 
@@ -120,7 +122,7 @@ describe 'guest creates professional account' do
 
       click_on 'Create Account'
 
-      expect(page).to have_current_path('/professionals/confirmation')
+      expect(page).to have_current_path('/confirmation')
       fill_in 'submitted_token', with: '54321'
       click_on 'Submit'
 

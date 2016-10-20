@@ -11,10 +11,11 @@ class ProfessionalsController < ApplicationController
     if @user.create_professional
       session[:user_id] = @user.id
       session[:confirm] = false
+      @user.roles << Role.new(name: "professional")
       service = AuthyService.new(@user)
       @user.authy_id = service.create_user
       @user.save
-      redirect_to professionals_confirmation_path
+      redirect_to confirmation_path
     else
       set_flash_errors
       render :new
@@ -28,7 +29,7 @@ class ProfessionalsController < ApplicationController
   def update
     @user = current_user
     if !user_params[:skill_ids].nil? && @user.update(user_params)
-      redirect_to professionals_dashboard_path
+      redirect_to dashboard_by_role
     else
       set_flash_errors
       render :edit
@@ -52,6 +53,10 @@ class ProfessionalsController < ApplicationController
         skill_ids: []
       )
     end
+
+    # def dashboard_by_role
+    #   return professionals_dashboard_path if
+    # end
 
     def set_skills
       @skills = Skill.all
