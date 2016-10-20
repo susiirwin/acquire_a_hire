@@ -19,4 +19,12 @@ class User < ApplicationRecord
       save
     end
   end
+
+  def set_verified_true
+    unless verified
+      self.verified = true
+      self.roles << Role.find_or_create_by(name: "requester")
+      self.save!
+    end
+  end
 end

@@ -21,18 +21,23 @@ class Requesters::SessionsController < ApplicationController
   end
 
   def confirm
+    service = AuthyService.new(current_user)
+    service.send_token
   end
 
   def validate
     validation = AuthyService.new(current_user)
-    if validation.verify(params[:submitted_token])
+    if validation.verify(params[:submitted_token]) == 'true'
+      current_user.set_verified_true
       session[:confirm] = true
       redirect_to requesters_dashboard_path
+    elsif current_user.verified
+      flash[:error] = "The key you entered is incorrect.\nWe are sending you a new key now."
+      redirect_to requesters_confirmation_path
     else
-      user = current_user
-      user.destroy
+      current_user.destroy
       session.clear
-      flash[:error] = "You entered the incorrect token."
+      flash[:error] = "The key you entered is incorrect."
       redirect_to new_requester_path
     end
   end
