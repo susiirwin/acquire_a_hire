@@ -16,5 +16,6 @@ Rails.application.routes.draw do
     post '/login',    to: 'sessions#create'
     get '/logout',    to: 'sessions#destroy', as: 'logout'
     get '/dashboard', to: 'users#show'
+    resources :jobs, only: [:index]
   end
 end

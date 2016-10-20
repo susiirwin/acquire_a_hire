@@ -12,7 +12,7 @@ describe 'professional looks at jobs' do
     
     ApplicationController.any_instance.stubs(:current_user).returns(pro)
 
-    visit professional_jobs_path
+    visit professionals_jobs_path
 
     expect(page).to have_content('Job 1')
     expect(page).not_to have_content('Job 2')

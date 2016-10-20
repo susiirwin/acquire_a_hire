@@ -1,0 +1,11 @@
+<ul>
+  <% @jobs.each do |job| %>
+    <li>
+      <h3><%= job.title %></h3>
+      <h5><%= job.skill.name %></h5>
+      <h5><%= number_to_currency(job.min_price / 1000.0) + " - " + number_to_currency(job.max_price / 1000.0) %></h5>
+      <p><%= job.description %></p>
+      <h5><%= job.status %></h5>
+    </li>
+  <% end %>
+</ul>
