@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root to: 'home#show'
-
   resources :requesters, only: [:new, :create]
   resources :professionals, only: [:new, :create, :edit, :update]
 
@@ -8,6 +7,8 @@ Rails.application.routes.draw do
     get '/login',     to: 'sessions#new',     as: 'login'
     post '/login',    to: 'sessions#create'
     get '/logout',    to: 'sessions#destroy', as: 'logout'
+    get '/confirmation', to: 'sessions#confirm'
+    post '/validate', to: 'sessions#validate'
     get '/dashboard', to: 'users#show'
   end
 
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
     get '/login',     to: 'sessions#new',     as: 'login'
     post '/login',    to: 'sessions#create'
     get '/logout',    to: 'sessions#destroy', as: 'logout'
+    get '/confirmation', to: 'sessions#confirm'
+    post '/validate', to: 'sessions#validate'
     get '/dashboard', to: 'users#show'
     resources :jobs, only: [:index]
   end

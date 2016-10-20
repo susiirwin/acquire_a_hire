@@ -21,6 +21,19 @@ class User < ApplicationRecord
     end
   end
 
+  def set_final_parameters(role)
+    unless verified
+      self.verified = true
+      self.roles << Role.find_or_create_by(name: role)
+      self.save!
+    end
+  end
+
+  def clear_professional_skills
+    self.user_skills.each do |us|
+      us.destroy
+    end
+
   def full_name
     "#{first_name} #{last_name}"
   end

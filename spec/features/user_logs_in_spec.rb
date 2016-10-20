@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe "user log in" do
   it "successfully logs in requester with proper username and password" do
+    AuthyService.any_instance.stubs(:create_user).returns("11111")
+    AuthyService.any_instance.stubs(:send_token).returns("true")
+    AuthyService.any_instance.stubs(:verify).returns("true")
+
     user = create(:user)
     user.roles << Role.find_or_create_by(name: "requester")
 
@@ -12,6 +16,10 @@ describe "user log in" do
 
     click_on "Login"
 
+    expect(page).to have_current_path('/requesters/confirmation')
+    fill_in 'submitted_token', with: '54321'
+    click_on 'Submit'
+
     expect(page).to have_content(user.first_name)
     expect(page).to have_content(user.last_name)
     expect(page).to have_content(user.street_address)
@@ -19,6 +27,10 @@ describe "user log in" do
   end
 
   it "successfully logs in professional with proper username and password" do
+    AuthyService.any_instance.stubs(:create_user).returns("11111")
+    AuthyService.any_instance.stubs(:send_token).returns("true")
+    AuthyService.any_instance.stubs(:verify).returns("true")
+
     user = create(:user)
     user.roles << Role.find_or_create_by(name: "professional")
 
@@ -28,6 +40,10 @@ describe "user log in" do
     fill_in "session_password", with: user.password
 
     click_on "Login"
+
+    expect(page).to have_current_path('/professionals/confirmation')
+    fill_in 'submitted_token', with: '54321'
+    click_on 'Submit'
 
     expect(page).to have_content(user.first_name)
     expect(page).to have_content(user.last_name)

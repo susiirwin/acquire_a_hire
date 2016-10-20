@@ -32,6 +32,10 @@ Shoulda::Matchers.configure do |config|
 end
 
 def login(user, login_path)
+  AuthyService.any_instance.stubs(:create_user).returns("11111")
+  AuthyService.any_instance.stubs(:send_token).returns("true")
+  AuthyService.any_instance.stubs(:verify).returns("true")
+
   visit login_path
 
   fill_in "session_email", with: user.email
