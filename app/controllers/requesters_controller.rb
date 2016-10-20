@@ -1,4 +1,6 @@
 class RequestersController < ApplicationController
+  skip_before_action :persist_current_user, only: [:create]
+
   def new
     @user = User.new
   end
