@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if is_valid_professional?(user)
       session[:user_id] = user.id
       session[:confirm] = false
-      redirect_to dashboard_by_role(user)
+      redirect_to confirmation_path
     else
       flash.now[:danger] = "Username and/or Password is invalid. Try again."
       render :new
@@ -48,8 +48,8 @@ class SessionsController < ApplicationController
   private
     def is_valid_professional?(user)
       user &&
-      user.authenticate(params[:session][:password]) &&
-      user.roles.pluck(:name).include?("professional")
+      user.authenticate(params[:session][:password])
+      # user.roles.pluck(:name).include?("professional")
     end
 
     def dashboard_by_role(user)
