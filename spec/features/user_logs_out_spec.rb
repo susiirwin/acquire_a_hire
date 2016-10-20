@@ -7,6 +7,10 @@ describe "user log out" do
 
     login(user, requesters_login_path)
 
+    expect(page).to have_current_path('/requesters/confirmation')
+    fill_in 'submitted_token', with: '54321'
+    click_on 'Submit'
+
     click_on "Logout"
 
     expect(page).to have_content("Login")
@@ -20,6 +24,10 @@ describe "user log out" do
     user.roles << Role.find_or_create_by(name: "professional")
 
     login(user, professionals_login_path)
+
+    expect(page).to have_current_path('/professionals/confirmation')
+    fill_in 'submitted_token', with: '54321'
+    click_on 'Submit'
 
     click_on "Logout"
 

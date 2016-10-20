@@ -27,4 +27,10 @@ class User < ApplicationRecord
       self.save!
     end
   end
+
+  def clear_professional_skills
+    self.user_skills.each do |us|
+      us.destroy
+    end
+  end
 end

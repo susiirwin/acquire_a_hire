@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
     end
 
     def persist_current_user
-      session[:user_id] = nil unless logged_in? && session[:confirm]
+      unless logged_in? && session[:confirm]
+        session[:user_id] = nil
+        session[:current_role] = nil
+      end
+
     end
 
     def logged_in?
