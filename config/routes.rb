@@ -19,5 +19,6 @@ Rails.application.routes.draw do
     get '/confirmation', to: 'sessions#confirm'
     post '/validate', to: 'sessions#validate'
     get '/dashboard', to: 'users#show'
+    resources :jobs, only: [:index]
   end
 end

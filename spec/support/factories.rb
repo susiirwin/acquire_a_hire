@@ -1,6 +1,6 @@
 FactoryGirl.define do
   # factories for each model go here
-  factory :user do
+  factory :user, aliases: [:requester, :professional] do
     first_name 'Chad'
     last_name 'Clancey'
     email 'cclancey007@test.com'
