@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :job do
     title "MyString"
-    skill nil
+    skill
     min_price 1
     max_price 1
-    requester nil
+    requester
     status "MyString"
     description "MyString"
   end
