@@ -22,6 +22,10 @@ describe 'guest creates requester account' do
 
       click_on 'Create Account'
 
+#      expect(page).to have_current_path('/confirmation')
+#      fill_in 'confirmation_code', with: '54321'
+#      click_on 'Submit'
+
       user = User.last
       expect(page).to have_content(user.first_name)
       expect(page).to have_content(user.last_name)
