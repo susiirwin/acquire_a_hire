@@ -21,4 +21,12 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'users#show'
     resources :jobs, only: [:index]
   end
+
+  namespace :api do
+    namespace :v1 do
+      namespace :jobs do
+        post '/:job_id/new_message', to: 'messages#create'
+      end
+    end
+  end
 end
