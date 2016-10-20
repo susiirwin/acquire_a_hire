@@ -127,7 +127,7 @@ describe 'guest creates professional account' do
       fill_in 'submitted_token', with: '54321'
       click_on 'Submit'
 
-      expect(current_path).to eq(new_professional_path)
+      expect(current_path).to eq(confirmation_path)
 
       expect(User.count).to eq(0)
       expect(page).to have_content('The key you entered is incorrect')

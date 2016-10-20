@@ -42,7 +42,7 @@ describe 'guest creates requester account' do
   end
 
   context "user enters partial info" do
-    xit "returns to the new requester form" do
+    it "returns to the new requester form" do
       visit root_path
       within('div.requester') do
         click_on 'Sign Up'
@@ -65,7 +65,7 @@ describe 'guest creates requester account' do
   end
 
   context 'user enters incorrect 2-auth key' do
-    xit 'clicks sign up and creates account' do
+    it 'clicks sign up and creates account' do
       AuthyService.any_instance.stubs(:create_user).returns("11111")
       AuthyService.any_instance.stubs(:send_token).returns("true")
       AuthyService.any_instance.stubs(:verify).returns("false")
@@ -89,11 +89,11 @@ describe 'guest creates requester account' do
 
       click_on 'Create Account'
 
-      expect(page).to have_current_path('/requesters/confirmation')
+      expect(page).to have_current_path(confirmation_path)
       fill_in 'submitted_token', with: '54321'
       click_on 'Submit'
 
-      expect(current_path).to eq(new_requester_path)
+      expect(current_path).to eq(confirmation_path)
 
       expect(User.count).to eq(0)
       expect(page).to have_content('The key you entered is incorrect')
