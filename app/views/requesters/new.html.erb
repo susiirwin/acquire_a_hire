@@ -1,33 +1,66 @@
-<%= form_for(@user, url: requesters_path) do |f| %>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
-
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
-
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <%= f.label :phone %>
-  <%= f.text_field :phone %>
-
-  <%= f.label :street_address %>
-  <%= f.text_field :street_address %>
-
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-
-  <%= f.label :state %>
-  <%= f.text_field :state %>
-
-  <%= f.label :zipcode %>
-  <%= f.text_field :zipcode %>
-
-  <%= f.label :password %>
-  <%= f.text_field :password %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.text_field :password_confirmation %>
-
-  <%= f.submit "Create Account" %>
-<% end %>
+<h1>Create a New User Account</h1>
+<div class="container">
+  <div class="jumbotron">
+    <%= form_for(@user, url: requesters_path, :html => {:class => "form-horizontal center"} )  do |f| %>
+      <div class="form-group">
+        <%= f.label :first_name, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+          <%= f.text_field :first_name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+          <%= f.text_field :last_name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+        <%= f.text_field :email, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :phone, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+      <%= f.text_field :phone, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :street_address, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+          <%= f.text_field :street_address, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :city, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+          <%= f.text_field :city, class: "form-control", class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :state, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+          <%= f.text_field :state, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :zipcode, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+          <%= f.text_field :zipcode, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+          <%= f.text_field :password, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+          <%= f.text_field :password_confirmation, class: "form-control" %>
+        </div>
+      </div>
+      <%= f.submit "Create Account" %>
+    <% end %>
