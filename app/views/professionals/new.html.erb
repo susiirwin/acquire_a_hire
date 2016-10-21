@@ -55,10 +55,17 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <%= f.label :Skills, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
       <% @skills.each do |skill| %>
-        <%= check_box_tag(:skill_ids, skill.id, @user.skills.include?(skill), name: 'user[skill_ids][]', id: "skill-#{skill.id}") %>
-            <%= skill.name %>
-      <% end %>
+        <div class="checkbox">
+          <%= check_box_tag(:skill_ids, skill.id, @user.skills.include?(skill), name: 'user[skill_ids][]', id: "skill-#{skill.id}", type: "checkbox" ) %>
+              <%= skill.name %>
+            </div>
+        <% end %>
+    </div>
+      </div>
 
     <div class="form-group">
         <%= f.label :password, class: "col-md-4 control-label" %>
@@ -73,7 +80,7 @@
         </div>
       </div>
 
-        <%= f.submit "Create Account", class: "btn btn-primary" %>
-      <% end %>
     </div>
+    <%= f.submit "Create Account", class: "btn btn-primary center-block" %>
+    <% end %>
 </div>
