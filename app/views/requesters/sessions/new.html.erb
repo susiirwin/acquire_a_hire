@@ -1,9 +1,19 @@
-<%= form_for(:session, url: requesters_login_path) do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+<div class="container">
+  <h1>Create a New User Account</h1>
+  <div class="jumbotron">
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.submit "Login", id: "login-button" %>
-<% end %>
+    <%= form_for(:session, url: requesters_login_path, :html => {:class => "form-horizontal center"} ) do |f| %>
+      <div class="form-group">
+        <%= f.label :email, class: "col-md-4 control-label" %>
+        <div class="col-md-4">
+          <%= f.text_field :email %>
+        </div>
+      </div>
+      <div class="form-group">
+      <%= f.label :password, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.password_field :password %>
+        </div>
+      </div>
+      <%= f.submit "Login", id: "login-button", class: "btn btn-primary" %>
+    <% end %>
