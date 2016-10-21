@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :persist_current_user, only: [:confirm, :validate]
+  before_action :check_attempt_number, only: [:validate]
+
   def new
   end
 
@@ -25,6 +27,7 @@ class SessionsController < ApplicationController
     validation = AuthyService.new(current_user)
     if validation.verify(params[:submitted_token]) == "true"
       current_user.update_attributes!(verified: true)
+      session[:counter] = nil
       redirect_to dashboard_by_role(current_user)
     else
       flash[:error] = "The key you entered is incorrect."
@@ -50,12 +53,22 @@ class SessionsController < ApplicationController
       return professionals_dashboard_path if user.role == "professional"
     end
 
-    def too_many_incorrect_attempts
+    def check_attempt_number
       session[:counter] ||= 0
       session[:counter] += 1
-      if session[:counter] == 3
-        flash[:error] = "You entered the incorrect key too many times.\nPlease try again later."
-        redirect_to root_path
+      if session[:counter] > 3
+         flash[:error] = "The key you entered is incorrect.\n Too many attempts, sending new key."
+         redirect_to confirmation_path
       end
     end
+
+
+    # def too_many_incorrect_attempts
+    #   session[:counter] ||= 0
+    #   session[:counter] += 1
+    #   if session[:counter] == 3
+    #     flash[:error] = "You entered the incorrect key too many times.\nPlease try again later."
+    #     redirect_to root_path
+    #   end
+    # end
 end

@@ -11,6 +11,7 @@ FactoryGirl.define do
     zipcode '80202'
     password '12345'
     password_confirmation '12345'
+    verified true
 
     factory :requester_user do
       role "requester"
@@ -18,6 +19,10 @@ FactoryGirl.define do
 
     factory :professional_user do
       role "professional"
+    end
+
+    factory :unverified_user do
+      verified false
     end
   end
 end

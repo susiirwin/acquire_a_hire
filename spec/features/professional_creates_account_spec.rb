@@ -129,8 +129,33 @@ describe 'guest creates professional account' do
 
       expect(current_path).to eq(confirmation_path)
 
-      expect(User.count).to eq(0)
+      # expect(User.count).to eq(0)
       expect(page).to have_content('The key you entered is incorrect')
+    end
+
+    it "sends too many attempts" do
+      user = create(:unverified_user)
+      AuthyService.any_instance.stubs(:create_user).returns("11111")
+      AuthyService.any_instance.stubs(:send_token).returns("true")
+      AuthyService.any_instance.stubs(:verify).returns("false")
+      ApplicationController.any_instance.stubs(:current_user).returns(user)
+
+      visit confirmation_path
+
+      3.times do
+        expect(current_path).to include('/confirmation')
+        fill_in 'submitted_token', with: '54321'
+        click_on 'Submit'
+
+        expect(current_path).to eq(confirmation_path)
+        expect(page).to have_content('The key you entered is incorrect')
+        expect(page).to_not have_content('Too many attempts, sending new key')
+      end
+
+      fill_in 'submitted_token', with: '54321'
+      click_on 'Submit'
+
+      expect(page).to have_content('Too many attempts, sending new key')
     end
   end
 end
