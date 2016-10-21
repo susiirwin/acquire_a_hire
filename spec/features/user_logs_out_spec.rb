@@ -4,7 +4,7 @@ describe "user log out" do
   it "successfully logs out a requester" do
     user = create(:requester_user)
 
-    login(user, login_path)
+    login(user)
 
     expect(page).to have_current_path('/confirmation')
     fill_in 'submitted_token', with: '54321'
@@ -21,7 +21,7 @@ describe "user log out" do
   it "successfully logs out a professional" do
     user = create(:professional_user)
 
-    login(user, login_path)
+    login(user)
 
     expect(page).to have_current_path('/confirmation')
     fill_in 'submitted_token', with: '54321'

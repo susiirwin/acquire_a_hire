@@ -19,9 +19,13 @@ FactoryGirl.define do
 
     factory :professional_user do
       role "professional"
+
+      before :create do |user|
+        user.skills << Skill.new(name: "Espionage")
+      end
     end
 
-    factory :unverified_user do
+    trait :unverified do
       verified false
     end
   end

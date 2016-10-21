@@ -48,13 +48,4 @@ describe "user log in" do
     expect(page).to have_content(user.street_address)
     expect(current_path).to eq(professionals_dashboard_path)
   end
-
-  def login(login_path)
-    visit login_path
-
-    fill_in "session_email", with: user.email
-    fill_in "session_password", with: user.password
-
-    click_on "Login"
-  end
 end

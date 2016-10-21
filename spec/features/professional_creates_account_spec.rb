@@ -129,12 +129,11 @@ describe 'guest creates professional account' do
 
       expect(current_path).to eq(confirmation_path)
 
-      # expect(User.count).to eq(0)
       expect(page).to have_content('The key you entered is incorrect')
     end
 
     it "sends too many attempts" do
-      user = create(:unverified_user)
+      user = create(:professional_user, :unverified)
       AuthyService.any_instance.stubs(:create_user).returns("11111")
       AuthyService.any_instance.stubs(:send_token).returns("true")
       AuthyService.any_instance.stubs(:verify).returns("false")
@@ -156,6 +155,22 @@ describe 'guest creates professional account' do
       click_on 'Submit'
 
       expect(page).to have_content('Too many attempts, sending new key')
+    end
+  end
+
+  context "user hasn't finished authy verification" do
+    it "destroys temporary user if they leave confirmation" do
+      user = create(:professional_user, :unverified)
+      AuthyService.any_instance.stubs(:send_token).returns("true")
+      ApplicationController.any_instance.stubs(:current_user).returns(user)
+
+      visit confirmation_path
+
+      expect(User.count).to eq(1)
+
+      visit root_path
+
+      expect(User.count).to eq(0)
     end
   end
 end

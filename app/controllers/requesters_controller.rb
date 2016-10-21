@@ -1,5 +1,4 @@
 class RequestersController < ApplicationController
-  skip_before_action :persist_current_user, only: [:create]
 
   def new
     @user = User.new
@@ -9,11 +8,9 @@ class RequestersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      @user.update_attribute(:role, "requester")
       session[:user_id] = @user.id
       service = AuthyService.new(@user)
-      @user.authy_id = service.create_user
-      @user.save
+      @user.update_attributes!(role: "requester", authy_id: service.create_user)
       redirect_to confirmation_path
     else
       flash.now[:error] = @user.errors.full_messages.join(", ")
