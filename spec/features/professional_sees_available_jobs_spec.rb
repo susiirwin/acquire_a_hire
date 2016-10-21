@@ -2,14 +2,15 @@ require 'rails_helper'
 
 describe 'professional looks at jobs' do
   it 'sees all jobs for their state and skills' do
-    pro = create_professional
-    skill = pro.skills.last
+    pro = create(:professional_user)
+    skill = Skill.new(name: "Espionage")
+    pro.skills << skill
     state = pro.state
 
     job_1 = create(:job, title: 'Job 1', state: 'CO', skill: skill)
     job_2 = create(:job, title: 'Job 2', state: 'CO')
     job_3 = create(:job, title: 'Job 3', state: 'WA', skill: skill)
-    
+
     ApplicationController.any_instance.stubs(:current_user).returns(pro)
 
     visit professionals_jobs_path
