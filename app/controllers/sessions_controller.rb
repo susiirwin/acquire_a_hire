@@ -53,7 +53,7 @@ class SessionsController < ApplicationController
 
     def check_attempt_number
       session[:counter] ||= 0
-      session[:counter] += 1
+      session[:counter] +=  1
       if session[:counter] > 3
          flash[:error] = "The key you entered is incorrect.\n Too many attempts, sending new key."
          redirect_to confirmation_path
