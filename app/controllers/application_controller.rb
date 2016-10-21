@@ -20,8 +20,11 @@ class ApplicationController < ActionController::Base
       unless logged_in? && current_user.verified
         session[:user_id] = nil
         session[:current_role] = nil
+        # if current_user
+        #   current_user.user_skills.destroy_all
+        #   current_user.destroy
+        # end
       end
-
     end
 
     def logged_in?

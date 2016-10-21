@@ -16,24 +16,19 @@ class SessionsController < ApplicationController
 
   def confirm
     service = AuthyService.new(current_user)
-    service.send_token
+    unless params[:do_not_send_token]
+      service.send_token
+    end
   end
 
   def validate
     validation = AuthyService.new(current_user)
-    if validation.verify(params[:submitted_token]) == 'true'
-      current_user.set_final_parameters
+    if validation.verify(params[:submitted_token]) == "true"
+      current_user.update_attributes!(verified: true)
       redirect_to dashboard_by_role(current_user)
-    elsif current_user.verified
-      too_many_incorrect_attempts
-      flash[:error] = "The key you entered is incorrect.\nWe are sending you a new key now."
-      redirect_back(fallback_location: root_path)
     else
-      current_user.clear_professional_skills
-      current_user.destroy
-      session.clear
       flash[:error] = "The key you entered is incorrect."
-      redirect_back(fallback_location: root_path)
+      redirect_to confirmation_path(do_not_send_token: true)
     end
   end
 
