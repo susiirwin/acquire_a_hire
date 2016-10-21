@@ -1,5 +1,5 @@
-<h1>Create a New User Account</h1>
 <div class="container">
+  <h1>Create a New User Account</h1>
   <div class="jumbotron">
     <%= form_for(@user, url: requesters_path, :html => {:class => "form-horizontal center"} )  do |f| %>
       <div class="form-group">
@@ -62,5 +62,5 @@
           <%= f.text_field :password_confirmation, class: "form-control" %>
         </div>
       </div>
-      <%= f.submit "Create Account" %>
+      <%= f.submit "Create Account", class: "btn btn-primary" %>
     <% end %>

@@ -1,5 +1,5 @@
-<h1>Create a New Professional Account</h1>
 <div class="container">
+  <h1>Create a New Professional Account</h1>
   <div class="jumbotron">
     <%= form_for(@user, url: professionals_path, :html => {:class => "form-horizontal center"} ) do |f| %>
       <div class="form-group">
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-        <%= f.submit "Create Account" %>
+        <%= f.submit "Create Account", class: "btn btn-primary" %>
       <% end %>
     </div>
 </div>
