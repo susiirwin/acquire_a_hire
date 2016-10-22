@@ -1,5 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe UserApi, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  it 'generates api key' do
+    user = create(:user)
+    params = {
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+      description: 'testing key generation',
+      url: 'http://test.com'
+    }
+    UserApi.save_key(params, user.id)
+
+    expect(UserApi.last.key.length).to eq(22)
+    expect(UserApi.last.uid).to eq(user.id)
+    expect(UserApi.last.first_name).to eq(user.first_name)
+    expect(UserApi.last.last_name).to eq(user.last_name)
+    expect(UserApi.last.email).to eq(user.email)
+    expect(UserApi.last.description).to eq(params[:description])
+    expect(UserApi.last.url).to eq(params[:url])
+  end
 end

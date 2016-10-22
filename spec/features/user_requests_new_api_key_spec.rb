@@ -38,7 +38,7 @@ describe 'logged in user seeks new api key' do
   #     click_on 'Send Request'
   #
   #     expect(page).to have_content('Incorrect password')
-  #       expect(UserApi.count).to eq(0)
+  #     expect(UserApi.count).to eq(0)
   #     expect(current_path).to eq('/api/accounts')
   #   end
   # end
