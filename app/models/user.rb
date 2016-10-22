@@ -24,6 +24,10 @@ class User < ApplicationRecord
     "#{street_address}\n#{city} #{state} #{zipcode}"
   end
 
+  def has_api_key?
+    UserApi.find_by(uid: id)
+  end
+
   private
     def professionals_must_have_skills
       if self.role == "professional" && self.skills.empty?

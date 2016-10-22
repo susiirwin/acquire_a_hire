@@ -7,8 +7,14 @@ class UserApi < ApplicationRecord
       email: params[:email],
       description: params[:description],
       url: params[:url],
+      redirect_url: params[:redirect_url],
       key: generate_key
     )
+  end
+
+  def self.validate_user_key(key, uid)
+    user_api = find_by(key: key)
+    user_api.uid == uid if user_api
   end
 
   private

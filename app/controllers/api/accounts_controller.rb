@@ -19,11 +19,18 @@ class Api::AccountsController < ApplicationController
     @user_api = UserApi.find_by(uid: current_user.id)
   end
 
+  def overwrite
+
+  end
+
+
   private
     def valid_form?
       !params[:first_name].nil? &&
       !params[:last_name].nil? &&
       !params[:email].nil? &&
+      !params[:url].nil? &&
+      !params[:redirect_url].nil? &&
       params[:password] == current_user.password
     end
 
@@ -36,6 +43,8 @@ class Api::AccountsController < ApplicationController
       errors << "First Name can't be blank" if params[:first_name].nil?
       errors << "Last Name can't be blank" if params[:last_name].nil?
       errors << "Email Address can't be blank" if params[:email].nil?
+      errors << "Application URL can't be blank" if params[:url].nil?
+      errors << "Redirect URL can't be blank" if params[:redirect_url].nil?
       errors << "You entered the incorrect password" if params[:password] != current_user.password
     end
 end

@@ -17,6 +17,8 @@ describe 'logged in user seeks new api key' do
       ApplicationController.any_instance.stubs(:current_user).returns(user)
       visit '/api/accounts/new'
 
+      fill_in 'url', with: 'test.com'
+      fill_in 'redirect_url', with: 'test.com'
       fill_in 'password', with: user.password
       fill_in 'description', with: 'This is a test'
       click_on 'Send Request'

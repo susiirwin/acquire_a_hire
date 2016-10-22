@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :accounts, only: [:new, :create]
+    post 'accounts/overwrite', to: 'accounts#overwrite'
     get 'accounts/dashboard', to: 'accounts#show'
   end
   namespace :requesters do
