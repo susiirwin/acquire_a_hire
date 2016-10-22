@@ -29,7 +29,6 @@ describe 'guest creates professional account' do
       check "skill-#{skill.id}"
 
       click_on 'Create Account'
-
       expect(page).to have_current_path('/confirmation')
       fill_in 'submitted_token', with: '54321'
       click_on 'Submit'
