@@ -6,6 +6,11 @@ class Api::V1::Jobs::MessagesController < ApplicationController
     notes 'Create a new message. business_name is required for Requester but not for Professional.'
   end
 
+  swagger_api :index do
+    summary 'View all Messages in a Conversation'
+    notes 'Displays array of messages related to a job'
+  end
+
   def create
     job = Job.find(params[:job_id])
     sender = User.find_by_api_key(params[:api_key])
@@ -25,7 +30,8 @@ class Api::V1::Jobs::MessagesController < ApplicationController
   end
 
   def index
-    @messages = Message.all
+    messages = Message.all
+    # require 'pry'; binding.pry
     render status: 200
   end
 end
