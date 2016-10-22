@@ -1,3 +1,4 @@
 <h1>Confirm your Key</h1>
-<%= form_tag('/requesters/validate')  %>
+<%= link_to "Send new key", confirmation_path %>
+<%= form_tag('/validate')  %>
 <%= render partial: 'shared/two_auth_confirmation' %>
