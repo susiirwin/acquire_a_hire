@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   post '/login',    to: 'sessions#create'
   get '/logout',    to: 'sessions#destroy', as: 'logout'
 
+  namespace :api do
+    resources :accounts, only: [:new, :create]
+    get 'accounts/dashboard', to: 'accounts#show'
+  end
   namespace :requesters do
     get '/dashboard', to: 'users#show'
   end
