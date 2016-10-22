@@ -2,16 +2,25 @@ class Api::V1::Jobs::MessagesController < ApplicationController
   swagger_controller :messages, 'Messages'
 
   swagger_api :create do
-    summary 'Sends a message'
-    notes 'Some notes'
+    summary 'Send a message to a user'
+    notes 'Create a new message. business_name is required for Requester but not for Professional.'
   end
 
   def create
-    sender = User.find(params[:sender])
-    recipient = User.find(params[:recipient])
     job = Job.find(params[:job_id])
-
+    sender = User.find_by_api_key(params[:api_key])
+    requester = job.requester
+    if requester == sender
+      recipient = User.find_by_business_name(params[:business_name])
+    else
+      recipient = requester
+    end
+    @name = if recipient.role == "professional"
+              recipient.business_name
+            else
+              recipient.full_name
+            end
     Message.create!(body: params[:body], sender: sender, recipient: recipient, job: job)
-    @recipient = recipient
+    render status: 201
   end
 end

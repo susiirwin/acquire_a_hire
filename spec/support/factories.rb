@@ -13,6 +13,7 @@ FactoryGirl.define do
     password '12345'
     password_confirmation '12345'
     verified true
+    api_key nil
 
     factory :requester_user do
       role "requester"

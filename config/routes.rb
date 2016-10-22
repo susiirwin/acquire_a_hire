@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :jobs do
-        post '/:job_id/new_message', to: 'messages#create'
+        post '/:job_id/message', to: 'messages#create'
       end
     end
   end
