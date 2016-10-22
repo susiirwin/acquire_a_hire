@@ -20,7 +20,15 @@ class Api::AccountsController < ApplicationController
   end
 
   def overwrite
-
+    @user = current_user
+    if valid_overwrite_form?
+      UserApi.find_by(uid: @user.id).overwrite_key
+      flash[:success] = "Your old API key has been successfully overwritten"
+      redirect_to api_accounts_dashboard_path
+    else
+      flash.now[:error] = "You entered the incorrect password"
+      render :new
+    end
   end
 
 
@@ -31,6 +39,11 @@ class Api::AccountsController < ApplicationController
       !params[:email].nil? &&
       !params[:url].nil? &&
       !params[:redirect_url].nil? &&
+      params[:password] == current_user.password
+    end
+
+    def valid_overwrite_form?
+      params[:accept] &&
       params[:password] == current_user.password
     end
 

@@ -1,4 +1,8 @@
 class UserApi < ApplicationRecord
+  def overwrite_key
+    update(key: UserApi.generate_key)
+  end
+
   def self.save_key(params, uid)
     user_api = find_or_create_by(uid: uid)
     user_api.update(

@@ -37,4 +37,22 @@ RSpec.describe UserApi, type: :model do
     expect(UserApi.validate_user_key(11111, user.id)).to be_falsey
     expect(UserApi.validate_user_key(UserApi.last.key, 11111111)).to be_falsey
   end
+
+  it 'overwrites existing keys' do
+    user = create(:user)
+    params = {
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+      description: 'testing key generation',
+      url: 'http://test.com'
+    }
+    UserApi.save_key(params, user.id)
+    old_key = UserApi.last.key
+    UserApi.last.overwrite_key
+
+    expect(UserApi.validate_user_key(old_key, user.id)).to be_falsey
+    expect(UserApi.validate_user_key(UserApi.last.key, user.id)).to eq(true)
+    expect(old_key).to_not eq(UserApi.last.key)
+  end
 end
