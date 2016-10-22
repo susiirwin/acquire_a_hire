@@ -28,18 +28,18 @@ describe 'logged in user seeks new api key' do
     end
   end
 
-  # context 'incorrect password is entered' do
-  #   it 'fills in incorrect password and rejected api key' do
-  #     user = create(:requester_user)
-  #     ApplicationController.any_instance.stubs(:current_user).returns(user)
-  #     visit '/api/accounts/new'
-  #
-  #     fill_in 'password', with: 'wrong'
-  #     click_on 'Send Request'
-  #
-  #     expect(page).to have_content('Incorrect password')
-  #     expect(UserApi.count).to eq(0)
-  #     expect(current_path).to eq('/api/accounts')
-  #   end
-  # end
+  context 'incorrect password is entered' do
+    it 'fills in incorrect password and rejected api key' do
+      user = create(:requester_user)
+      ApplicationController.any_instance.stubs(:current_user).returns(user)
+      visit '/api/accounts/new'
+
+      fill_in 'password', with: 'wrong'
+      click_on 'Send Request'
+
+      expect(page).to have_content('incorrect password')
+      expect(UserApi.count).to eq(0)
+      expect(current_path).to eq('/api/accounts')
+    end
+  end
 end

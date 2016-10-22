@@ -4,17 +4,19 @@ class Api::AccountsController < ApplicationController
   end
 
   def create
-    byebug
+    @user = current_user
     if valid_form?
-      UserApi.save_key(api_request_params, current_user.id)
+      UserApi.save_key(api_request_params, @user.id)
+      flash[:success] = "API Key Request Accepted"
       redirect_to api_accounts_dashboard_path
     else
-      flash.now[:error] = set_error_message.joins(", ")
+      flash.now[:error] = set_error_message.join(", ")
       render :new
     end
   end
 
   def show
+    @user_api = UserApi.find_by(uid: current_user.id)
   end
 
   private
