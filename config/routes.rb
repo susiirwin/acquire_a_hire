@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'home#show'
   resources :requesters, only: [:new, :create]
   resources :professionals, only: [:new, :create, :edit, :update]
+  resources :jobs, only: [:new]
 
   namespace :requesters do
     get '/login',     to: 'sessions#new',     as: 'login'
