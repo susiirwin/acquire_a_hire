@@ -20,12 +20,14 @@
           <%= f.text_field :business_name, class: "form-control" %>
         </div>
       </div>
-      <div class="form-group">    <%= f.label :email, class: "col-md-4 control-label" %>
+      <div class="form-group">
+        <%= f.label :email, class: "col-md-4 control-label" %>
         <div class="col-md-4">
           <%= f.text_field :email, class: "form-control" %>
         </div>
       </div>
-      <div class="form-group">    <%= f.label :phone, class: "col-md-4 control-label" %>
+      <div class="form-group">
+        <%= f.label :phone, class: "col-md-4 control-label" %>
         <div class="col-md-4">
           <%= f.text_field :phone, class: "form-control" %>
         </div>
@@ -62,11 +64,9 @@
         <div class="checkbox">
           <%= check_box_tag(:skill_ids, skill.id, @user.skills.include?(skill), name: 'user[skill_ids][]', id: "skill-#{skill.id}", type: "checkbox" ) %>
               <%= skill.name %>
-            </div>
+        </div>
         <% end %>
-    </div>
       </div>
-
     <div class="form-group">
         <%= f.label :password, class: "col-md-4 control-label" %>
         <div class="col-md-4">
@@ -83,4 +83,5 @@
     </div>
     <%= f.submit "Create Account", class: "btn btn-primary center-block" %>
     <% end %>
+  </div>
 </div>
