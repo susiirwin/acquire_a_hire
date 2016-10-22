@@ -2,12 +2,11 @@ require 'rails_helper'
 
 describe "user log out" do
   it "successfully logs out a requester" do
-    user = create(:user)
-    user.roles << Role.find_or_create_by(name: "requester")
+    user = create(:requester_user)
 
-    login(user, requesters_login_path)
+    login(user)
 
-    expect(page).to have_current_path('/requesters/confirmation')
+    expect(page).to have_current_path('/confirmation')
     fill_in 'submitted_token', with: '54321'
     click_on 'Submit'
 
@@ -20,12 +19,11 @@ describe "user log out" do
   end
 
   it "successfully logs out a professional" do
-    user = create(:user)
-    user.roles << Role.find_or_create_by(name: "professional")
+    user = create(:professional_user)
 
-    login(user, professionals_login_path)
+    login(user)
 
-    expect(page).to have_current_path('/professionals/confirmation')
+    expect(page).to have_current_path('/confirmation')
     fill_in 'submitted_token', with: '54321'
     click_on 'Submit'
 

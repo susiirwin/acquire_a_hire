@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'professional edits account' do
   context 'enters all necessary information' do
     it 'clicks edit account and sees updates' do
-      pro = create_professional
+      pro = create(:professional_user)
       original_skill = pro.skills.last
-      create_skill
+      create(:skill)
       new_skill = Skill.last
 
       ApplicationController.any_instance.stubs(:current_user).returns(pro)
@@ -28,7 +28,7 @@ describe 'professional edits account' do
 
   context "user enters partial info" do
     it "returns to the edit form if all skills are unchecked" do
-      pro = create_professional
+      pro = create(:professional_user)
       skill = pro.skills.last
 
       ApplicationController.any_instance.stubs(:current_user).returns(pro)
