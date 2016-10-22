@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :jobs do
         post '/:job_id/message', to: 'messages#create'
+        get '/:job_id/messages', to: 'messages#index'
       end
     end
   end

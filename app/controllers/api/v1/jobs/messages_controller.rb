@@ -23,4 +23,9 @@ class Api::V1::Jobs::MessagesController < ApplicationController
     Message.create!(body: params[:body], sender: sender, recipient: recipient, job: job)
     render status: 201
   end
+
+  def index
+    @messages = Message.all
+    render status: 200
+  end
 end
