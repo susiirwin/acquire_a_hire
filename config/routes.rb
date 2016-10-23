@@ -13,6 +13,20 @@ Rails.application.routes.draw do
   namespace :api do
     resources :accounts, only: [:new, :create, :update]
     get 'accounts/dashboard', to: 'accounts#show'
+
+    namespace :v1 do
+      namespace :jobs do
+        post '/:job_id/message', to: 'messages#create'
+        get '/:job_id/messages', to: 'messages#index'
+      end
+    end
+
+    namespace :oauth do
+      get '/authorize', to: 'authorize#new'
+      post '/authorize', to: 'authorize#create'
+      get '/authorize/confirm', to: 'authorize#show'
+      get '/authorize/redirect', to: 'authorize#redirect'
+    end
   end
   namespace :requesters do
     get '/dashboard', to: 'users#show'
@@ -24,12 +38,5 @@ Rails.application.routes.draw do
     resources :messages, only: [:new, :create]
   end
 
-  namespace :api do
-    namespace :v1 do
-      namespace :jobs do
-        post '/:job_id/message', to: 'messages#create'
-        get '/:job_id/messages', to: 'messages#index'
-      end
-    end
-  end
+  get '/test_redirect_landing', to: "test_landing#show"
 end
