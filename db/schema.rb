@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023173057) do
+ActiveRecord::Schema.define(version: 20161023214039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(version: 20161023173057) do
     t.index ["user_id"], name: "index_user_apis_on_user_id", using: :btree
   end
 
+  create_table "user_authorizations", force: :cascade do |t|
+    t.string  "code"
+    t.integer "user_id"
+    t.integer "user_api_id"
+    t.boolean "authorized",  default: false
+    t.index ["user_api_id"], name: "index_user_authorizations_on_user_api_id", using: :btree
+    t.index ["user_id"], name: "index_user_authorizations_on_user_id", using: :btree
+  end
+
   create_table "user_skills", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skill_id"
@@ -102,6 +111,8 @@ ActiveRecord::Schema.define(version: 20161023173057) do
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "user_apis", "users"
+  add_foreign_key "user_authorizations", "user_apis"
+  add_foreign_key "user_authorizations", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
 end

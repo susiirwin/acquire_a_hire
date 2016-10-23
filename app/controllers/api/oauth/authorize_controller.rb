@@ -5,7 +5,10 @@ class Api::Oauth::AuthorizeController < ApplicationController
 
   def create
     user = User.find_by(email: params[:authorization][:email])
+    user_api = UserApi.find_by(key: authorize_params[:api_key])
     if user.authenticate(params[:authorization][:password])
+      session[:authorizing_user_id] = user.id
+      UserAuthorization.create(user: user, user_api: user_api)
       redirect_to api_oauth_authorize_confirm_path(authorize_params)
     else
       render :new
@@ -14,12 +17,15 @@ class Api::Oauth::AuthorizeController < ApplicationController
 
   def show
     @authorize_params = authorize_params
-    # @user_api = UserApi.find_by(user: current_user)
   end
 
   def redirect
     user_api = UserApi.find_by(key: authorize_params[:api_key])
-    redirect_to "#{user_api.redirect_url}?code=123"
+    user = User.find(session[:authorizing_user_id])
+    user_authorization = UserAuthorization.find_by(user_api: user_api, user: user)
+    user_authorization.update_attributes(authorized: true)
+    code = user_authorization.set_code
+    redirect_to "#{user_api.redirect_url}?code=#{code}"
   end
 
   private
