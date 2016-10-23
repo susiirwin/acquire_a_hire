@@ -1,0 +1,6 @@
+<h1>Request Messaging API Key</h1>
+<% if @user.has_api_key? %>
+  <%= render partial: 'another_key_form' %>
+<% else %>
+  <%= render partial: 'new_key_form' %>
+<% end %>

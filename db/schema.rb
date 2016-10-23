@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023025028) do
+ActiveRecord::Schema.define(version: 20161023143315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20161023025028) do
   end
 
   create_table "user_apis", force: :cascade do |t|
-    t.integer  "uid"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
@@ -62,6 +61,8 @@ ActiveRecord::Schema.define(version: 20161023025028) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "redirect_url"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_user_apis_on_user_id", using: :btree
   end
 
   create_table "user_skills", force: :cascade do |t|
@@ -99,6 +100,7 @@ ActiveRecord::Schema.define(version: 20161023025028) do
   add_foreign_key "messages", "jobs"
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "user_apis", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
 end
