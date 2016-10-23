@@ -1,21 +1,19 @@
 class UserApi < ApplicationRecord
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+  validates :url, presence: true
+  validates :redirect_url, presence: true
+
   belongs_to :user
 
   def overwrite_key
     update(key: UserApi.generate_key)
   end
 
-  def self.save_key(params, uid)
-    user_api = find_or_create_by(user_id: uid)
-    user_api.update(
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      email: params[:email],
-      description: params[:description],
-      url: params[:url],
-      redirect_url: params[:redirect_url],
-      key: generate_key
-    )
+  def update(params)
+    params[:key] = UserApi.generate_key
+    super(params)
   end
 
   def self.validate_user_key(key, user)

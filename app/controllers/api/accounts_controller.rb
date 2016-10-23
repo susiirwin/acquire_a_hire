@@ -5,12 +5,14 @@ class Api::AccountsController < ApplicationController
 
   def create
     @user = current_user
-    if valid_overwrite_form?
+    @user_api = UserApi.find_or_create_by(user_id: @user.id)
+    if valid_password? && params[:accept]
       overwrite_user_api_key
-    elsif valid_form?
-      create_new_user_api_key
+    elsif valid_password? && @user_api.update(api_request_params)
+      flash[:success] = "API Key Request Accepted"
+      redirect_to api_accounts_dashboard_path
     else
-      flash.now[:error] = set_error_message.join(", ")
+      flash.now[:error] = set_error_message
       render :new
     end
   end
@@ -20,43 +22,25 @@ class Api::AccountsController < ApplicationController
   end
 
   private
-    def valid_form?
-      !params[:first_name].nil? &&
-      !params[:last_name].nil? &&
-      !params[:email].nil? &&
-      !params[:url].nil? &&
-      !params[:redirect_url].nil? &&
-      params[:password] == current_user.password
-    end
-
-    def valid_overwrite_form?
-      params[:accept] &&
+    def valid_password?
       params[:password] == current_user.password
     end
 
     def api_request_params
-      params.permit(:first_name, :last_name, :email, :description, :url)
+      params.permit(:first_name, :last_name, :email, :description, :url, :redirect_url)
     end
 
     def set_error_message
-      errors = Array.new
-      errors << "First Name can't be blank" if params[:first_name].nil?
-      errors << "Last Name can't be blank" if params[:last_name].nil?
-      errors << "Email Address can't be blank" if params[:email].nil?
-      errors << "Application URL can't be blank" if params[:url].nil?
-      errors << "Redirect URL can't be blank" if params[:redirect_url].nil?
-      errors << "You entered the incorrect password" if params[:password] != current_user.password
+      if params[:password] != current_user.password
+        flash.now[:alert] = @user.errors.full_messages.push('You entered the incorrect password').join(', ')
+      else
+        flash.now[:alert] = @user.errors.full_messages.join(', ')
+      end
     end
 
     def overwrite_user_api_key
       @user.user_apis.last.overwrite_key
       flash[:success] = "Your old API key has been successfully overwritten"
-      redirect_to api_accounts_dashboard_path
-    end
-
-    def create_new_user_api_key
-      UserApi.save_key(api_request_params, @user.id)
-      flash[:success] = "API Key Request Accepted"
       redirect_to api_accounts_dashboard_path
     end
 end

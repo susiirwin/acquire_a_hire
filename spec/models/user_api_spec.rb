@@ -11,7 +11,8 @@ RSpec.describe UserApi, type: :model do
       url: 'http://test.com',
       redirect_url: 'http://test.com'
     }
-    UserApi.save_key(params, user.id)
+    user_api = UserApi.find_or_create_by(user_id: user.id)
+    user_api.update(params)
 
     expect(UserApi.last.key.length).to eq(22)
     expect(UserApi.last.user).to eq(user)
@@ -29,9 +30,11 @@ RSpec.describe UserApi, type: :model do
       last_name: user.last_name,
       email: user.email,
       description: 'testing key generation',
-      url: 'http://test.com'
+      url: 'http://test.com',
+      redirect_url: 'http://test.com'
     }
-    UserApi.save_key(params, user.id)
+    user_api = UserApi.find_or_create_by(user_id: user.id)
+    user_api.update(params)
 
     expect(UserApi.validate_user_key(UserApi.last.key, user)).to eq(true)
     expect(UserApi.validate_user_key(11111, user)).to be_falsey
@@ -44,9 +47,11 @@ RSpec.describe UserApi, type: :model do
       last_name: user.last_name,
       email: user.email,
       description: 'testing key generation',
-      url: 'http://test.com'
+      url: 'http://test.com',
+      redirect_url: 'http://test.com'
     }
-    UserApi.save_key(params, user.id)
+    user_api = UserApi.find_or_create_by(user_id: user.id)
+    user_api.update(params)
     old_key = UserApi.last.key
     UserApi.last.overwrite_key
 

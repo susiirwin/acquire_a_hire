@@ -11,7 +11,8 @@ describe 'user requests another api key' do
       url: 'http://test.com',
       redirect_url: 'http://test.com'
     }
-    UserApi.save_key(params, user.id)
+    user_api = UserApi.find_or_create_by(user_id: user.id)
+    user_api.update(params)
     old_key = UserApi.last.key
 
     ApplicationController.any_instance.stubs(:current_user).returns(user)
