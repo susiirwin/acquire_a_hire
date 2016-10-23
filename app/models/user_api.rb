@@ -9,6 +9,7 @@ class UserApi < ApplicationRecord
 
   def overwrite_key
     update(key: UserApi.generate_key)
+    update(secret: UserApi.generate_key)
   end
 
   def update(params)
