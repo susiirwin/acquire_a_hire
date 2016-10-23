@@ -30,7 +30,7 @@ class Api::V1::Jobs::MessagesController < ApplicationController
   end
 
   def index
-    messages = Message.all
+    @messages = Message.all
     # require 'pry'; binding.pry
     render status: 200
   end
