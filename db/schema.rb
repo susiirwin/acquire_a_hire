@@ -51,6 +51,19 @@ ActiveRecord::Schema.define(version: 20161023010014) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_apis", force: :cascade do |t|
+    t.integer  "uid"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.text     "description"
+    t.string   "url"
+    t.string   "key"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "redirect_url"
+  end
+
   create_table "user_skills", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skill_id"
