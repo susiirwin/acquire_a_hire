@@ -7,7 +7,7 @@ class Api::V1::Oauth::TokenController < ApplicationController
       @user_authorization = user_authorization
       render status: 201
     else
-      render status: 404
+      render status: 403
     end
   end
 
