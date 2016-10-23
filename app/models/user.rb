@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :user_skills, dependent: :destroy
   has_many :skills, through: :user_skills
   has_many :jobs, foreign_key: 'requester_id'
+  has_many :user_apis
 
   enum role: [:requester, :professional , :admin]
 
@@ -23,6 +24,10 @@ class User < ApplicationRecord
 
   def full_address
     "#{street_address}\n#{city} #{state} #{zipcode}"
+  end
+
+  def has_api_key?
+    !user_apis.empty?
   end
 
   def in_progress_jobs
