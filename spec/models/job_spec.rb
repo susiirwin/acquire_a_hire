@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Job, type: :model do
-  it "has "
-
   context "price range" do
     it "requires min price less than max price" do
       job = create(:job, min_price: 100, max_price: 200)
