@@ -14,6 +14,7 @@ class JobsController < ApplicationController
     end
 
     def authorized?
-      current_user.professional? || current_user.jobs.pluck(:id).include?(params[:id])
+      current_user.professional? ||
+      current_user.jobs.pluck(:id).include?(params[:id].to_i)
     end
 end
