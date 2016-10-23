@@ -7,6 +7,10 @@ class UserAuthorization < ApplicationRecord
     code
   end
 
+  def set_token
+    update_attributes(token: get_code)
+  end
+
   private
     def get_code
       SecureRandom.urlsafe_base64

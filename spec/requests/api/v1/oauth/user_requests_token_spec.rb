@@ -4,7 +4,7 @@ describe "OAuth API" do
   it "userrequests a token by sending key, secret and code" do
     user = create(:requester_user)
     ApplicationController.any_instance.stubs(:current_user).returns(user)
-    UserAuthorization.any_instance.stubs(:set_token).returns("123")
+    UserAuthorization.any_instance.stubs(:get_code).returns("123")
     params = {
       first_name: user.first_name,
       last_name: user.last_name,
@@ -22,8 +22,9 @@ describe "OAuth API" do
 
     token_data = JSON.parse(response.body, symbolize_names: true)
 
-    expect(token_data[:access_token]).to eq("123")
+    expect(response.status).to eq(201)
     expect(token_data[:token_type]).to eq("bearer")
     expect(token_data[:info]).to eq({name: "#{user.full_name}", email: "#{user.email}"})
+    expect(token_data[:access_token]).to eq("123")
   end
 end

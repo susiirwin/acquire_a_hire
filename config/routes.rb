@@ -19,12 +19,15 @@ Rails.application.routes.draw do
         post '/:job_id/message', to: 'messages#create'
         get '/:job_id/messages', to: 'messages#index'
       end
+      namespace :oauth do
+        get '/token',              to: 'token#create', format: "json"
+      end
     end
 
     namespace :oauth do
-      get '/authorize', to: 'authorize#new'
-      post '/authorize', to: 'authorize#create'
-      get '/authorize/confirm', to: 'authorize#show'
+      get '/authorize',          to: 'authorize#new'
+      post '/authorize',         to: 'authorize#create'
+      get '/authorize/confirm',  to: 'authorize#show'
       get '/authorize/redirect', to: 'authorize#redirect'
     end
   end

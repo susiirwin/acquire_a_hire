@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "User authorizes access to account" do
-  it "logs in, confirms authorization and is redirected to redirect_url" do
+  it "logs in, confirms authorization and is redirected to redirect_url with code" do
     user = create(:requester_user)
     ApplicationController.any_instance.stubs(:current_user).returns(user)
     UserAuthorization.any_instance.stubs(:set_code).returns("123")
