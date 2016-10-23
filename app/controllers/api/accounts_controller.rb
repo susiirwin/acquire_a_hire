@@ -5,10 +5,10 @@ class Api::AccountsController < ApplicationController
 
   def create
     @user = current_user
-    if valid_form?
-      UserApi.save_key(api_request_params, @user.id)
-      flash[:success] = "API Key Request Accepted"
-      redirect_to api_accounts_dashboard_path
+    if valid_overwrite_form?
+      overwrite_user_api_key
+    elsif valid_form?
+      create_new_user_api_key
     else
       flash.now[:error] = set_error_message.join(", ")
       render :new
@@ -18,19 +18,6 @@ class Api::AccountsController < ApplicationController
   def show
     @user_api = current_user.user_apis.last
   end
-
-  def overwrite
-    @user = current_user
-    if valid_overwrite_form?
-      @user.user_apis.last.overwrite_key
-      flash[:success] = "Your old API key has been successfully overwritten"
-      redirect_to api_accounts_dashboard_path
-    else
-      flash.now[:error] = "You entered the incorrect password"
-      render :new
-    end
-  end
-
 
   private
     def valid_form?
@@ -60,6 +47,16 @@ class Api::AccountsController < ApplicationController
       errors << "Redirect URL can't be blank" if params[:redirect_url].nil?
       errors << "You entered the incorrect password" if params[:password] != current_user.password
     end
-end
 
-# SecureRandom.urlsafe_base64
+    def overwrite_user_api_key
+      @user.user_apis.last.overwrite_key
+      flash[:success] = "Your old API key has been successfully overwritten"
+      redirect_to api_accounts_dashboard_path
+    end
+
+    def create_new_user_api_key
+      UserApi.save_key(api_request_params, @user.id)
+      flash[:success] = "API Key Request Accepted"
+      redirect_to api_accounts_dashboard_path
+    end
+end
