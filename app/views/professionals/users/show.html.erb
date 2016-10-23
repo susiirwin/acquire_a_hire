@@ -1,0 +1,20 @@
+<h1><%= @user.business_name %></h1>
+<h3><%= @user.first_name %> <%= @user.last_name %></h3>
+<p><%= link_to 'Edit Account', edit_professional_path(@user) %>
+<p>
+  <%= render partial: "shared/address", locals: {user: @user} %>
+</p>
+<h3>Skills Offered</h3>
+<ul>
+  <% @user.skills.each do |skill| %>
+    <li><%= skill.name %></li>
+  <% end %>
+</ul>
+
+<div class="jobs">
+  <% @user.in_progress_jobs.each do |job| %>
+    <ul>
+      <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
+    </ul>
+  <% end %>
+</div>
