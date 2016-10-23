@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'home#show'
   resources :requesters, only: [:new, :create]
   resources :professionals, only: [:new, :create, :edit, :update]
-  resources :jobs, only: [:new]
+  resources :jobs, only: [:show, :new]
 
   get '/confirmation', to: 'sessions#confirm'
   post '/validate', to: 'sessions#validate'

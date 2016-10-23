@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   enum role: [:requester, :professional , :admin]
 
+
   def full_name
     "#{first_name} #{last_name}"
   end

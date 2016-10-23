@@ -12,6 +12,7 @@ FactoryGirl.define do
     zipcode '80202'
     password '12345'
     password_confirmation '12345'
+
     verified true
     api_key nil
 
@@ -30,5 +31,24 @@ FactoryGirl.define do
     trait :unverified do
       verified false
     end
+  end
+
+  sequence :job_title do |n|
+    "Job #{n}"
+  end
+
+  factory :skill do
+    name "Espionage"
+  end
+
+  factory :job do
+    title { generate(:job_title) }
+    skill
+    min_price 100
+    max_price 1000
+    requester
+    # professional
+    status "available"
+    description "do the thing"
   end
 end

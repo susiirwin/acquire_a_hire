@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161022180523) do
+ActiveRecord::Schema.define(version: 20161023010014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,11 @@ ActiveRecord::Schema.define(version: 20161022180523) do
     t.integer  "requester_id"
     t.string   "status"
     t.string   "description"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "state"
+    t.integer  "professional_id"
+    t.index ["professional_id"], name: "index_jobs_on_professional_id", using: :btree
     t.index ["requester_id"], name: "index_jobs_on_requester_id", using: :btree
     t.index ["skill_id"], name: "index_jobs_on_skill_id", using: :btree
   end
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(version: 20161022180523) do
   end
 
   add_foreign_key "jobs", "skills"
+  add_foreign_key "jobs", "users", column: "professional_id"
   add_foreign_key "jobs", "users", column: "requester_id"
   add_foreign_key "messages", "jobs"
   add_foreign_key "messages", "users", column: "recipient_id"
