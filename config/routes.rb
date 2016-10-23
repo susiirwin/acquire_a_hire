@@ -13,6 +13,14 @@ Rails.application.routes.draw do
   namespace :api do
     resources :accounts, only: [:new, :create, :update]
     get 'accounts/dashboard', to: 'accounts#show'
+    get 'oauth/authorize', to: 'oauth#new'
+    get 'oauth/authorize/confirm', to: 'oauth#show'
+    namespace :v1 do
+      namespace :jobs do
+        post '/:job_id/message', to: 'messages#create'
+        get '/:job_id/messages', to: 'messages#index'
+      end
+    end
   end
   namespace :requesters do
     get '/dashboard', to: 'users#show'
@@ -22,14 +30,5 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'users#show'
     resources :jobs, only: [:index]
     resources :messages, only: [:new, :create]
-  end
-
-  namespace :api do
-    namespace :v1 do
-      namespace :jobs do
-        post '/:job_id/message', to: 'messages#create'
-        get '/:job_id/messages', to: 'messages#index'
-      end
-    end
   end
 end

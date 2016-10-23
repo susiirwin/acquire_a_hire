@@ -14,6 +14,7 @@ class UserApi < ApplicationRecord
 
   def update(params)
     params[:key] = UserApi.generate_key
+    params[:secret] = UserApi.generate_key
     super(params)
   end
 
