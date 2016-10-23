@@ -16,12 +16,25 @@ class User < ApplicationRecord
 
   enum role: [:requester, :professional , :admin]
 
+
   def full_name
     "#{first_name} #{last_name}"
   end
 
   def full_address
     "#{street_address}\n#{city} #{state} #{zipcode}"
+  end
+
+  def in_progress_jobs
+    jobs.in_progress
+  end
+
+  def open_jobs
+    jobs.available
+  end
+
+  def closed_jobs
+    jobs.closed
   end
 
   private
