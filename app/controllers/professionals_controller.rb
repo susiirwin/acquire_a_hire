@@ -7,11 +7,12 @@ class ProfessionalsController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.roles << Role.find_or_create_by(name: 'professional')
-
-    if @user.create_professional
+    @user.update_attributes(role: "professional")
+    if @user.save
       session[:user_id] = @user.id
-      redirect_to professionals_dashboard_path
+      service = AuthyService.new(@user)
+      @user.update_attributes(authy_id: service.create_user)
+      redirect_to confirmation_path
     else
       set_flash_errors
       render :new

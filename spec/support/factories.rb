@@ -7,21 +7,27 @@ FactoryGirl.define do
     phone '555-555-1234'
     street_address '123 Test St.'
     city 'Denver'
-    state 'Colorado'
+    state 'CO'
     zipcode '80202'
     password '12345'
     password_confirmation '12345'
 
+    verified true
+
     factory :requester_user do
-      after(:create) do |user|
-        user.roles << Role.new(name: "requester")
-      end
+      role "requester"
     end
 
     factory :professional_user do
-      after(:create) do |user|
-        user.roles << Role.new(name: "professional")
+      role "professional"
+
+      before :create do |user|
+        user.skills << Skill.new(name: "Espionage")
       end
+    end
+
+    trait :unverified do
+      verified false
     end
   end
 
@@ -40,7 +46,7 @@ FactoryGirl.define do
     max_price 1000
     requester
     # professional
-    status "pending"
+    status "available"
     description "do the thing"
   end
 end

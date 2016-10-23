@@ -8,18 +8,14 @@ class User < ApplicationRecord
   validates :city, presence: true
   validates :state, presence: true
   validates :zipcode, presence: true
+  validate  :professionals_must_have_skills
 
-  has_many :user_roles
-  has_many :roles, through: :user_roles
-  has_many :user_skills
+  has_many :user_skills, dependent: :destroy
   has_many :skills, through: :user_skills
   has_many :jobs, foreign_key: 'requester_id'
 
-  def create_professional
-    if valid? && !skills.empty?
-      save
-    end
-  end
+  enum role: [:requester, :professional , :admin]
+
 
   def full_name
     "#{first_name} #{last_name}"
@@ -28,4 +24,23 @@ class User < ApplicationRecord
   def full_address
     "#{street_address}\n#{city} #{state} #{zipcode}"
   end
+
+  def in_progress_jobs
+    jobs.in_progress
+  end
+
+  def open_jobs
+    jobs.available
+  end
+
+  def closed_jobs
+    jobs.closed
+  end
+
+  private
+    def professionals_must_have_skills
+      if self.role == "professional" && self.skills.empty?
+        errors.add(:user, "can't be professional without skills")
+      end
+    end
 end

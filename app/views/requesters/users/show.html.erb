@@ -5,13 +5,19 @@
 </p>
 <h3>Your Posted Jobs</h3>
 <div class="jobs">
-  <% @user.jobs.each do |job| %>
-    <ul>
-      <h4><%= job.title %></h4>
-      <li>Skill: <%= job.skill.name %></li>
-      <li>Price: $<%= job.min_price / 100.0 %> - $<%= job.max_price / 100.0 %></li>
-      <li>Assigned to: <%= job.assigned_professional_name %></li>
-      <p><%= job.description %></p>
-    </ul>
-  <% end %>
+  <div id="open">
+    <% @user.open_jobs.each do |job| %>
+      <ul>
+        <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
+      </ul>
+    <% end %>
+  </div>
+
+  <div id="in_progress">
+    <% @user.in_progress_jobs.each do |job| %>
+      <ul>
+        <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
+      </ul>
+    <% end %>
+  </div>
 </div>

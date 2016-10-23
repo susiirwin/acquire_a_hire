@@ -1,16 +1,18 @@
 class RequestersController < ApplicationController
+
   def new
     @user = User.new
   end
 
   def create
     @user = User.new(user_params)
-    @user.roles << Role.find_or_create_by(name: "requester")
-
     if @user.save
       session[:user_id] = @user.id
-      redirect_to requesters_dashboard_path
+      service = AuthyService.new(@user)
+      @user.update_attributes!(role: "requester", authy_id: service.create_user)
+      redirect_to confirmation_path
     else
+      flash.now[:error] = @user.errors.full_messages.join(", ")
       render :new
     end
   end

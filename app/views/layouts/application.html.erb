@@ -10,7 +10,7 @@
 
   <body>
     <% if current_user %>
-      <%= link_to "Logout", logout_path_based_on_role %>
+      <%= link_to "Logout", logout_path %>
     <% else %>
     <% end %>
     <% flash.each do |type, message| %>

@@ -31,39 +31,17 @@ Shoulda::Matchers.configure do |config|
  end
 end
 
-def login(user, login_path)
+def login(user)
+  AuthyService.any_instance.stubs(:create_user).returns("11111")
+  AuthyService.any_instance.stubs(:send_token).returns("true")
+  AuthyService.any_instance.stubs(:verify).returns("true")
+
   visit login_path
 
   fill_in "session_email", with: user.email
   fill_in "session_password", with: user.password
 
   click_on "Login"
-end
-
-def create_professional
-  pro = User.new(
-    first_name: 'Test',
-    last_name: 'Tester',
-    business_name: 'Testing',
-    email: 'test_tester@testing.com',
-    phone: '5555551234',
-    street_address: '123 Test st.',
-    city: 'Denver',
-    state: 'CO',
-    zipcode: '80202',
-    password: '12345',
-    password_confirmation: '12345'
-  )
-  pro.roles << Role.find_or_create_by(name: 'professional')
-  pro.skills << Skill.create(name: 'Professional Skill')
-  pro.save
-  pro
-end
-
-def create_skill(amount = 1)
-  amount.times do |n|
-    Skill.create(name: "Testing Skill#{n}")
-  end
 end
 
 Shoulda::Matchers.configure do |config|

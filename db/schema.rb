@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019225124) do
+ActiveRecord::Schema.define(version: 20161023010014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,31 +23,32 @@ ActiveRecord::Schema.define(version: 20161019225124) do
     t.integer  "requester_id"
     t.string   "status"
     t.string   "description"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "state"
+    t.integer  "professional_id"
+    t.index ["professional_id"], name: "index_jobs_on_professional_id", using: :btree
     t.index ["requester_id"], name: "index_jobs_on_requester_id", using: :btree
     t.index ["skill_id"], name: "index_jobs_on_skill_id", using: :btree
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "messages", force: :cascade do |t|
+    t.string   "body"
+    t.text     "subject"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "job_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["job_id"], name: "index_messages_on_job_id", using: :btree
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
+    t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
   end
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "user_roles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_user_roles_on_role_id", using: :btree
-    t.index ["user_id"], name: "index_user_roles_on_user_id", using: :btree
   end
 
   create_table "user_skills", force: :cascade do |t|
@@ -68,18 +69,23 @@ ActiveRecord::Schema.define(version: 20161019225124) do
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "password_digest"
     t.string   "password_confirmation"
     t.string   "business_name"
     t.string   "authy_id"
+    t.boolean  "verified",              default: false
+    t.integer  "role"
+    t.string   "api_key"
   end
 
   add_foreign_key "jobs", "skills"
+  add_foreign_key "jobs", "users", column: "professional_id"
   add_foreign_key "jobs", "users", column: "requester_id"
-  add_foreign_key "user_roles", "roles"
-  add_foreign_key "user_roles", "users"
+  add_foreign_key "messages", "jobs"
+  add_foreign_key "messages", "users", column: "recipient_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
 end
