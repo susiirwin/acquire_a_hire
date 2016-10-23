@@ -1,5 +1,5 @@
 <h1><%= @user.full_name %></h1>
-<h3>Member since: <%= @user.created_at %></h3>
+<h3>Member since: <%= @user.created_at.to_s(:long) %></h3>
 <p>
   <%= render partial: "shared/address", locals: {user: @user} %>
 </p>
