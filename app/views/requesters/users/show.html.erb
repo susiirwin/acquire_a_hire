@@ -1,5 +1,5 @@
 <h1><%= @user.full_name %></h1>
-
+<h3>Member since: <%= @user.created_at %></h3>
 <p>
   <%= render partial: "shared/address", locals: {user: @user} %>
 </p>
@@ -21,3 +21,7 @@
     <% end %>
   </div>
 </div>
+
+<p>
+<%= link_to 'Start A Project', new_job_path %>
+</p>
