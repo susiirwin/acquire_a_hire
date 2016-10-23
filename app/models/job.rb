@@ -1,5 +1,5 @@
 class Job < ApplicationRecord
-  validate :is_valid_price_range
+  validates :min_price, numericality: { less_than: :max_price, greater_than: 0 }
 
   belongs_to :skill
   belongs_to :requester, class_name: "User"
@@ -12,10 +12,4 @@ class Job < ApplicationRecord
   def assigned_professional_name
     "none"
   end
-  private
-    def is_valid_price_range
-      if min_price > max_price
-        errors.add(:min_price, "can't be greater than max price")
-      end
-    end
 end
