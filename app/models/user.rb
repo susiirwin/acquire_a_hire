@@ -28,6 +28,7 @@ class User < ApplicationRecord
 
   def has_api_key?
     !user_apis.empty?
+  end
 
   def in_progress_jobs
     jobs.in_progress

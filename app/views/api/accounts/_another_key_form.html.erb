@@ -1,7 +1,7 @@
 <p>You already have an API key attached to your account.<br>
 Requesting a new API key will overwrite your prior key.</p>
 
-<%= form_tag api_accounts_path %>
+<%= form_tag api_account_path(@user.user_apis.last), method: :put %>
   <%= label_tag 'accept', '*I understand my existing key will be overwritten' %>
   <%= check_box_tag 'accept' %>
   <%= label_tag 'password', '*Password' %><br>
