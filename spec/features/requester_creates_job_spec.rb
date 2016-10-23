@@ -19,6 +19,7 @@ describe "requester creates job" do
     click_on "Create Project"
 
     job = Job.last
+    expect(current_path).to eq(requesters_dashboard_path)
     expect(job.min_price).to eq(1000)
     within('div.jobs div#open') do
       expect(page).to have_link("#{job.id} - #{job.title}")
