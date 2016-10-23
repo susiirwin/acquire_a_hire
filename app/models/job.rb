@@ -1,5 +1,9 @@
 class Job < ApplicationRecord
-  validates :min_price, numericality: { less_than: :max_price, greater_than: 0 }
+  validates :title,       presence: true
+  validates :skill,       presence: true
+  validates :description, presence: true
+  validates :status,      presence: true
+  validates :min_price, numericality: { greater_than: 0, less_than: :max_price }
 
   belongs_to :skill
   belongs_to :requester, class_name: "User"
@@ -8,8 +12,4 @@ class Job < ApplicationRecord
   scope :in_progress, -> { where(status: "pending") }
   scope :available,   -> { where(status: "available") }
   scope :closed,      -> { where(status: "closed") }
-
-  def assigned_professional_name
-    "none"
-  end
 end
