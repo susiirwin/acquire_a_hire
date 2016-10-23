@@ -30,8 +30,7 @@ class Api::V1::Jobs::MessagesController < ApplicationController
   end
 
   def index
-    @messages = Message.all
-    # require 'pry'; binding.pry
+    @messages = Message.find_by_job(params[:job_id])
     render status: 200
   end
 end

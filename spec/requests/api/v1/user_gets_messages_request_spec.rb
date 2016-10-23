@@ -25,27 +25,26 @@ describe "API endpoint for all messages" do
     expect(messages.first).to have_key("created_at")
   end
 
-  xit "returns an array of related messages only" do
+  it "returns an array of related messages only" do
     requester = create(:requester, first_name: "Dave", last_name: "Clancey", api_key: '4567')
-    # And my user has permission to comment on this job - at this point they do.... is this ok?
     professional = create(:professional, api_key: '1234')
-    job1 = create(:job, id: 1, requester: requester)
-    job2 = create(:job, id: 2, requester: requester)
+    job = create(:job, requester: requester)
+    job2 = create(:job, requester: requester)
     Message.create(body: "Build all the things.",
                   subject: "You got the job.",
                   sender_id: requester.id,
                   recipient_id: professional.id,
-                  job_id: job1.id)
+                  job_id: job.id)
     Message.create(body: "OK. Give me all your money.",
                   subject: "Sweet!",
                   sender_id: professional.id,
                   recipient_id: requester.id,
-                  job_id: job1.id)
+                  job_id: job.id)
     Message.create(body: "K thx bye.",
                   subject: "You got the job.",
                   sender_id: requester.id,
                   recipient_id: professional.id,
-                  job_id: job1.id)
+                  job_id: job.id)
     Message.create(body: "I really want to help you out.",
                   subject: "Give me a chance.",
                   sender_id: requester.id,
@@ -63,5 +62,6 @@ describe "API endpoint for all messages" do
     expect(messages.first).to have_key("poster_id")
     expect(messages.first).to have_key("body")
     expect(messages.first).to have_key("created_at")
+
   end
 end
