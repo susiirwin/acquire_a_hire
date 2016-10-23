@@ -25,9 +25,9 @@ describe 'user requests another api key' do
 
     expect(page).to have_content(UserApi.last.key)
     expect(current_path).to eq('/api/accounts/dashboard')
-    expect(UserApi.validate_user_key(old_key, user.id)).to be_falsey
-    expect(UserApi.validate_user_key(UserApi.last.key, user.id)).to eq(true)
-    expect(UserApi.last.uid).to eq(user.id)
+    expect(UserApi.validate_user_key(old_key, user)).to be_falsey
+    expect(UserApi.validate_user_key(UserApi.last.key, user)).to eq(true)
+    expect(UserApi.last.user).to eq(user)
     expect(UserApi.last.description).to eq('testing key generation')
   end
 end

@@ -16,13 +16,13 @@ class Api::AccountsController < ApplicationController
   end
 
   def show
-    @user_api = UserApi.find_by(uid: current_user.id)
+    @user_api = current_user.user_apis.last
   end
 
   def overwrite
     @user = current_user
     if valid_overwrite_form?
-      UserApi.find_by(uid: @user.id).overwrite_key
+      @user.user_apis.last.overwrite_key
       flash[:success] = "Your old API key has been successfully overwritten"
       redirect_to api_accounts_dashboard_path
     else

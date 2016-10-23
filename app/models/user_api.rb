@@ -1,10 +1,12 @@
 class UserApi < ApplicationRecord
+  belongs_to :user
+
   def overwrite_key
     update(key: UserApi.generate_key)
   end
 
   def self.save_key(params, uid)
-    user_api = find_or_create_by(uid: uid)
+    user_api = find_or_create_by(user_id: uid)
     user_api.update(
       first_name: params[:first_name],
       last_name: params[:last_name],
@@ -16,9 +18,8 @@ class UserApi < ApplicationRecord
     )
   end
 
-  def self.validate_user_key(key, uid)
-    user_api = find_by(key: key)
-    user_api.uid == uid if user_api
+  def self.validate_user_key(key, user)
+    user.user_apis.pluck(:key).include?(key)
   end
 
   private

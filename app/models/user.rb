@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :user_skills, dependent: :destroy
   has_many :skills, through: :user_skills
   has_many :jobs, foreign_key: 'requester_id'
+  has_many :user_apis
 
   enum role: [:requester, :professional , :admin]
 
@@ -25,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def has_api_key?
-    UserApi.find_by(uid: id)
+    !user_apis.empty?
   end
 
   private

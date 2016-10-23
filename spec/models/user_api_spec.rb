@@ -14,7 +14,7 @@ RSpec.describe UserApi, type: :model do
     UserApi.save_key(params, user.id)
 
     expect(UserApi.last.key.length).to eq(22)
-    expect(UserApi.last.uid).to eq(user.id)
+    expect(UserApi.last.user).to eq(user)
     expect(UserApi.last.first_name).to eq(user.first_name)
     expect(UserApi.last.last_name).to eq(user.last_name)
     expect(UserApi.last.email).to eq(user.email)
@@ -33,9 +33,8 @@ RSpec.describe UserApi, type: :model do
     }
     UserApi.save_key(params, user.id)
 
-    expect(UserApi.validate_user_key(UserApi.last.key, user.id)).to eq(true)
-    expect(UserApi.validate_user_key(11111, user.id)).to be_falsey
-    expect(UserApi.validate_user_key(UserApi.last.key, 11111111)).to be_falsey
+    expect(UserApi.validate_user_key(UserApi.last.key, user)).to eq(true)
+    expect(UserApi.validate_user_key(11111, user)).to be_falsey
   end
 
   it 'overwrites existing keys' do
@@ -51,8 +50,8 @@ RSpec.describe UserApi, type: :model do
     old_key = UserApi.last.key
     UserApi.last.overwrite_key
 
-    expect(UserApi.validate_user_key(old_key, user.id)).to be_falsey
-    expect(UserApi.validate_user_key(UserApi.last.key, user.id)).to eq(true)
+    expect(UserApi.validate_user_key(old_key, user)).to be_falsey
+    expect(UserApi.validate_user_key(UserApi.last.key, user)).to eq(true)
     expect(old_key).to_not eq(UserApi.last.key)
   end
 end

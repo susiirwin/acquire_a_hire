@@ -25,7 +25,7 @@ describe 'logged in user seeks new api key' do
 
       expect(page).to have_content(UserApi.first.key)
       expect(current_path).to eq('/api/accounts/dashboard')
-      expect(UserApi.first.uid).to eq(user.id)
+      expect(UserApi.first.user).to eq(user)
       expect(UserApi.first.description).to eq('This is a test')
     end
   end
