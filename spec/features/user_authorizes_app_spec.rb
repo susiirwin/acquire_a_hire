@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "User authorizes access to account" do
   it "logs in, confirms authorization and is redirected to redirect_url" do
     user = create(:requester_user)
+    ApplicationController.any_instance.stubs(:current_user).returns(user)
     params = {
       first_name: user.first_name,
       last_name: user.last_name,
@@ -25,5 +26,6 @@ describe "User authorizes access to account" do
     click_on "Authorize Application"
 
     expect(current_path).to eq("/test_redirect_landing")
+    expect(page).to have_content("code: 123")
   end
 end

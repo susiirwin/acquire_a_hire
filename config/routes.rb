@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       get '/authorize', to: 'authorize#new'
       post '/authorize', to: 'authorize#create'
       get '/authorize/confirm', to: 'authorize#show'
+      get '/authorize/redirect', to: 'authorize#redirect'
     end
   end
   namespace :requesters do
@@ -36,4 +37,6 @@ Rails.application.routes.draw do
     resources :jobs, only: [:index]
     resources :messages, only: [:new, :create]
   end
+
+  get '/test_redirect_landing', to: "test_landing#show"
 end
