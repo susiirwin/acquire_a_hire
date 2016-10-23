@@ -24,6 +24,18 @@ class User < ApplicationRecord
     "#{street_address}\n#{city} #{state} #{zipcode}"
   end
 
+  def in_progress_jobs
+    jobs.in_progress
+  end
+
+  def open_jobs
+    jobs.available
+  end
+
+  def closed_jobs
+    jobs.closed
+  end
+
   private
     def professionals_must_have_skills
       if self.role == "professional" && self.skills.empty?

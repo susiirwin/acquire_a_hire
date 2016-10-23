@@ -1,5 +1,35 @@
 <h1><%= @user.full_name %></h1>
-
+<h3>Member since: <%= @user.created_at %></h3>
 <p>
   <%= render partial: "shared/address", locals: {user: @user} %>
 </p>
+<p>
+<%= link_to 'Start A Project', new_job_path %>
+</p>
+<div id="in-progress-jobs" class="col-md-4">
+  <% current_user.in_progress_jobs.each do |job| %>
+    <p>
+      <%= link_to job.title, job_path(job) %>
+      something happening
+    </p>
+  <% end %>
+</div>
+
+<div id="open-jobs" class="col-md-4">
+  <% @user.open_jobs.each do |job| %>
+    <p>
+      <%= link_to job.title, job_path(job) %>
+      something else
+    </p>
+  <% end %>
+</div>
+
+<div id="closed-jobs" class="col-md-4">
+  <% @user.closed_jobs.each do |job| %>
+    <p>
+      <%= link_to job.title, job_path(job) %>
+      another thing
+    </p>
+  <% end %>
+</div>
+
