@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "OAuth API" do
-  it "userrequests a token by sending key, secret and code" do
+  it "user requests a token by sending key, secret and code" do
     user = create(:requester_user)
     UserAuthorization.any_instance.stubs(:get_code).returns("123")
     params = {
@@ -41,26 +41,18 @@ describe "OAuth API" do
     user_api.update(params)
     user_authorization = UserAuthorization.create(user: user, user_api: user_api, authorized: true)
     user_authorization.set_code
+    bad_url_1 = "/api/v1/oauth/token?api_key='123'&secret=#{user_api.secret}&code=#{user_authorization.code}&redirect_url=#{user_api.redirect_url}"
+    bad_url_2 = "/api/v1/oauth/token?api_key='#{user_api.key}'&secret='123'&code=#{user_authorization.code}&redirect_url=#{user_api.redirect_url}"
+    bad_url_3 = "/api/v1/oauth/token?api_key='#{user_api.key}'&secret=#{user_api.secret}&code='123'&redirect_url=#{user_api.redirect_url}"
+    bad_url_4 = "/api/v1/oauth/token?api_key='#{user_api.key}'&secret=#{user_api.secret}&code=#{user_authorization.code}&redirect_url=google.com"
+    bad_urls = [bad_url_1, bad_url_2, bad_url_3, bad_url_4]
 
-    get "/api/v1/oauth/token?api_key='123'&secret=#{user_api.secret}&code=#{user_authorization.code}&redirect_url=#{user_api.redirect_url}"
+    bad_urls.each do |bad_url|
+      get bad_url
+      data = JSON.parse(response.body, symbolize_names: true)
 
-    data = JSON.parse(response.body, symbolize_names: true)
-
-    expect(response.status).to eq(403)
-    expect(data[:error]).to eq("Invalid request, could not find user authorization for this app")
-
-    get "/api/v1/oauth/token?api_key='#{user_api.key}'&secret='123'&code=#{user_authorization.code}&redirect_url=#{user_api.redirect_url}"
-
-    data = JSON.parse(response.body, symbolize_names: true)
-
-    expect(response.status).to eq(403)
-    expect(data[:error]).to eq("Invalid request, could not find user authorization for this app")
-
-    get "/api/v1/oauth/token?api_key='#{user_api.key}'&secret=#{user_api.secret}&code='123'&redirect_url=#{user_api.redirect_url}"
-
-    data = JSON.parse(response.body, symbolize_names: true)
-
-    expect(response.status).to eq(403)
-    expect(data[:error]).to eq("Invalid request, could not find user authorization for this app")
+      expect(response.status).to eq(403)
+      expect(data[:error]).to eq("Invalid request, could not find user authorization for this app")
+    end
   end
 end
