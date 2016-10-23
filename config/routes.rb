@@ -12,11 +12,12 @@ Rails.application.routes.draw do
 
   namespace :requesters do
     get '/dashboard', to: 'users#show'
+    resources :reviews, only: [:create, :new]
   end
 
   namespace :professionals do
     get '/dashboard', to: 'users#show'
-    resources :jobs, only: [:index]
+    resources :jobs, only: [:show, :index]
   end
 
   namespace :api do
