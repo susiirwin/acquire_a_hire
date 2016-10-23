@@ -21,13 +21,28 @@ ActiveRecord::Schema.define(version: 20161023143315) do
     t.integer  "min_price"
     t.integer  "max_price"
     t.integer  "requester_id"
-    t.string   "status"
+    t.string   "status",          default: "available"
     t.string   "description"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "state"
+    t.integer  "professional_id"
+    t.index ["professional_id"], name: "index_jobs_on_professional_id", using: :btree
     t.index ["requester_id"], name: "index_jobs_on_requester_id", using: :btree
     t.index ["skill_id"], name: "index_jobs_on_skill_id", using: :btree
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "body"
+    t.text     "subject"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "job_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["job_id"], name: "index_messages_on_job_id", using: :btree
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
+    t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
   end
 
   create_table "skills", force: :cascade do |t|
@@ -76,10 +91,15 @@ ActiveRecord::Schema.define(version: 20161023143315) do
     t.string   "authy_id"
     t.boolean  "verified",              default: false
     t.integer  "role"
+    t.string   "api_key"
   end
 
   add_foreign_key "jobs", "skills"
+  add_foreign_key "jobs", "users", column: "professional_id"
   add_foreign_key "jobs", "users", column: "requester_id"
+  add_foreign_key "messages", "jobs"
+  add_foreign_key "messages", "users", column: "recipient_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "user_apis", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"

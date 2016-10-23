@@ -1,0 +1,15 @@
+<%= form_for(@job) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %> <br>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %> <br>
+
+  Price Range:
+  $<%= f.text_field :min_price %> -
+  $<%= f.text_field :max_price %> <br>
+
+  <%= f.collection_select :skill_id, Skill.all, :id, :name %> <br>
+
+  <%= f.submit "Create Project" %>
+<% end %>
