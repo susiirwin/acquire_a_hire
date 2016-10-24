@@ -20,11 +20,8 @@ class Api::V1::Jobs::MessagesController < ApplicationController
     else
       recipient = requester
     end
-    @name = if recipient.role == "professional"
-              recipient.business_name
-            else
-              recipient.full_name
-            end
+
+    @name = recipient.display_name
     Message.create!(body: params[:body], sender: sender, recipient: recipient, job: job)
     render status: 201
   end
