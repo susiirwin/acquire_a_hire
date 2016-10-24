@@ -24,12 +24,14 @@ set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 # Default value for :pty is false
 # set :pty, true
+set :linked_files, %w{config/database.yml}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for :linked_files is []
-append :linked_files, 'config/database.yml', 'config/secrets.yml'
+# append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
-append :linked_dirs, 'bin', 'vendor/bundle', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
+# append :linked_dirs, 'bin', 'vendor/bundle', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
 
 namespace :deploy do
 
