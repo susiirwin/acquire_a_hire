@@ -8,7 +8,7 @@ describe "Professional leaves Review" do
                     requester: create(:requester_user))
       # when I visit a job assigned to me
       visit "/professionals/jobs/#{job.id}"
-      expect(page).to have_content("Paint the Roof")      
+      expect(page).to have_content("Paint the Roof")
       # and I click a "review requester" button
       click_on "Review Requester"
       # i should be on a page for the requester/review/create

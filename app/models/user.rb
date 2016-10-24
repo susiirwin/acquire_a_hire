@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :skills, through: :user_skills
   has_many :jobs, foreign_key: 'requester_id'
 
-  enum role: [:requester, :professional , :admin]
+  enum role: [:requester, :professional, :admin]
 
 
   def full_name
