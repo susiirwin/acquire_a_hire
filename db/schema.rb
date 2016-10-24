@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023143315) do
+ActiveRecord::Schema.define(version: 20161023220809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 20161023143315) do
     t.index ["job_id"], name: "index_messages_on_job_id", using: :btree
     t.index ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
     t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "body"
+    t.integer  "rating"
+    t.integer  "to_id"
+    t.integer  "from_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_id"], name: "index_reviews_on_from_id", using: :btree
+    t.index ["to_id"], name: "index_reviews_on_to_id", using: :btree
   end
 
   create_table "skills", force: :cascade do |t|
@@ -100,6 +111,8 @@ ActiveRecord::Schema.define(version: 20161023143315) do
   add_foreign_key "messages", "jobs"
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "reviews", "users", column: "from_id"
+  add_foreign_key "reviews", "users", column: "to_id"
   add_foreign_key "user_apis", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
