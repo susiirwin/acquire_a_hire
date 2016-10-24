@@ -4,7 +4,7 @@ FactoryGirl.define do
     first_name 'Chad'
     last_name 'Clancey'
     business_name 'Clancey Spies'
-    email 'cclancey007@test.com'
+    email { generate(:email) }
     phone '555-555-1234'
     street_address '123 Test St.'
     city 'Denver'
@@ -35,6 +35,10 @@ FactoryGirl.define do
 
   sequence :job_title do |n|
     "Job #{n}"
+  end
+
+  sequence :email do |n|
+    "chad#{n}@test.com"
   end
 
   factory :skill do
