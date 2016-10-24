@@ -42,7 +42,15 @@ namespace :deploy do
     end
   end
 
+  desc 'Link to Figaro secrets'
+  task :figaro do
+    on roles(:app) do
+      execute "ln -s /application.yml #{current_path}/config/application.yml"
+    end
+  end
+
   after :publishing, 'deploy:restart'
+  after 'deploy:restart', 'deploy:figaro'
   after :finishing, 'deploy:cleanup'
 end
 
