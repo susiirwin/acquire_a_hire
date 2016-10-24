@@ -37,6 +37,17 @@ class User < ApplicationRecord
     jobs.closed
   end
 
+  def inverse_role
+    inverse_roles[role]
+  end
+
+  def inverse_roles
+    {
+      "professional" => "requester",
+      "requester" => "professional"
+    }
+  end
+
   private
     def professionals_must_have_skills
       if self.role == "professional" && self.skills.empty?

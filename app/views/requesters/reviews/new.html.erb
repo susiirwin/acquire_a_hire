@@ -1,8 +1,11 @@
-<h1>Add a Review for a Requester: <%= @requester.full_name %></h1>
 
-<%= form_for(@review, url: new_requesters_review_path) do |f| %>
+<%= form_for @review, url: requesters_reviews_path do |f| %>
+
   <%= f.label :review %>
   <%= f.text_field :review %>
+  <%= f.text_field :requester_id %>
+
+  <!-- have text fields that show those 3 fields and then turn them into HIDDEN FIELDS later-->
 
   <%= f.radio_button(:rating, 'one_star') %>
   <%= label(:review_rating_one_star, '1 star') %>

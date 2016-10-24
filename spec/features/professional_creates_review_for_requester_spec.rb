@@ -18,10 +18,11 @@ describe "Professional leaves Review" do
 
       fill_in 'review_review', with: 'This is my review of the requester'
       choose('review_rating_four_stars')
+
       click_on "Create Review"
 
       # and I see the Review Show Page
-      expect(current_path).to eq (requesters_review)
+      expect(current_path).to eq (requesters_review_path)
       # I expect the review text and the rating
       expect(page).to have_content("This is my review of the requester")
       expect(page).to have_content("4 stars")
