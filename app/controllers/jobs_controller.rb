@@ -6,7 +6,7 @@ class JobsController < ApplicationController
   end
 
   def create
-    @job = Job.create(formatted_job_params.merge(requester: current_user))
+    @job = Job.create(formatted_job_params.merge(requester: current_user, state: current_user.state))
 
     if @job.save
       flash[:info] = "Project created"
