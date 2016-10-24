@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Authy service' do
   it 'generates an authy id for a user' do
     VCR.use_cassette('authy#generate') do
-      user = create(:user, phone: ENV['test_phone_number'])
+      user = create(:user, email: 'cclancey007@test.com', phone: ENV['test_phone_number'])
       authy = AuthyService.new(user)
 
       response = authy.create_user
