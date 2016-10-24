@@ -1,1 +1,20 @@
-<h1>Add a Review for a <%= @requester.full_name %></h1>
+<h1>Add a Review for a Requester: <%= @requester.full_name %></h1>
+
+<%= form_for(@review, url: new_requesters_review_path) do |f| %>
+  <%= f.label :review %>
+  <%= f.text_field :review %>
+
+  <%= f.radio_button(:rating, 'one_star') %>
+  <%= label(:review_rating_one_star, '1 star') %>
+  <%= f.radio_button(:rating, 'two_stars') %>
+  <%= label(:review_rating_two_stars, '2 stars') %>
+  <%= f.radio_button(:rating, 'three_stars') %>
+  <%= label(:review_rating_three_stars, '3 stars') %>
+  <%= f.radio_button(:rating, 'four_stars') %>
+  <%= label(:review_rating_four_stars, '4 stars') %>
+  <%= f.radio_button(:rating, 'five_stars') %>
+  <%= label(:review_rating_four_stars, '5 stars') %>
+
+
+  <%= f.submit %>
+<% end %>
