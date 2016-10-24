@@ -22,6 +22,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def display_name
+    if role == "professional"
+      return business_name
+    else
+      return full_name
+    end
+  end
+
   def full_address
     "#{street_address}\n#{city} #{state} #{zipcode}"
   end
