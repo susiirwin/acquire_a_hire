@@ -12,7 +12,7 @@ RSpec.describe UserApi, type: :model do
       redirect_url: 'http://test.com'
     }
     user_api = UserApi.find_or_create_by(user_id: user.id)
-    user_api.update(params)
+    user_api.create_new_key(params)
 
     expect(UserApi.last.key.length).to eq(22)
     expect(UserApi.last.user).to eq(user)
