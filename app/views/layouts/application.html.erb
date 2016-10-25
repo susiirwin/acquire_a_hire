@@ -12,8 +12,11 @@
     <nav class="navbar navbar-default">
       <%= display_navbar %>
     </nav>
-
-    <%= yield %>
+    <% flash.each do |type, message| %>
+      <%= content_tag :div, message.html_safe, class: "alert #{type}" %>
+    <% end %>
     
+    <%= yield %>
+
   </body>
 </html>
