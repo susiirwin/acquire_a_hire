@@ -14,7 +14,7 @@ describe 'user visits job show page' do
       expect(page).to have_content(job.min_price)
       expect(page).to have_content(job.max_price)
       expect(page).to have_content(job.description)
-      expect(page).to have_button('Send Message')
+      expect(page).to have_button('Start Conversation')
     end
   end
 

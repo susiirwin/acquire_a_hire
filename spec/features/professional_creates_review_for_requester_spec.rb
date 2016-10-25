@@ -8,13 +8,13 @@ describe "Professional leaves Review" do
       job = create(:job, title: "Paint the Roof",professional: pro,
                     requester: create(:requester_user))
 
-      visit "/professionals/jobs/#{job.id}"
+      visit "/jobs/#{job.id}"
 
       expect(page).to have_content("Paint the Roof")
 
       click_on "Review Requester"
 
-      expect(current_path).to eq(new_requesters_review_path)
+      expect(current_path).to eq(new_review_path)
 
       fill_in 'review_review', with: 'This is my review of the requester'
       choose('review_rating_four_stars')
@@ -22,7 +22,7 @@ describe "Professional leaves Review" do
       click_on "Create Review"
 
       review = Review.last
-      expect(current_path).to eq (requesters_review_path(review))
+      expect(current_path).to eq (review_path(review))
 
       expect(page).to have_content("This is my review of the requester")
       expect(page).to have_content("four_stars")
