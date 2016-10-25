@@ -27,3 +27,4 @@
 
 /spec/fixtures/
 config/database.yml
+*/.DS_Store

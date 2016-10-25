@@ -97,4 +97,4 @@ class Seed
   end
 end
 
-Seed.start(5000, 5000, 2000)
+Seed.start(50, 50, 200)
