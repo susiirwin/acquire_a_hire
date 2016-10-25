@@ -12,10 +12,10 @@ class UserApi < ApplicationRecord
     update(secret: UserApi.generate_key)
   end
 
-  def update(params)
+  def create_new_key(params)
     params[:key] = UserApi.generate_key
     params[:secret] = UserApi.generate_key
-    super(params)
+    update(params)
   end
 
   def self.validate_user_key(key, user)

@@ -6,7 +6,7 @@ class Api::AccountsController < ApplicationController
   def create
     @user = current_user
     @user_api = UserApi.find_or_create_by(user_id: @user.id)
-    if valid_password? && @user_api.update(api_request_params)
+    if valid_password? && @user_api.create_new_key(api_request_params)
       flash[:success] = "API Key Request Accepted"
       redirect_to api_accounts_dashboard_path
     else

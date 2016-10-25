@@ -6,8 +6,9 @@
   <%= f.text_area :description %> <br>
 
   Price Range:
-  $<%= f.text_field :min_price %> -
-  $<%= f.text_field :max_price %> <br>
+  $ 
+  <%= f.number_field :min_price, placeholder: "min price" %> -
+  <%= f.number_field :max_price, placeholder: "max price" %> <br>
 
   <%= f.collection_select :skill_id, Skill.all, :id, :name %> <br>
 

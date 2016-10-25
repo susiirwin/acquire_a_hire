@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023221211) do
+ActiveRecord::Schema.define(version: 20161024205327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 20161023221211) do
     t.index ["job_id"], name: "index_messages_on_job_id", using: :btree
     t.index ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
     t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text     "review"
+    t.integer  "professional_id", null: false
+    t.integer  "requester_id",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "rating"
+    t.string   "reviewee_role"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -111,6 +121,8 @@ ActiveRecord::Schema.define(version: 20161023221211) do
   add_foreign_key "messages", "jobs"
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "reviews", "users", column: "professional_id"
+  add_foreign_key "reviews", "users", column: "requester_id"
   add_foreign_key "user_apis", "users"
   add_foreign_key "user_authorizations", "user_apis"
   add_foreign_key "user_authorizations", "users"

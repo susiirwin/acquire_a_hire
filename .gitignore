@@ -26,3 +26,4 @@
 /config/application.yml
 
 /spec/fixtures/
+config/database.yml

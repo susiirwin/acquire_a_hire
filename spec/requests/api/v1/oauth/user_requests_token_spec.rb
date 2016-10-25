@@ -13,7 +13,7 @@ describe "OAuth API" do
       redirect_url: '/test_redirect_landing'
     }
     user_api = UserApi.find_or_create_by(user_id: user.id)
-    user_api.update(params)
+    user_api.create_new_key(params)
     user_authorization = UserAuthorization.create(user: user, user_api: user_api, authorized: true)
     user_authorization.set_code
 

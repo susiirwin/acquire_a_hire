@@ -6,6 +6,7 @@ class Api::Oauth::AuthorizeController < ApplicationController
   def create
     user = User.find_by(email: params[:authorization][:email])
     user_api = UserApi.find_by(key: authorize_params[:api_key])
+
     if user.authenticate(params[:authorization][:password]) && user_api
       session[:authorizing_user_id] = user.id
       UserAuthorization.create(user: user, user_api: user_api)
