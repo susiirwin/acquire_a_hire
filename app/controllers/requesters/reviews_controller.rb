@@ -22,7 +22,7 @@ class Requesters::ReviewsController < ApplicationController
   private
 
     def review_params
-      params.require(:review).permit(:review, :rating, :professional_id, :requester_id)
+      params.require(:review).permit(:review, :rating, :professional_id, :requester_id, :reviewee_role)
     end
 
 end

@@ -21,7 +21,8 @@ describe "Professional leaves Review" do
 
       click_on "Create Review"
 
-      expect(current_path).to eq (requesters_review_path(@review))
+      review = Review.last
+      expect(current_path).to eq (requesters_review_path(review))
 
       expect(page).to have_content("This is my review of the requester")
       expect(page).to have_content("four_stars")

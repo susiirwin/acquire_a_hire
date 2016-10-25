@@ -1,9 +1,9 @@
 
 <%= form_for @review, url: requesters_reviews_path do |f| %>
 
-  <%= hidden_field_tag :requester_id, @review.requester_id %>
-  <%= hidden_field_tag :professional_id, @review.professional_id %>
-  <%= hidden_field_tag :reviewee_role, @review.reviewee_role %>
+  <%= f.hidden_field :requester_id, value: @review.requester_id %>
+  <%= f.hidden_field :professional_id, value: @review.professional_id %>
+  <%= f.hidden_field :reviewee_role, value: @review.reviewee_role %>
 
   <%= f.label :review %>
   <%= f.text_field :review %>
