@@ -3,4 +3,9 @@ class Professionals::JobsController < ApplicationController
     @jobs = Job.where(state: current_user.state)
                .where(skill: [current_user.skills.pluck('id')])
   end
+
+  def show
+    @job = Job.find_by(params[:professional_id])
+  end
+
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'professional looks at jobs' do
   it 'sees all jobs for their state and skills' do
     pro = create(:professional_user)
-    skill = Skill.new(name: "Espionage")
+    skill = Skill.new(name: "Amazing Espionage")
     pro.skills << skill
     state = pro.state
 

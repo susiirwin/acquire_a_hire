@@ -34,6 +34,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'figaro'
 gem 'faraday'
 gem 'swagger-docs'
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
