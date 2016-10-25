@@ -9,6 +9,7 @@ class UserAuthorization < ApplicationRecord
 
   def set_token
     update_attributes(token: get_code)
+    token
   end
 
   private

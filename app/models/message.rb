@@ -19,4 +19,12 @@ class Message < ApplicationRecord
     .where('sender_id = ? OR recipient_id = ?', conversation_params[:with], conversation_params[:with])
     .order(created_at: :desc)
   end
+
+  def other_party(id)
+    if sender_id == id.to_i
+      recipient_id
+    else recipient_id == id.to_i
+      sender_id
+    end
+  end
 end

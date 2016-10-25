@@ -13,13 +13,8 @@ class Api::V1::Jobs::MessagesController < ApplicationController
 
   def create
     job = Job.find(params[:job_id])
-    sender = User.find_by_api_key(params[:api_key])
-    requester = job.requester
-    if requester == sender
-      recipient = User.find_by_business_name(params[:business_name])
-    else
-      recipient = requester
-    end
+    sender = UserAuthorization.find_by(token: params[:token]).user
+    recipient = User.find(params[:recipient_id])
     @name = if recipient.role == "professional"
               recipient.business_name
             else
@@ -30,7 +25,18 @@ class Api::V1::Jobs::MessagesController < ApplicationController
   end
 
   def index
-    @messages = Message.find_by_job(params[:job_id])
+    @requesting_user = UserAuthorization.find_by(token: params[:token]).user
+    messages = @requesting_user.messages.job_conversation(conversation_params)
+    if @requesting_user.role == "professional"
+      @messages = messages
+    elsif @requesting_user.role == "requester"
+      @messages = messages.group_by{ |message| message.other_party(@requesting_user.id) }
+    end
     render status: 200
   end
+
+  private
+    def conversation_params
+      {job: params[:job_id], with: @requesting_user.id}
+    end
 end
