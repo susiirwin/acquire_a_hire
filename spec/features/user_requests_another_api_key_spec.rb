@@ -25,6 +25,7 @@ describe 'user requests another api key' do
     click_on 'Send New API Key'
 
     expect(page).to have_content(UserApi.last.key)
+    expect(page).to have_content("secret is: #{UserApi.last.secret}")
     expect(current_path).to eq('/api/accounts/dashboard')
     expect(UserApi.validate_user_key(old_key, user)).to be_falsey
     expect(UserApi.validate_user_key(UserApi.last.key, user)).to eq(true)

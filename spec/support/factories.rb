@@ -24,7 +24,7 @@ FactoryGirl.define do
       role "professional"
 
       before :create do |user|
-        user.skills << Skill.new(name: "Espionage")
+        user.skills << Skill.new(name: generate(:skill_name))
       end
     end
 

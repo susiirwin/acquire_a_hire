@@ -72,7 +72,18 @@ ActiveRecord::Schema.define(version: 20161024205327) do
     t.datetime "updated_at",   null: false
     t.string   "redirect_url"
     t.integer  "user_id"
+    t.string   "secret"
     t.index ["user_id"], name: "index_user_apis_on_user_id", using: :btree
+  end
+
+  create_table "user_authorizations", force: :cascade do |t|
+    t.string  "code"
+    t.integer "user_id"
+    t.integer "user_api_id"
+    t.boolean "authorized",  default: false
+    t.string  "token"
+    t.index ["user_api_id"], name: "index_user_authorizations_on_user_api_id", using: :btree
+    t.index ["user_id"], name: "index_user_authorizations_on_user_id", using: :btree
   end
 
   create_table "user_skills", force: :cascade do |t|
@@ -113,6 +124,8 @@ ActiveRecord::Schema.define(version: 20161024205327) do
   add_foreign_key "reviews", "users", column: "professional_id"
   add_foreign_key "reviews", "users", column: "requester_id"
   add_foreign_key "user_apis", "users"
+  add_foreign_key "user_authorizations", "user_apis"
+  add_foreign_key "user_authorizations", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
 end

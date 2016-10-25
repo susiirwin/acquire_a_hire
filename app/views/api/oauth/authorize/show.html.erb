@@ -1,0 +1,6 @@
+<p>
+  <!-- <%#= @user_api.user.full_name %>'s app is requesting permission to get and send messages through your account -->
+</p>
+
+<%= button_to "Authorize Application", api_oauth_authorize_redirect_path(@authorize_params), method: :get %>
+<!-- <%#= button_to "Deny Authorization", @user_api.user %> -->
