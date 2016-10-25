@@ -1,0 +1,6 @@
+<% @messages.each do |message| %>
+  <div class="message">
+    <%= message.sender.display_name %>:
+    <p><%= message.body %></p>
+  </div>
+<% end %>

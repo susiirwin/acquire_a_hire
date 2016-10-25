@@ -50,6 +50,10 @@ class User < ApplicationRecord
     jobs.closed
   end
 
+  def messages
+    Message.where('sender_id = ? OR recipient_id= ?', self.id, self.id)
+  end
+
   private
     def professionals_must_have_skills
       if self.role == "professional" && self.skills.empty?
