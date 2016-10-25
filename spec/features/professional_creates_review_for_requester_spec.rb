@@ -8,7 +8,7 @@ describe "Professional leaves Review" do
       job = create(:job, title: "Paint the Roof",professional: pro,
                     requester: create(:requester_user))
 
-      visit "/professionals/jobs/#{job.id}"
+      visit "/jobs/#{job.id}"
 
       expect(page).to have_content("Paint the Roof")
 

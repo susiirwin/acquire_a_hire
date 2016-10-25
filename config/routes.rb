@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   namespace :professionals do
     get '/dashboard', to: 'users#show'
-    resources :jobs, only: [:show, :index]
+    resources :jobs, only: [:index]
     resources :messages, only: [:new, :create]
 
   end

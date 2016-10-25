@@ -5,7 +5,7 @@ class Professionals::JobsController < ApplicationController
   end
 
   def show
-    @job = Job.find(params[:professional_id])
+    @job = Job.find(params[:id])
   end
 
 end

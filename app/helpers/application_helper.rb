@@ -1,9 +1,11 @@
 module ApplicationHelper
   def display_authorized_job_options
-    if current_user.professional?
-      button_to 'Send Message', new_professionals_message_path, method: :get
-    else
-      button_to 'Edit Job Information', edit_job_path(@job), method: :get
+    if current_user.id == @job.professional_id
+      button_to "Review Requester", new_requesters_review_path(:job_id => params[:id]), method: :get, class: "btn-acquire"
+    elsif current_user.professional?
+      button_to 'Start Conversation', new_professionals_message_path, method: :get, class: "btn-acquire"
+    elsif current_user.id == @job.requester_id
+      button_to 'Edit Job Information', edit_job_path(@job), method: :get, class: "btn-acquire"
     end
   end
 

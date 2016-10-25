@@ -1,4 +1,5 @@
-
+<h2>Review for <%= User.find(@review.requester_id).full_name %></h2>
+<h2>Written by <%= User.find(@review.professional_id).business_name %></h2>
 <h3>Review:</h3>
 <%= @review.review %>
 
