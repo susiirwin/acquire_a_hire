@@ -13,4 +13,10 @@ class Message < ApplicationRecord
       Conversation.new(raw_conversation, user_id)
     end
   end
+
+  def self.job_conversation(conversation_params)
+    where(job_id: conversation_params[:job])
+    .where('sender_id = ? OR recipient_id = ?', conversation_params[:with], conversation_params[:with])
+    .order(created_at: :desc)
+  end
 end

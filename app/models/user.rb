@@ -50,6 +50,10 @@ class User < ApplicationRecord
     jobs.closed
   end
 
+  def messages
+    Message.where('sender_id = ? OR recipient_id = ?', self.id, self.id)
+  end
+
   def inverse_role
     inverse_roles[role]
   end
