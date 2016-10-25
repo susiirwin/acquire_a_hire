@@ -21,11 +21,10 @@ describe "Professional leaves Review" do
 
       click_on "Create Review"
 
-      # and I see the Review Show Page
-      expect(current_path).to eq (requesters_review_path)
-      # I expect the review text and the rating
+      expect(current_path).to eq (requesters_review_path(@review))
+
       expect(page).to have_content("This is my review of the requester")
-      expect(page).to have_content("4 stars")
+      expect(page).to have_content("four_stars")
     end
   end
 end

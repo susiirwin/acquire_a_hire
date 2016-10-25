@@ -11,7 +11,6 @@ class Requesters::ReviewsController < ApplicationController
     if @review.save
       redirect_to requesters_review_path(@review)
     else
-      flash.now[:error] = @user.errors.full_messages.join(", ")
       render :new
     end
   end
