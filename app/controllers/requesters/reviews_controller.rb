@@ -7,7 +7,17 @@ class Requesters::ReviewsController < ApplicationController
   end
 
   def create
-    require 'pry'; binding.pry
+    @review = Review.new(review_params)
+    if @review.save
+      redirect_to requesters_review_path(@review)
+    else
+      flash.now[:error] = @user.errors.full_messages.join(", ")
+      render :new
+    end
+  end
+
+  def show
+    @review = Review.find(params[:id])
   end
 
   private
