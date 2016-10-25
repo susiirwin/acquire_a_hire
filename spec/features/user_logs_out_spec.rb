@@ -6,10 +6,6 @@ describe "user log out" do
 
     login(user)
 
-    expect(page).to have_current_path('/confirmation')
-    fill_in 'submitted_token', with: '54321'
-    click_on 'Submit'
-
     click_on "Logout"
 
     expect(page).to have_content("Login")
@@ -22,10 +18,6 @@ describe "user log out" do
     user = create(:professional_user)
 
     login(user)
-
-    expect(page).to have_current_path('/confirmation')
-    fill_in 'submitted_token', with: '54321'
-    click_on 'Submit'
 
     click_on "Logout"
 
