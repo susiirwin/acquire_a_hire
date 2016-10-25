@@ -61,6 +61,20 @@ ActiveRecord::Schema.define(version: 20161024205327) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_apis", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.text     "description"
+    t.string   "url"
+    t.string   "key"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "redirect_url"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_user_apis_on_user_id", using: :btree
+  end
+
   create_table "user_skills", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skill_id"
@@ -98,6 +112,7 @@ ActiveRecord::Schema.define(version: 20161024205327) do
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "reviews", "users", column: "professional_id"
   add_foreign_key "reviews", "users", column: "requester_id"
+  add_foreign_key "user_apis", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'home#show'
   resources :requesters, only: [:new, :create]
   resources :professionals, only: [:new, :create, :edit, :update]
-  resources :jobs, only: [:show, :new, :create]
+  resources :jobs, only: [:show, :new, :edit, :update, :create]
 
   get '/confirmation', to: 'sessions#confirm'
   post '/validate', to: 'sessions#validate'
@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   post '/login',    to: 'sessions#create'
   get '/logout',    to: 'sessions#destroy', as: 'logout'
 
+  namespace :api do
+    resources :accounts, only: [:new, :create, :update]
+    get 'accounts/dashboard', to: 'accounts#show'
+  end
   namespace :requesters do
     get '/dashboard', to: 'users#show'
     resources :reviews, only: [:show, :create, :new,]
@@ -18,6 +22,8 @@ Rails.application.routes.draw do
   namespace :professionals do
     get '/dashboard', to: 'users#show'
     resources :jobs, only: [:show, :index]
+    resources :messages, only: [:new, :create]
+
   end
 
   namespace :api do
@@ -28,4 +34,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :conversations, only: [:index]
+  resources :messages, only: [:index]
 end

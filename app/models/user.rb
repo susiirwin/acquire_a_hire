@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
   validates :phone, presence: true
   validates :street_address, presence: true
   validates :city, presence: true
@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :user_skills, dependent: :destroy
   has_many :skills, through: :user_skills
   has_many :jobs, foreign_key: 'requester_id'
+  has_many :user_apis
 
   enum role: [:requester, :professional, :admin]
 
@@ -21,8 +22,20 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def display_name
+    if role == "professional"
+      return business_name
+    else
+      return full_name
+    end
+  end
+
   def full_address
     "#{street_address}\n#{city} #{state} #{zipcode}"
+  end
+
+  def has_api_key?
+    !user_apis.empty?
   end
 
   def in_progress_jobs
