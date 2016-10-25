@@ -9,10 +9,15 @@ $accent-color1: #6EC8F8;
 //
 $accent-color2: #AFB1B9;
 // red
-$accent-color3: #E0523D;
+$accent-color3: #c53620;
 
 .jumbotron {
   background-color: $accent-color2;
+}
+
+.btn-acquire {
+  background-color: $accent-color3;
+  color: white;
 }
 
 body {
