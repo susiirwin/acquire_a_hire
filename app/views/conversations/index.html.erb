@@ -1,0 +1,7 @@
+<ul>
+  <% @conversations.each do |conversation| %>
+    <li>
+      <%= link_to "#{conversation.job.title} - #{conversation.with.display_name}", messages_path(job: conversation.job.id, with: conversation.with.id) %>
+    </li>
+  <% end %>
+</ul>
