@@ -3,12 +3,12 @@ class Api::V1::Jobs::MessagesController < ApplicationController
 
   swagger_api :create do
     summary 'Send a message to a user'
-    notes 'Create a new message. business_name is required for Requester but not for Professional.'
+    notes 'Create a new message. Requires oauth token and id of user you are sending to'
   end
 
   swagger_api :index do
     summary 'View all Messages in a Conversation'
-    notes 'Displays array of messages related to a job'
+    notes 'Displays array of messages related to a job. Requires oauth token'
   end
 
   def create
