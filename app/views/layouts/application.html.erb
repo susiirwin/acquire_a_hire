@@ -9,13 +9,11 @@
   </head>
 
   <body>
-    <% if current_user %>
-      <%= link_to "Logout", logout_path %>
-    <% else %>
-    <% end %>
-    <% flash.each do |type, message| %>
-      <%= content_tag :div, message.html_safe, class: "alert #{type}" %>
-    <% end %>
+    <nav class="navbar navbar-default">
+      <%= display_navbar %>
+    </nav>
+
     <%= yield %>
+    
   </body>
 </html>
