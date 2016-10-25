@@ -1,13 +1,15 @@
 
 <%= form_for @review, url: requesters_reviews_path do |f| %>
-  <%= hidden_field :requester_id, @review.requester_id %>
-  <%= hidden_field :professional_id, @review.professional_id %>
-  <%= hidden_field :reviewee_role, @review.reviewee_role %>
 
+
+  <%= hidden_field_tag :requester_id, @review.requester_id %>
+  <%= hidden_field_tag :professional_id, @review.professional_id %>
+  <%= hidden_field_tag :reviewee_role, @review.reviewee_role %>
 
   <%= f.label :review %>
   <%= f.text_field :review %>
 
+  <!-- have text fields that show those 3 fields and then turn them into HIDDEN FIELDS later-->
 
   <%= f.radio_button(:rating, 'one_star') %>
   <%= label(:review_rating_one_star, '1 star') %>
