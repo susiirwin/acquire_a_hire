@@ -1,4 +1,4 @@
-class Requesters::ReviewsController < ApplicationController
+class ReviewsController < ApplicationController
   def new
     @job = Job.find(params[:job_id])
     @review = Review.new(requester_id: @job.requester_id,
@@ -9,7 +9,7 @@ class Requesters::ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     if @review.save
-      redirect_to requesters_review_path(@review)
+      redirect_to review_path(@review)
     else
       render :new
     end

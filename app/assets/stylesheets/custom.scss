@@ -6,13 +6,18 @@ $primary-color: #2D6998;
 $secondary-color: #50A8E1;
 //light blue
 $accent-color1: #6EC8F8;
-//
-$accent-color2: #AFB1B9;
+//grey
+$accent-color2: #E4E4E4;
 // red
 $accent-color3: #c53620;
 
 .jumbotron {
   background-color: $accent-color2;
+}
+
+blockquote {
+  border-left: 10px solid;
+  border-color: $accent-color3;
 }
 
 .btn-acquire {
@@ -21,6 +26,6 @@ $accent-color3: #c53620;
 }
 
 body {
-    background-image: url(concrete_seamless.png);
+    background-image: url(brickwall_@2X.png);
     background-repeat:repeat;
 }

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :requesters, only: [:new, :create]
   resources :professionals, only: [:new, :create, :edit, :update]
   resources :jobs, only: [:show, :new, :edit, :update, :create]
+  resources :reviews, only: [:show, :create, :new,]
 
   get '/confirmation', to: 'sessions#confirm'
   post '/validate', to: 'sessions#validate'
@@ -33,12 +34,11 @@ Rails.application.routes.draw do
   end
   namespace :requesters do
     get '/dashboard', to: 'users#show'
-    resources :reviews, only: [:show, :create, :new,]
   end
 
   namespace :professionals do
     get '/dashboard', to: 'users#show'
-    resources :jobs, only: [:show, :index]
+    resources :jobs, only: [:index]
     resources :messages, only: [:new, :create]
 
   end

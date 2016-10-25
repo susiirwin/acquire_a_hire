@@ -8,7 +8,7 @@ describe 'professional sends message to requester through job show page' do
     ApplicationController.any_instance.stubs(:current_user).returns(pro)
 
     visit job_path(job)
-    click_on 'Send Message'
+    click_on 'Start Conversation'
     fill_in 'message_subject', with: 'Test Subject'
     fill_in 'message_body', with: "I'm interested in your test job"
     click_on 'Send Message'
