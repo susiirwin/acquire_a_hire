@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :jobs, foreign_key: 'requester_id'
   has_many :user_apis
 
-  enum role: [:requester, :professional , :admin]
+  enum role: [:requester, :professional, :admin]
 
 
   def full_name
@@ -48,6 +48,17 @@ class User < ApplicationRecord
 
   def closed_jobs
     jobs.closed
+  end
+
+  def inverse_role
+    inverse_roles[role]
+  end
+
+  def inverse_roles
+    {
+      "professional" => "requester",
+      "requester" => "professional"
+    }
   end
 
   private
