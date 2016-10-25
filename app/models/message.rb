@@ -6,4 +6,17 @@ class Message < ApplicationRecord
   def self.find_by_job(id)
     Message.where(job_id: id).order(:created_at)
   end
+
+  def self.summary(user_id)
+    conversations = Message.where('sender_id = ? OR recipient_id = ?', user_id, user_id).distinct.pluck(:job_id, :sender_id, :recipient_id)
+    conversations.map do |raw_conversation|
+      Conversation.new(raw_conversation, user_id)
+    end
+  end
+
+  def self.job_conversation(conversation_params)
+    where(job_id: conversation_params[:job])
+    .where('sender_id = ? OR recipient_id = ?', conversation_params[:with], conversation_params[:with])
+    .order(created_at: :desc)
+  end
 end

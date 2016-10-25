@@ -41,8 +41,12 @@ FactoryGirl.define do
     "chad#{n}@test.com"
   end
 
+  sequence :skill_name do |n|
+    "Espionage #{n}"
+  end
+
   factory :skill do
-    name "Espionage"
+    name { generate(:skill_name) }
   end
 
   factory :job do

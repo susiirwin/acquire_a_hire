@@ -16,12 +16,14 @@ Rails.application.routes.draw do
   end
   namespace :requesters do
     get '/dashboard', to: 'users#show'
+    resources :reviews, only: [:show, :create, :new,]
   end
 
   namespace :professionals do
     get '/dashboard', to: 'users#show'
-    resources :jobs, only: [:index]
+    resources :jobs, only: [:show, :index]
     resources :messages, only: [:new, :create]
+
   end
 
   namespace :api do
@@ -32,4 +34,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :conversations, only: [:index]
+  resources :messages, only: [:index]
 end
