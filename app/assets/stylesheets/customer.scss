@@ -1,13 +1,21 @@
 @import "bootstrap";
 
-.well {
+//dark blue
+$primary-color: #2D6998;
+//medium blue
+$secondary-color: #50A8E1;
+//light blue
+$accent-color1: #6EC8F8;
+//
+$accent-color2: #AFB1B9;
+// red
+$accent-color3: #E0523D;
 
+.jumbotron {
+  background-color: $accent-color2;
 }
 
-.requester {
-
-}
-
-.professional {
-
+body {
+    background-image: url(concrete_seamless.png);
+    background-repeat:repeat;
 }
