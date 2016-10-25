@@ -1,10 +1,39 @@
-<h1>Acquire A Hire</h1>
-<div class='requester'>
-  <%= link_to "Login", login_path %>
-  <%= link_to "Sign Up", new_requester_path %>
+<div class="container">
+    <div class="jumbotron">
+      <center>
+        <img src="/assets/AAHLogo.png" alt="Acquire-A-Hire Logo" />
+        <p>
+          Connecting the best clients with the best professionals since 2016.
+        </p>
+      </center>
+    </div>
 </div>
 
-<div class='professional'>
-  <%= link_to "Login", login_path %>
-  <%= link_to "Sign Up", new_professional_path %>
+
+<div class='container'>
+
+  <div class="col-md-6 well requester">
+    <h3>Looking for a Professional?</h3>
+      <!-- <img src="/assets/requester.jpg" alt="requesters"/> -->
+    <blockquote>
+      Login or Sign Up to post your job and have the thousands of our registered professionals bid for your contract.
+    </blockquote>
+    <div class="btn-group">
+      <%= link_to "Login", login_path, class: "btn btn-acquire" %>
+      <%= link_to "Sign Up", new_requester_path, class: "btn btn-acquire" %>
+    </div>
+  </div>
+
+  <div class="col-md-6 well professional">
+    <h3>Looking for Work?</h3>
+      <!-- <img src="/assets/professional.png" alt="professionals" /> -->
+    <blockquote>
+      Login or Sign Up to bid on the thousands of jobs people are seeking across the country.
+    </blockquote>
+    <div class="btn-group">
+      <%= link_to "Login", login_path, class: "btn btn-acquire" %>
+      <%= link_to "Sign Up", new_professional_path, class: "btn btn-acquire" %>
+    </div>
+  </div>
+
 </div>

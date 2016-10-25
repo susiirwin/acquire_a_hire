@@ -1,0 +1,26 @@
+@import "bootstrap";
+
+//dark blue
+$primary-color: #2D6998;
+//medium blue
+$secondary-color: #50A8E1;
+//light blue
+$accent-color1: #6EC8F8;
+//
+$accent-color2: #AFB1B9;
+// red
+$accent-color3: #c53620;
+
+.jumbotron {
+  background-color: $accent-color2;
+}
+
+.btn-acquire {
+  background-color: $accent-color3;
+  color: white;
+}
+
+body {
+    background-image: url(concrete_seamless.png);
+    background-repeat:repeat;
+}
