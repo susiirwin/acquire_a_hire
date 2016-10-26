@@ -6,9 +6,9 @@ describe 'logged in user seeks new api key' do
     ApplicationController.any_instance.stubs(:current_user).returns(user)
     visit '/api/accounts/new'
 
-    expect(page).to have_content('*First Name')
-    expect(page).to have_content('*Last Name')
-    expect(page).to have_content('*Email Address')
+    expect(page).to have_content('First Name')
+    expect(page).to have_content('Last Name')
+    expect(page).to have_content('Email Address')
   end
 
   context 'correct password is entered' do
