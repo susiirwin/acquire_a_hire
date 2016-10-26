@@ -1,0 +1,5 @@
+<div class="container">
+  <% @reviews.each do |review| %>
+    <%= render partial: 'shared/user_review', locals: {review: review} %>
+  <% end %>
+</div>

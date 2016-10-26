@@ -1,7 +1,7 @@
   <div class="jumbotron">
     <center>
       <%= image_tag 'AAHLogo.png' %>
-      <p>
+      <p class='container tagline'>
         Connecting the best clients with the best professionals since 2016.
       </p>
     </center>
@@ -17,7 +17,7 @@
     </blockquote>
     <div class="btn-group">
       <%= link_to "Login", login_path, class: "btn btn-acquire" %>
-      <%= link_to "Sign Up", new_requester_path, class: "btn btn-acquire" %>
+      <%= link_to "Sign Up", new_requester_path, class: "btn btn-acquire-secondary" %>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
     </blockquote>
     <div class="btn-group">
       <%= link_to "Login", login_path, class: "btn btn-acquire" %>
-      <%= link_to "Sign Up", new_professional_path, class: "btn btn-acquire" %>
+      <%= link_to "Sign Up", new_professional_path, class: "btn btn-acquire-secondary" %>
     </div>
   </div>
 

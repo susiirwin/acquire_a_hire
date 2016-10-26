@@ -66,8 +66,12 @@ class User < ApplicationRecord
     }
   end
 
+  def reviews
+    Review.where(reviewee_role: self.role).where('professional_id = ? OR requester_id = ?', self.id, self.id)
+  end
+
   def average_rating
-    average = Review.where(reviewee_role: self.role).where('professional_id = ? OR requester_id = ?', self.id, self.id).average(:rating)
+    average = reviews.average(:rating)
     average.to_f.round(2)
   end
 

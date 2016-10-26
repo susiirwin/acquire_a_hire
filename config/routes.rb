@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   resources :requesters, only: [:new, :create]
   resources :professionals, only: [:new, :create, :edit, :update]
   resources :jobs, only: [:show, :new, :edit, :update, :create]
-  resources :reviews, only: [:show, :create, :new,]
+  resources :reviews, only: [:show, :create, :new]
   resources :conversations, only: [:index]
   resources :messages, only: [:index, :new, :create]
+  resources :users, only: [:show]
 
   get '/confirmation', to: 'sessions#confirm'
   post '/validate', to: 'sessions#validate'
@@ -43,7 +44,6 @@ Rails.application.routes.draw do
   namespace :professionals do
     get '/dashboard', to: 'users#show'
     resources :jobs, only: [:index]
-    resources :messages, only: [:new, :create]
   end
 
   get '/test_redirect_landing', to: "test_landing#show"

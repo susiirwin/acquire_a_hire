@@ -35,7 +35,7 @@ describe 'requester gets offer from professional' do
       ApplicationController.any_instance.stubs(:current_user).returns(pro)
 
       visit messages_path(job: job.id, with: requester.id)
-_page
+
       expect(page).to have_content("Another professional was hired")
       expect(page).to_not have_button("Reply")
     end
