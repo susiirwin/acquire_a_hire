@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20161026003828) do
     t.integer  "job_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "attachment"
     t.index ["job_id"], name: "index_messages_on_job_id", using: :btree
     t.index ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
     t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
