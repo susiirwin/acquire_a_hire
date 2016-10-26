@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20161026003828) do
     t.integer  "requester_id",    null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "rating"
     t.string   "reviewee_role"
+    t.integer  "rating"
   end
 
   create_table "skills", force: :cascade do |t|

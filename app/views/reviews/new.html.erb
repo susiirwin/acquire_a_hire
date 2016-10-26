@@ -1,5 +1,3 @@
-
-
 <div class="container">
   <div class="well">
     <h2>Add a Review</h2>
@@ -14,15 +12,15 @@
 
   </br/>
 
-  <%= f.radio_button(:rating, 'one_star') %>
+  <%= f.radio_button(:rating, 1) %>
   <%= label(:review_rating_one_star, '1 star') %>
-  <%= f.radio_button(:rating, 'two_stars') %>
+  <%= f.radio_button(:rating, 2) %>
   <%= label(:review_rating_two_stars, '2 stars') %>
-  <%= f.radio_button(:rating, 'three_stars') %>
+  <%= f.radio_button(:rating, 3) %>
   <%= label(:review_rating_three_stars, '3 stars') %>
-  <%= f.radio_button(:rating, 'four_stars') %>
+  <%= f.radio_button(:rating, 4) %>
   <%= label(:review_rating_four_stars, '4 stars') %>
-  <%= f.radio_button(:rating, 'five_stars') %>
+  <%= f.radio_button(:rating, 5) %>
   <%= label(:review_rating_four_stars, '5 stars') %>
   <br/>
 
