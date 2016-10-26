@@ -1,4 +1,7 @@
 <h1><%= @job.title %></h1>
+<% if @job.professional %>
+  <h3>Assigned To: <%= @job.professional.business_name %></h3>
+<% end %>
 <table>
   <tr>
     <th>Description</th>
