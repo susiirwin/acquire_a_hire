@@ -17,6 +17,8 @@ class Api::Oauth::AuthorizeController < ApplicationController
   end
 
   def show
+    @user_api = UserApi.find_by(key: authorize_params[:api_key])
+    @authorizing_user = User.find(session[:authorizing_user_id])
     @authorize_params = authorize_params
   end
 

@@ -6,4 +6,9 @@ module ApplicationHelper
       button_to 'Edit Job Information', edit_job_path(@job), method: :get
     end
   end
+
+  def dashboard_by_role(user)
+    return requesters_dashboard_path if user.role == "requester"
+    return professionals_dashboard_path if user.role == "professional"
+  end
 end
