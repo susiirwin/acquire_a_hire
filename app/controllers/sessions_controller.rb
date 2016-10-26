@@ -46,6 +46,11 @@ class SessionsController < ApplicationController
       user.authenticate(params[:session][:password])
     end
 
+    def dashboard_by_role(user)
+      return requesters_dashboard_path if user.role == "requester"
+      return professionals_dashboard_path if user.role == "professional"
+    end
+
     def check_attempt_number
       session[:counter] ||= 0
       session[:counter] +=  1
