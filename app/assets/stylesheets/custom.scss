@@ -1,11 +1,11 @@
 //dark blue
-$primary-color: #2D6998;
+$primary-color: #2b4450;
 //medium blue
-$secondary-color: #50A8E1;
+$secondary-color: #497285;
 //grey
-$accent-color2: #E4E4E4;
+$accent-color2: #dfebed;
 // red
-$accent-color3: #c53620;
+$accent-color3: #f78536;
 
 .jumbotron {
   background-color: $accent-color2;
@@ -18,6 +18,11 @@ blockquote {
 
 .btn-acquire {
   background-color: $accent-color3;
+  color: white;
+}
+
+.btn-acquire-secondary {
+  background-color: $primary-color;
   color: white;
 }
 
