@@ -1,0 +1,7 @@
+<% unless Job.find(@job_id).user_rejections.find_by(user_id: current_user.id) %>
+  <%= button_to 'Reply', new_message_path, method: :get, params: { job_id: @job_id } %>
+<% end %>
+<% if current_user.requester? %>
+  <%= button_to 'Accept Offer', requesters_accept_offer_path(@job_id.to_i), method: :put, params: {professional: @with_id} %>
+  <%= button_to 'Reject Offer', requesters_reject_offer_path(@job_id.to_i), method: :delete, params: {professional: @with_id} %>
+<% end %>
