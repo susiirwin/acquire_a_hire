@@ -6,4 +6,4 @@
     <p><%= display_attachments(message) %></p>
   </div>
 <% end %>
-<%= button_to 'Reply', new_message_path(job_id: @job_id, with: @with_id), method: :get %>
+<%= button_to 'Reply', new_message_path, method: :get, params: { job_id: @job_id } %>
