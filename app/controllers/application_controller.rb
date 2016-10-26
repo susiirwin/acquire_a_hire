@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def dashboard_by_role(user)
+    return requesters_dashboard_path if user.role == "requester"
+    return professionals_dashboard_path if user.role == "professional"
+  end
+
   private
     def require_verified_user
       unless verified_login?

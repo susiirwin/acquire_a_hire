@@ -42,7 +42,6 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'users#show'
     resources :jobs, only: [:index]
     resources :messages, only: [:new, :create]
-
   end
 
   get '/test_redirect_landing', to: "test_landing#show"
