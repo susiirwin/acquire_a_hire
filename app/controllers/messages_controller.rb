@@ -31,6 +31,7 @@ class MessagesController < ApplicationController
       {
         subject: params[:message][:subject],
         body: params[:message][:body],
+        attachment: params[:message][:attachment],
         sender_id: current_user.id,
         recipient_id: session[:recipient_id],
         job_id: session[:job_id]
