@@ -1,31 +1,53 @@
-<h1><%= @user.full_name %></h1>
-<h3>Average Rating: <%= render partial: 'shared/average_rating', locals: {user: @user} %></h3>
-<h3>Member since: <%= @user.created_at.to_s(:long) %></h3>
-<p>
-  <%= render partial: "shared/address", locals: {user: @user} %>
-</p>
+<div  class="container">
+  <div class="well">
+    <h1>Welcome, <%= @user.full_name %></h1>
+    <table class="table">
+      <tr>
+        <td>
+          Member Since:
+        </td>
+        <td>
+          <%= @user.created_at.to_s(:long) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Average Rating:
+        </td>
+        <td>
+          <%= render partial: 'shared/average_rating', locals: {user: @user} %>
+        </td>
+      </tr>
+      <tr>
+       <td>
+         Home Address:
+       </td>
+       <td>
+         <%= render partial: "shared/address", locals: {user: @user} %>
+       </td>
+     </tr>
+    </table>
 
-<p>
-  <%= link_to 'Start A Project', new_job_path %>
-</p>
+    <h2>Your Posted Jobs <%= link_to 'Start A Project', new_job_path, class:'btn btn-acquire' %></h2>
 
-<h3>Your Posted Jobs</h3>
-<div class="jobs">
-  <div id="open">
-    <h3>Open Jobs</h3>
-    <% @user.open_jobs.each do |job| %>
+
+    <div class="row">
+      <div class="col-md-6"><h3>Open Jobs</h3></div>
+      <div class="col-md-6"><h3>In-Progress Jobs</h3></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6"><% @user.open_jobs.each do |job| %>
       <ul>
         <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
       </ul>
-    <% end %>
-  </div>
-
-  <div id="in_progress">
-    <h3>In-Progress Jobs</h3>
-    <% @user.in_progress_jobs.each do |job| %>
-      <ul>
-        <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
-      </ul>
-    <% end %>
+      <% end %>
+      </div>
+      <div class="col-md-6">  <% @user.in_progress_jobs.each do |job| %>
+        <ul>
+          <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

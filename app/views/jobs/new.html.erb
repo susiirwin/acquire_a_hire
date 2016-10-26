@@ -1,16 +1,33 @@
-<%= form_for(@job) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %> <br>
+<div class="container">
+  <div class="well">
+    <%= form_for(@job, :html => {:class => "form-horizontal center"} ) do |f| %>
 
-  <%= f.label :description %>
-  <%= f.text_area :description %> <br>
+    <div class="form-group">
+      <%= f.label :title, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_field :title %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_area :description %>
+      </div>
+    </div>
 
-  Price Range:
-  $ 
-  <%= f.number_field :min_price, placeholder: "min price" %> -
-  <%= f.number_field :max_price, placeholder: "max price" %> <br>
-
-  <%= f.collection_select :skill_id, Skill.all, :id, :name %> <br>
-
-  <%= f.submit "Create Project" %>
-<% end %>
+    <div class="form-group">
+      <%= f.label "Price Range: ", class: "col-md-4 control-label"  %>
+        <div class="col-md-4">
+      $<%= f.number_field :min_price, placeholder: "min price" %> - <%= f.number_field :max_price, placeholder: "max price" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label "Skill:", class: "col-md-4 control-label"  %>
+        <div class="col-md-4">
+          <%= f.collection_select :skill_id, Skill.all, :id, :name %>
+        </div>
+    </div>
+    <%= f.submit "Create Project", class: "btn btn-acquire"  %>
+    <% end %>
+  </div>
+</div>

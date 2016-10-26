@@ -1,6 +1,6 @@
 <div class="container">
-  <h1>Log In To Your Account</h1>
-  <div class="jumbotron">
+  <div class="well">
+    <h1>Log In To Your Account</h1>
 
     <%= form_for(:session, url: login_path, :html => {:class => "form-horizontal center"} ) do |f| %>
       <div class="form-group">
@@ -15,7 +15,7 @@
         <%= f.password_field :password %>
         </div>
       </div>
-      <%= f.submit "Login", id: "login-button", class: "btn btn-primary" %>
+      <%= f.submit "Login", id: "login-button", class: "btn btn-acquire" %>
     <% end %>
   </div>
 </div>

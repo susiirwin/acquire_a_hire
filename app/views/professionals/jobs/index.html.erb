@@ -1,11 +1,16 @@
-<ul>
-  <% @jobs.each do |job| %>
-    <li>
-      <h3><%= link_to job.title, job_path(job) %></h3>
-      <h5><%= job.skill.name %></h5>
-      <h5><%= number_to_currency(job.min_price / 100.0) + " - " + number_to_currency(job.max_price / 100.0) %></h5>
-      <p><%= job.description %></p>
-      <h5><%= job.status %></h5>
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="well">
+    <ul>
+      <% @jobs.each do |job| %>
+      <li>
+        <h3><%= link_to job.title, job_path(job) %></h3>
+        <h5><%= job.skill.name %></h5>
+        <h5><%= number_to_currency(job.min_price / 100.0) + " - " + number_to_currency(job.max_price / 100.0) %></h5>
+        <p><%= job.description %></p>
+        <h5><%= job.status %></h5>
+      </li>
+      <% end %>
+    </ul>
+    
+  </div>
+</div>
