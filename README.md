@@ -1,24 +1,30 @@
-# README
+# Acquire A Hire
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Acquire A Hire is a Rails-based web application that allows users to post jobs and hire professionals, and allows professionals to bid on jobs.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+Acquire A Hire uses Ruby 2.3.0 and Rails 5.0.0.1. Run the command `bundle install` to install neccesary gems.  
+NOTE: Do not run `bundle update`, as this will update to a version of Capistrano that is incompatible with our server.
 
-* System dependencies
+## Deployment
 
-* Configuration
+To deploy Acquire A Hire, run the command `bundle exec cap production deploy`.
 
-* Database creation
+## Database
 
-* Database initialization
+To create the database, run the command `rake db:{create,migrate}`. Seed data for requesters, professionals, jobs, and reviews is also included in the project. To import this data into your database, run `rake db:seed`.
 
-* How to run the test suite
+## Testing
 
-* Services (job queues, cache servers, search engines, etc.)
+First, update the test databases with the command `rake db:test:prepare`. Following this, use the command `rspec` to run the test suite.
 
-* Deployment instructions
+## API
 
-* ...
+Acquire A Hire uses the OAuth 2.0 protocol to recieve a token for API requests. [Full API Documentation](./public/apidocs/api/v1/api-docs.json)
+
+## Authors
+Brendan Dillon  
+Susi Irwin  
+Jean Joeris  
+Ryan Workman
