@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026000506) do
+ActiveRecord::Schema.define(version: 20161026003828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20161026000506) do
     t.string   "redirect_url"
     t.integer  "user_id"
     t.string   "secret"
+    t.string   "app_name"
     t.index ["user_id"], name: "index_user_apis_on_user_id", using: :btree
   end
 

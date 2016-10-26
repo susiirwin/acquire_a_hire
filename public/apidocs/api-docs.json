@@ -6,6 +6,10 @@
     {
       "path": "/apidocs/api/v1/jobs/messages.{format}",
       "description": "Messages"
+    },
+    {
+      "path": "/apidocs/api/v1/oauth/token.{format}",
+      "description": "Oauth tokens"
     }
   ],
   "authorizations": null

@@ -10,8 +10,7 @@ class ProfessionalsController < ApplicationController
     @user.update_attributes(role: "professional")
     if @user.save
       session[:user_id] = @user.id
-      service = AuthyService.new(@user)
-      @user.update_attributes(authy_id: service.create_user)
+      @user.update_attributes!(authy_id: AuthyService.create_user(@user))
       redirect_to confirmation_path
     else
       set_flash_errors

@@ -17,7 +17,7 @@ describe 'New Message API Endpoint from professional' do
     authorization = UserAuthorization.create(user: professional, user_api: user_api)
     token = authorization.set_token
     job = create(:job, requester: requester)
-    message = JSON.generate({body: "HEY PLEASE HIRE ME SUCKA", token: token, recipient_id: requester.id})
+    message = JSON.generate({body: "HEY PLEASE HIRE ME SUCKA", subject: 'WOOT!', token: token, recipient_id: requester.id})
     post "/api/v1/jobs/#{job.id}/message.json",
           params: message,
           headers: {'Content-Type': 'application/json'}
@@ -48,7 +48,7 @@ describe 'New Message API Endpoint from requester' do
     authorization = UserAuthorization.create(user: requester, user_api: user_api)
     token = authorization.set_token
     job = create(:job, requester: requester)
-    message = JSON.generate({body: "HEY SUCKA! You are hired!", token: token, recipient_id: professional.id})
+    message = JSON.generate({body: "HEY SUCKA! You are hired!", subject: 'WOOT!', token: token, recipient_id: professional.id})
 
     post "/api/v1/jobs/#{job.id}/message.json",
           params: message,

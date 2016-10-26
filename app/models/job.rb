@@ -12,4 +12,8 @@ class Job < ApplicationRecord
   scope :in_progress, -> { where(status: "pending") }
   scope :available,   -> { where(status: "available") }
   scope :closed,      -> { where(status: "closed") }
+
+  def self.for_professional(professional)
+    where(state: professional.state).where(skill: [professional.skills.pluck('id')])
+  end
 end

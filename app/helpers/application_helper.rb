@@ -26,4 +26,9 @@ module ApplicationHelper
       render partial: 'shared/requester_nav'
     end
   end
+
+  def dashboard_by_role(user)
+    return requesters_dashboard_path if user.role == "requester"
+    return professionals_dashboard_path if user.role == "professional"
+  end
 end
