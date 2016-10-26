@@ -35,7 +35,6 @@ class Api::V1::Jobs::MessagesController < ApplicationController
   end
 
   def index
-    require "pry"; binding.pry
     @requesting_user = UserAuthorization.find_by(token: params[:token]).user
     messages = @requesting_user.messages.job_conversation(conversation_params)
     if @requesting_user.role == "professional"

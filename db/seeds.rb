@@ -1,10 +1,11 @@
 class Seed
-  def self.start(num_requesters, num_professionals, num_jobs)
+  def self.start(num_requesters, num_professionals, num_jobs, num_reviews)
     seed = Seed.new
     seed.create_skills
     seed.create_requester(num_requesters)
     seed.create_professional(num_professionals)
     seed.create_jobs(num_jobs)
+    seed.create_reviews(num_reviews)
   end
 
   def create_skills
@@ -95,6 +96,19 @@ class Seed
       rand_job.update_attributes(professional: random_professional, status: status)
     end
   end
+
+  def create_reviews(num)
+    num.times do |i|
+      Review.create( {
+        review: Faker::ChuckNorris.fact,
+        professional: User.where(role: "professional").shuffle.pop,
+        requester: User.where(role: "requester").shuffle.pop,
+        reviewee_role: ["requester", "professional"].shuffle.pop,
+        rating: rand(1..5)
+      })
+    end
+    puts "Review #{i} created"
+  end
 end
 
-Seed.start(50, 50, 200)
+Seed.start(500, 500, 2000, 1000)
