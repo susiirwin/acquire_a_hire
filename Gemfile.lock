@@ -68,7 +68,7 @@ GEM
       capistrano (~> 3.1)
       sshkit (~> 1.2)
     capistrano-harrow (0.5.3)
-    capistrano-rails (1.2.0)
+    capistrano-rails (1.1.8)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capybara (2.10.1)
@@ -265,7 +265,7 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.6)
   capistrano-bundler
-  capistrano-rails
+  capistrano-rails (~> 1.1.8)
   capistrano-rbenv!
   capybara
   carrierwave (>= 1.0.0.beta, < 2.0)
