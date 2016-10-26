@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def display_attachments(message)
     unless message.attachment.file.nil?
-      link_to message.attachment.file.original_filename, message.attachment.url 
+      link_to message.attachment.file.original_filename, message.attachment.url
     end
   end
 

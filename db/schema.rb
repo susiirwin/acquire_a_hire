@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026003828) do
+ActiveRecord::Schema.define(version: 20161026170328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,14 @@ ActiveRecord::Schema.define(version: 20161026003828) do
     t.index ["user_id"], name: "index_user_authorizations_on_user_id", using: :btree
   end
 
+  create_table "user_rejections", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "user_id"
+    t.boolean "rejected", default: true
+    t.index ["job_id"], name: "index_user_rejections_on_job_id", using: :btree
+    t.index ["user_id"], name: "index_user_rejections_on_user_id", using: :btree
+  end
+
   create_table "user_skills", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skill_id"
@@ -128,6 +136,8 @@ ActiveRecord::Schema.define(version: 20161026003828) do
   add_foreign_key "user_apis", "users"
   add_foreign_key "user_authorizations", "user_apis"
   add_foreign_key "user_authorizations", "users"
+  add_foreign_key "user_rejections", "jobs"
+  add_foreign_key "user_rejections", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
 end
