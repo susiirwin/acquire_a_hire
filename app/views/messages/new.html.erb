@@ -1,0 +1,8 @@
+<h1>Send Message For <%= @job.title %></h1>
+<%= form_for @message do |f| %>
+  <%= f.text_field :subject, placeholder: 'Message Subject' %><br><br>
+  <%= f.text_area :body, placeholder: 'Enter Text Here' %><br><br>
+  <%= f.file_field :attachment, accept: 'image/jpg,image/jpeg,application/pdf' %>
+
+  <%= f.submit 'Send Message' %>
+<% end %>

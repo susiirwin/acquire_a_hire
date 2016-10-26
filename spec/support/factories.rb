@@ -24,7 +24,7 @@ FactoryGirl.define do
       role "professional"
 
       before :create do |user|
-        user.skills << Skill.new(name: "Espionage")
+        user.skills << Skill.new(name: generate(:skill_name))
       end
     end
 
@@ -41,8 +41,12 @@ FactoryGirl.define do
     "chad#{n}@test.com"
   end
 
+  sequence :skill_name do |n|
+    "Espionage #{n}"
+  end
+
   factory :skill do
-    name "Espionage"
+    name { generate(:skill_name) }
   end
 
   factory :job do

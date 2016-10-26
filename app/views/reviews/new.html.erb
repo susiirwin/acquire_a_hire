@@ -1,0 +1,36 @@
+
+
+<div class="container">
+  <div class="well">
+    <h2>Add a Review</h2>
+    <%= form_for @review, url: reviews_path do |f| %>
+
+    <%= f.hidden_field :requester_id, value: @review.requester_id %>
+    <%= f.hidden_field :professional_id, value: @review.professional_id %>
+    <%= f.hidden_field :reviewee_role, value: @review.reviewee_role %>
+
+    <%= f.label :review %>
+    <%= f.text_area :review %> <br/>
+
+  </br/>
+
+  <%= f.radio_button(:rating, 'one_star') %>
+  <%= label(:review_rating_one_star, '1 star') %>
+  <%= f.radio_button(:rating, 'two_stars') %>
+  <%= label(:review_rating_two_stars, '2 stars') %>
+  <%= f.radio_button(:rating, 'three_stars') %>
+  <%= label(:review_rating_three_stars, '3 stars') %>
+  <%= f.radio_button(:rating, 'four_stars') %>
+  <%= label(:review_rating_four_stars, '4 stars') %>
+  <%= f.radio_button(:rating, 'five_stars') %>
+  <%= label(:review_rating_four_stars, '5 stars') %>
+  <br/>
+
+</br/>
+
+<%= f.submit %>
+<% end %>
+
+  </div>
+
+</div>
