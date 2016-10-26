@@ -36,7 +36,7 @@ class Api::AccountsController < ApplicationController
     end
 
     def api_request_params
-      params.permit(:first_name, :last_name, :email, :description, :url, :redirect_url)
+      params.permit(:first_name, :last_name, :email, :description, :url, :redirect_url, :app_name)
     end
 
     def set_error_message
