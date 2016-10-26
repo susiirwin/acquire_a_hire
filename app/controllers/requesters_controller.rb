@@ -9,8 +9,7 @@ class RequestersController < ApplicationController
     @user.update_attributes(role: "requester")
     if @user.save
       session[:user_id] = @user.id
-      service = AuthyService.new(@user)
-      @user.update_attributes!(authy_id: service.create_user)
+      @user.update_attributes!(authy_id: AuthyService.create_user(@user))
       redirect_to confirmation_path
     else
       flash.now[:error] = @user.errors.full_messages.join(", ")
