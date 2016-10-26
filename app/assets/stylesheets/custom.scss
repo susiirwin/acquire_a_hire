@@ -2,8 +2,6 @@
 $primary-color: #2D6998;
 //medium blue
 $secondary-color: #50A8E1;
-//light blue
-$accent-color1: #6EC8F8;
 //grey
 $accent-color2: #E4E4E4;
 // red
@@ -21,6 +19,12 @@ blockquote {
 .btn-acquire {
   background-color: $accent-color3;
   color: white;
+}
+
+.container {
+  background-color: $primary-color;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 body {
