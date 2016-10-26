@@ -1,16 +1,18 @@
 //dark blue
-$primary-color: #2D6998;
+$primary-color: #2b4450;
 //medium blue
-$secondary-color: #50A8E1;
-//light blue
-$accent-color1: #6EC8F8;
+$secondary-color: #497285;
 //grey
-$accent-color2: #E4E4E4;
+$accent-color2: #dfebed;
 // red
-$accent-color3: #c53620;
+$accent-color3: #f78536;
 
 .jumbotron {
-  background-color: $accent-color2;
+  background-image: url('https://images.unsplash.com/photo-1470342495351-a5f90c5011cd?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=8b647b6f0ed6d7790c6866bbf06ea0b1');
+  background-size: cover;
+  background-position: 0 -200px;
+  height: 500px;
+  color: white;
 }
 
 blockquote {
@@ -21,6 +23,17 @@ blockquote {
 .btn-acquire {
   background-color: $accent-color3;
   color: white;
+}
+
+.btn-acquire-secondary {
+  background-color: $primary-color;
+  color: white;
+}
+
+.container {
+  background-color: $primary-color;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 body {

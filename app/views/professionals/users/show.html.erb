@@ -1,5 +1,6 @@
 <h1><%= @user.business_name %></h1>
 <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+<h3>Average Rating: <%= render partial: 'shared/average_rating', locals: {user: @user} %></h3>
 <p><%= link_to 'Edit Account', edit_professional_path(@user) %>
 <p>
   <%= render partial: "shared/address", locals: {user: @user} %>

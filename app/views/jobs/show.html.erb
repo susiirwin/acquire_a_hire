@@ -9,6 +9,10 @@
     <td><%= @job.skill.name %></td>
   </tr>
   <tr>
+    <th>Requester Rating</th>
+    <td><%= render partial: 'shared/average_rating', locals: {user: @job.requester} %></td>
+    </tr>
+  <tr>
     <th>Minimum Price</th>
     <td>$<%= @job.min_price %></td>
   </tr>

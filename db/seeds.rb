@@ -106,8 +106,8 @@ class Seed
         reviewee_role: ["requester", "professional"].shuffle.pop,
         rating: rand(1..5)
       })
+      puts "Review #{i} created"
     end
-    puts "Review #{i} created"
   end
 end
 
