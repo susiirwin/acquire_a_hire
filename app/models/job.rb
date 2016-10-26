@@ -5,6 +5,8 @@ class Job < ApplicationRecord
   validates :status,      presence: true
   validates :min_price, numericality: { greater_than: 0, less_than: :max_price }
 
+  has_many :user_rejections
+
   belongs_to :skill
   belongs_to :requester, class_name: "User"
   belongs_to :professional, class_name: "User", optional: true

@@ -9,5 +9,10 @@ class Requesters::OfferController < ApplicationController
   end
 
   def destroy
+    job = current_user.jobs.find(params[:id])
+    professional = User.find(params[:professional])
+    user_rejection = UserRejection.create(job: job, user: professional)
+    Rejector.send_rejection_messages(user_rejection)
+    redirect_to conversations_path
   end
 end
