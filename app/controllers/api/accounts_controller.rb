@@ -32,7 +32,7 @@ class Api::AccountsController < ApplicationController
 
   private
     def valid_password?
-      params[:password] == current_user.password
+      current_user.authenticate(params[:password])
     end
 
     def api_request_params
