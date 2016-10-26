@@ -1,18 +1,18 @@
-@import "bootstrap";
-
 //dark blue
-$primary-color: #2D6998;
+$primary-color: #2b4450;
 //medium blue
-$secondary-color: #50A8E1;
-//light blue
-$accent-color1: #6EC8F8;
+$secondary-color: #497285;
 //grey
-$accent-color2: #E4E4E4;
+$accent-color2: #dfebed;
 // red
-$accent-color3: #c53620;
+$accent-color3: #f78536;
 
 .jumbotron {
-  background-color: $accent-color2;
+  background-image: image-url('shaved_wood.jpg');
+  background-size: cover;
+  background-position: 0 30%;
+  height: 25%;
+  color: white;
 }
 
 blockquote {
@@ -25,7 +25,27 @@ blockquote {
   color: white;
 }
 
+.btn-acquire-secondary {
+  background-color: $primary-color;
+  color: white;
+}
+
+.container {
+  background-color: $primary-color;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.navbar-default {
+  margin-bottom: 0;
+}
+
+.tagline {
+  opacity: 0.75;
+  width: 50%
+}
+
 body {
-    background-image: url(brickwall_@2X.png);
-    background-repeat:repeat;
+  background-image: image-url('brickwall_@2X.png');
+  background-repeat:repeat;
 }

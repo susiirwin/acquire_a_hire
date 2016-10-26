@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :skills, through: :user_skills
   has_many :jobs, foreign_key: 'requester_id'
   has_many :user_apis
+  has_many :user_rejections
 
   enum role: [:requester, :professional, :admin]
 
@@ -63,6 +64,15 @@ class User < ApplicationRecord
       "professional" => "requester",
       "requester" => "professional"
     }
+  end
+
+  def reviews
+    Review.where(reviewee_role: self.role).where('professional_id = ? OR requester_id = ?', self.id, self.id)
+  end
+
+  def average_rating
+    average = reviews.average(:rating)
+    average.to_f.round(2)
   end
 
   private

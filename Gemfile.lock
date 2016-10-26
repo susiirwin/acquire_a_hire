@@ -265,7 +265,7 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.6)
   capistrano-bundler
-  capistrano-rails
+  capistrano-rails (~> 1.1.8)
   capistrano-rbenv!
   capybara
   carrierwave (>= 1.0.0.beta, < 2.0)

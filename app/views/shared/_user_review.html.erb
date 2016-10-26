@@ -1,0 +1,15 @@
+<div class="well review">
+  <% if review.reviewee_role == "requester" %>
+    <h2>Review for <%= User.find(review.requester_id).full_name %></h2>
+    <h2>Written by <%= User.find(review.professional_id).business_name %></h2>
+  <% elsif review.reviewee_role == "professional" %>
+    <h2>Review for <%= User.find(review.professional_id).business_name %></h2>
+    <h2>Written by <%= User.find(review.requester_id).full_name %></h2>
+  <% end  %>
+
+  <h3>Review:</h3>
+  <%= review.review %>
+
+  <h3>Rating: </h3>
+  <%= review.rating %>
+</div>

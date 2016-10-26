@@ -1,30 +1,61 @@
-<h1><%= @user.full_name %></h1>
-<h3>Member since: <%= @user.created_at.to_s(:long) %></h3>
-<p>
-  <%= render partial: "shared/address", locals: {user: @user} %>
-</p>
+<div class="container">
+  <div class="well">
+    <h1><%= @user.full_name %></h1>
 
-<p>
-  <%= link_to 'Start A Project', new_job_path %>
-</p>
+    <table>
+      <tr>
+        <td>
+          Member since:
+        </td>
+        <td>
+          <%= @user.created_at.to_s(:long) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Average Rating:
+        </td>
+        <td>
+          <%= render partial: 'shared/average_rating', locals: {user: @user} %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Home Address:
+        </td>
+        <td>
+          <%= render partial: "shared/address", locals: {user: @user} %>
+        </td>
+      </tr>
 
-<h3>Your Posted Jobs</h3>
-<div class="jobs">
-  <div id="open">
-    <h3>Open Jobs</h3>
-    <% @user.open_jobs.each do |job| %>
-      <ul>
-        <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
-      </ul>
-    <% end %>
-  </div>
 
-  <div id="in_progress">
-    <h3>In-Progress Jobs</h3>
-    <% @user.in_progress_jobs.each do |job| %>
-      <ul>
-        <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
-      </ul>
-    <% end %>
+    </table>
+
+
+    <p>
+      <%= link_to 'Start A Project', new_job_path, class:"btn btn-acquire" %>
+    </p>
+
+    <h3>Your Posted Jobs</h3>
+    <div class="jobs">
+      <div id="open">
+        <h3>Open Jobs</h3>
+        <% @user.open_jobs.each do |job| %>
+        <ul>
+          <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
+        </ul>
+        <% end %>
+      </div>
+
+      <div id="in_progress">
+        <h3>In-Progress Jobs</h3>
+        <% @user.in_progress_jobs.each do |job| %>
+        <ul>
+          <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>

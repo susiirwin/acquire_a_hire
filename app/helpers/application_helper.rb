@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def display_attachments(message)
     unless message.attachment.file.nil?
-      link_to message.attachment.file.original_filename, message.attachment.url 
+      link_to message.attachment.file.original_filename, message.attachment.url
     end
   end
 
@@ -25,5 +25,10 @@ module ApplicationHelper
     elsif current_user.requester?
       render partial: 'shared/requester_nav'
     end
+  end
+
+  def dashboard_by_role(user)
+    return requesters_dashboard_path if user.role == "requester"
+    return professionals_dashboard_path if user.role == "professional"
   end
 end

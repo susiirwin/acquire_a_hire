@@ -14,8 +14,8 @@ class MessagesController < ApplicationController
 
   def create
     message = Message.new(message_params)
-    clear_params_session
     if message.save
+      clear_params_session
       redirect_to messages_path(job: message.job_id, with: message.recipient_id)
     else
       redirect_to new_message_path

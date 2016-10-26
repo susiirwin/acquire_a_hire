@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026000506) do
+ActiveRecord::Schema.define(version: 20161026170328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20161026000506) do
     t.integer  "requester_id",    null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "rating"
     t.string   "reviewee_role"
+    t.integer  "rating"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20161026000506) do
     t.string   "redirect_url"
     t.integer  "user_id"
     t.string   "secret"
+    t.string   "app_name"
     t.index ["user_id"], name: "index_user_apis_on_user_id", using: :btree
   end
 
@@ -85,6 +86,14 @@ ActiveRecord::Schema.define(version: 20161026000506) do
     t.string  "token"
     t.index ["user_api_id"], name: "index_user_authorizations_on_user_api_id", using: :btree
     t.index ["user_id"], name: "index_user_authorizations_on_user_id", using: :btree
+  end
+
+  create_table "user_rejections", force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "user_id"
+    t.boolean "rejected", default: true
+    t.index ["job_id"], name: "index_user_rejections_on_job_id", using: :btree
+    t.index ["user_id"], name: "index_user_rejections_on_user_id", using: :btree
   end
 
   create_table "user_skills", force: :cascade do |t|
@@ -127,6 +136,8 @@ ActiveRecord::Schema.define(version: 20161026000506) do
   add_foreign_key "user_apis", "users"
   add_foreign_key "user_authorizations", "user_apis"
   add_foreign_key "user_authorizations", "users"
+  add_foreign_key "user_rejections", "jobs"
+  add_foreign_key "user_rejections", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
 end

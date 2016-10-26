@@ -1,4 +1,7 @@
 <h1><%= @job.title %></h1>
+<% if @job.professional %>
+  <h3>Assigned To: <%= @job.professional.business_name %></h3>
+<% end %>
 <table>
   <tr>
     <th>Description</th>
@@ -8,6 +11,10 @@
     <th>Skill</th>
     <td><%= @job.skill.name %></td>
   </tr>
+  <tr>
+    <th>Requester Rating</th>
+    <td><%= render partial: 'shared/average_rating', locals: {user: @job.requester} %></td>
+    </tr>
   <tr>
     <th>Minimum Price</th>
     <td>$<%= @job.min_price %></td>

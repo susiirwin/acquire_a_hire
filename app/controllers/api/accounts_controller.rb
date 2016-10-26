@@ -32,11 +32,11 @@ class Api::AccountsController < ApplicationController
 
   private
     def valid_password?
-      params[:password] == current_user.password
+      current_user.authenticate(params[:password])
     end
 
     def api_request_params
-      params.permit(:first_name, :last_name, :email, :description, :url, :redirect_url)
+      params.permit(:first_name, :last_name, :email, :description, :url, :redirect_url, :app_name)
     end
 
     def set_error_message

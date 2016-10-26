@@ -6,7 +6,7 @@ class JobsController < ApplicationController
   end
 
   def create
-    @job = Job.create(formatted_job_params.merge(requester: current_user, state: current_user.state))
+    @job = Job.create(formatted_job_params)
 
     if @job.save
       flash[:info] = "Project created"
@@ -42,6 +42,8 @@ class JobsController < ApplicationController
       params = job_params
       params["min_price"] = params["min_price"].to_i * 100
       params["max_price"] = params["max_price"].to_i * 100
+      params["requester"] = current_user
+      params["state"]     = current_user.state
       params
     end
 end

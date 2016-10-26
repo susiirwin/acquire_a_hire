@@ -17,7 +17,7 @@ describe "Professional leaves Review" do
       expect(current_path).to eq(new_review_path)
 
       fill_in 'review_review', with: 'This is my review of the requester'
-      choose('review_rating_four_stars')
+      choose('review_rating_4')
 
       click_on "Create Review"
 
@@ -25,7 +25,7 @@ describe "Professional leaves Review" do
       expect(current_path).to eq (review_path(review))
 
       expect(page).to have_content("This is my review of the requester")
-      expect(page).to have_content("four_stars")
+      expect(page).to have_content(4)
     end
   end
 end
