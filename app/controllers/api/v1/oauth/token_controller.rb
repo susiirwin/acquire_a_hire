@@ -3,7 +3,11 @@ class Api::V1::Oauth::TokenController < ApplicationController
 
   swagger_api :create do
     summary 'Send an oauth token to the user'
-    notes 'Gives an oauth token required in other api calls. User must have previously authorized an application to access their account to get an oauth token'
+    notes 'Gives an oauth token required in other api calls. User must have previously authorized an application to access their account to get the code'
+    param :query, :api_key, :string, :required
+    param :query, :secret, :string, :required
+    param :query, :code, :string, :required
+    param :query, :redirect_url, :string, :required
   end
 
   def create
