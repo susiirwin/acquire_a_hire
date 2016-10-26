@@ -1,5 +1,5 @@
 class Rejector
-  def self.send_rejection_messages(*user_rejections)
+  def self.send_rejection_messages(user_rejections)
     user_rejections.each do |ur|
       rejection_message(ur)
     end

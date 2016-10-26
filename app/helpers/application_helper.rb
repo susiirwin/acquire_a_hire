@@ -31,8 +31,4 @@ module ApplicationHelper
     return requesters_dashboard_path if user.role == "requester"
     return professionals_dashboard_path if user.role == "professional"
   end
-
-  def message_options
-    
-  end
 end
