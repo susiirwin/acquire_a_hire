@@ -1,4 +1,3 @@
-require 'carrierwave/orm/activerecord'
 
 class Message < ApplicationRecord
   belongs_to :sender, class_name: 'User'
