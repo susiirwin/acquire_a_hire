@@ -22,7 +22,7 @@ describe 'guest creates professional account' do
       fill_in 'user_phone', with: '555-555-1234'
       fill_in 'user_street_address', with: '123 Test St.'
       fill_in 'user_city', with: 'Denver'
-      fill_in 'user_state', with: 'Colorado'
+      select 'Colorado', from: 'user_state'
       fill_in 'user_zipcode', with: '80202'
       fill_in 'user_password', with: "12345"
       fill_in 'user_password_confirmation', with: "12345"
@@ -56,7 +56,7 @@ describe 'guest creates professional account' do
       fill_in 'user_last_name', with: 'Clancey'
       fill_in 'user_phone', with: '555-555-1234'
       fill_in 'user_street_address', with: '123 Test St.'
-      fill_in 'user_state', with: 'Colorado'
+      select 'Colorado', from: 'user_state'
       fill_in 'user_zipcode', with: '80202'
       fill_in 'user_password', with: "12345"
       fill_in 'user_password_confirmation', with: "12345"
@@ -83,7 +83,7 @@ describe 'guest creates professional account' do
       fill_in 'user_phone', with: '555-555-1234'
       fill_in 'user_street_address', with: '123 Test St.'
       fill_in 'user_city', with: 'Denver'
-      fill_in 'user_state', with: 'Colorado'
+      select 'Colorado', from: 'user_state'
       fill_in 'user_zipcode', with: '80202'
       fill_in 'user_password', with: "12345"
       fill_in 'user_password_confirmation', with: "12345"
@@ -114,7 +114,7 @@ describe 'guest creates professional account' do
       fill_in 'user_phone', with: '555-555-1234'
       fill_in 'user_street_address', with: '123 Test St.'
       fill_in 'user_city', with: 'Denver'
-      fill_in 'user_state', with: 'Colorado'
+      select 'Colorado', from: 'user_state'
       fill_in 'user_zipcode', with: '80202'
       fill_in 'user_password', with: "12345"
       fill_in 'user_password_confirmation', with: "12345"

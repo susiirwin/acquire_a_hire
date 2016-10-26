@@ -13,11 +13,7 @@ describe "user log in" do
     fill_in "session_email", with: user.email
     fill_in "session_password", with: user.password
 
-    click_on "Login"
-
-    expect(page).to have_current_path('/confirmation')
-    fill_in 'submitted_token', with: '54321'
-    click_on 'Submit'
+    within('form') { click_on "Login" }
 
     expect(page).to have_content(user.first_name)
     expect(page).to have_content(user.last_name)
@@ -37,11 +33,7 @@ describe "user log in" do
     fill_in "session_email", with: user.email
     fill_in "session_password", with: user.password
 
-    click_on "Login"
-
-    expect(page).to have_current_path('/confirmation')
-    fill_in 'submitted_token', with: '54321'
-    click_on 'Submit'
+    within('form') { click_on "Login" }
 
     expect(page).to have_content(user.first_name)
     expect(page).to have_content(user.last_name)

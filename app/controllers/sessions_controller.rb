@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if authenticated?(user)
       session[:user_id] = user.id
-      redirect_to confirmation_path
+      redirect_to dashboard_by_role(current_user)
     else
       flash.now[:danger] = "Username and/or Password is invalid. Try again."
       render :new
@@ -37,6 +37,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.clear
+    # current_user.update_attribute(verified: false)
     flash[:info] = "You have logged out"
     redirect_to root_path
   end
