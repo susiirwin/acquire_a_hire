@@ -47,7 +47,7 @@
       <div class="col-md-6"><h3>In-Progress Jobs</h3></div>
     </div>
     <div class="row">
-      <div class="col-md-6"><h3><% @user.in_progress_jobs.each do |job| %>
+      <div class="col-md-6"><h3><% @user.pro_jobs.in_progress.each do |job| %>
         <ul>
           <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
         </ul>
