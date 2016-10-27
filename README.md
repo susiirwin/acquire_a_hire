@@ -45,7 +45,7 @@ Acquire A Hire uses the OAuth 2.0 protocol to receive a token for API requests.
   + `recipient_id`
 * To see all messages for a user, make a GET request to `/api/v1/jobs/:job_id/messages.json` with the parameter:
   + token
-* If this is successful, you will receive a response with a status of 200 and an array of all messages for that user.
+* If this is successful, you will receive a response with a status of 200 and an array of all messages for that user regarding that job.
 
 ## Authors
 Brendan Dillon  
