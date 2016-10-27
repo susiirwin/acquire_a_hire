@@ -22,6 +22,10 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
   end
 
+  def update
+    
+  end
+
   private
     def validate_authorization
       unless authorized?

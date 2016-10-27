@@ -17,7 +17,7 @@ describe "Professional dashboard" do
 
     it "only shows assigned jobs" do
       pro = create(:professional_user)
-      job = create(:job, professional: pro, requester: create(:requester_user), status: "pending")
+      job = create(:job, professional: pro, requester: create(:requester_user), status: "foo")
       ApplicationController.any_instance.stubs(:current_user).returns(pro)
 
       visit professionals_dashboard_path

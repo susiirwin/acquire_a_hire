@@ -13,7 +13,7 @@
 </ul>
 
 <div class="jobs">
-  <% @user.in_progress_jobs.each do |job| %>
+  <% @user.pro_jobs.in_progress.each do |job| %>
     <ul>
       <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
     </ul>
