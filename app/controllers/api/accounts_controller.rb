@@ -5,14 +5,19 @@ class Api::AccountsController < ApplicationController
 
   def create
     @user = current_user
-    @user_api = UserApi.find_or_create_by(user_id: @user.id)
+    @user_api  = @user.user_apis.new(api_request_params)
+    # @user_api = UserApi.find_or_create_by(user_id: @user.id)
     if valid_password? && @user_api.create_new_key(api_request_params)
       flash[:success] = "API Key Request Accepted"
       redirect_to api_accounts_dashboard_path
     else
-      flash.now[:error] = set_error_message
-      render :new
+      flash[:error] = set_error_message
+      redirect_to new_api_account_path
     end
+  end
+
+  def edit
+    @user = current_user
   end
 
   def update
@@ -27,7 +32,11 @@ class Api::AccountsController < ApplicationController
   end
 
   def show
-    @user_api = current_user.user_apis.last
+    @user = current_user
+    @user_apis = current_user.user_apis.to_a
+    unless @user_apis
+      redirect_to new_api_account_path
+    end
   end
 
   private

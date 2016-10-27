@@ -21,6 +21,7 @@ describe 'logged in user seeks new api key' do
       fill_in 'redirect_url', with: 'test.com'
       fill_in 'password', with: user.password
       fill_in 'description', with: 'This is a test'
+      fill_in 'app_name', with: 'Test App'
       click_on 'Send Request'
 
       expect(page).to have_content(UserApi.first.key)
@@ -36,12 +37,16 @@ describe 'logged in user seeks new api key' do
       ApplicationController.any_instance.stubs(:current_user).returns(user)
       visit '/api/accounts/new'
 
+      fill_in 'url', with: 'test.com'
+      fill_in 'redirect_url', with: 'test.com'
       fill_in 'password', with: 'wrong'
+      fill_in 'description', with: 'This is a test'
+      fill_in 'app_name', with: 'Test App'
       click_on 'Send Request'
 
       expect(page).to have_content('incorrect password')
       expect(UserApi.count).to eq(0)
-      expect(current_path).to eq('/api/accounts')
+      expect(current_path).to eq('/api/accounts/new')
     end
   end
 end

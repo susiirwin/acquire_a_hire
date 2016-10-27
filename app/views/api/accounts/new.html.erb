@@ -1,10 +1,6 @@
 <div class="container">
   <div class="well">
     <h1>Request Messaging API Key</h1>
-    <% if @user.has_api_key? %>
-    <%= render partial: 'another_key_form' %>
-    <% else %>
-    <%= render partial: 'new_key_form' %>
-    <% end %>
+      <%= render partial: 'new_key_form' %>
   </div>
 </div>

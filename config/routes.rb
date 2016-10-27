@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/logout',    to: 'sessions#destroy', as: 'logout'
 
   namespace :api do
-    resources :accounts, only: [:new, :create, :update]
+    resources :accounts, only: [:new, :create, :edit, :update]
     get 'accounts/dashboard', to: 'accounts#show'
 
     namespace :v1 do

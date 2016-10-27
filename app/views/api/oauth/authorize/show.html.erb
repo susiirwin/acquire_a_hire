@@ -4,7 +4,8 @@
     <%= @user_api.app_name %> app is requesting permission to get and send messages through your account
   </p>
 
-  <%= button_to "Authorize Application", api_oauth_authorize_redirect_path(@authorize_params), method: :get, class:"btn btn-acquire" %>
+  <%= button_to "Authorize Application", api_oauth_authorize_redirect_path, method: :get, params: {api_key: @authorize_params["api_key"]}, class:"btn btn-acquire" %>
+  <br />
   <%= button_to "Deny Authorization", dashboard_by_role(@authorizing_user), method: :get, class:"btn btn-acquire"  %>
   </div>
 </div>
