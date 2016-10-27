@@ -5,6 +5,16 @@ class Rejector
     end
   end
 
+  def self.mass_rejection(params, current_user)
+    job = current_user.jobs.find(params[:id])
+    job_poster = job.requester
+    pro_ids = Message.where(job_id: job.id).map { |m| m.other_party(job_poster.id) }.uniq
+    pro_ids.delete(params[:professional].to_i)
+    pro_ids.each { |id| UserRejection.create(job: job, user_id: id)}
+    rejections = UserRejection.where(job_id: job.id)
+    Rejector.send_rejection_messages(rejections)
+  end
+
   private
     def self.rejection_message(user_rejection)
       Message.create(
