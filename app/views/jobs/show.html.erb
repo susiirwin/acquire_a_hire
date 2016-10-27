@@ -16,11 +16,11 @@
         </tr>
       <tr>
         <th>Minimum Price</th>
-        <td>$<%= @job.min_price %></td>
+        <td>$<%= @job.price_in_dollars(@job.min_price) %></td>
       </tr>
       <tr>
         <th>Maximum Price</th>
-        <td>$<%= @job.max_price %></td>
+        <td>$<%= @job.price_in_dollars(@job.max_price) %></td>
       </tr>
     </table>
     <%= display_authorized_job_options %>

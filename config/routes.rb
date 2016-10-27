@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   end
   namespace :requesters do
     get '/dashboard', to: 'users#show'
+    put '/job_status/:id', to: 'offer#update', as: 'accept_offer'
+    delete '/job_status/:id', to: 'offer#destroy', as: 'reject_offer'
   end
 
   namespace :professionals do
