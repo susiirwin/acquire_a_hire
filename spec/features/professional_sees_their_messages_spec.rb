@@ -12,6 +12,6 @@ describe 'A professional views their conversations' do
     Message.create(body: "Build all the things.", subject: "You got the job.", sender_id: requester.id, recipient_id: professional.id, job_id: job.id)
 
     visit '/conversations'
-    expect(page).to have_link("#{job.title} - #{requester.full_name}", href: "/messages?job=#{job.id}&with=#{requester.id}")
+    expect(page).to have_link("#{job.title}", href: "/messages?job=#{job.id}&with=#{requester.id}")
   end
 end
