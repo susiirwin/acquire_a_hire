@@ -1,7 +1,6 @@
 <div class="container">
   <div class="well">
     <p>Here are the applications you currently have registered with us</p>
-    <%= link_to "register a new app", new_api_account_path %>
     <% @user_apis.each do |user_api| %>
       <div class="well">
         <h3><%= user_api.app_name %></h3>
@@ -10,6 +9,15 @@
         <%= link_to "New Key", edit_api_account_path(@user) %>
       </div>
     <% end %>
-    <p>Be sure to write down this key.  You must have this in order to use our API</p>
+    <p>
+      You must have these in order to use our API, and to make use OAuth authentication.
+      Keep these private and generate a new key if you think it has been compromised.
+    </p>
+    <div class="btn-group">
+      <%= link_to "Register a New App", new_api_account_path, class: 'btn btn-acquire' %>
+    </div>
+    <div class="btn-group">
+      <%= link_to "Documentation", api_documentation_path, class: 'btn btn-acquire-secondary' %>
+    </div>
   </div>
 </div>

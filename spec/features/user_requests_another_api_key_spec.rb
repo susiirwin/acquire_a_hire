@@ -16,10 +16,9 @@ describe 'user requests another api key' do
     old_key = UserApi.last.key
 
     ApplicationController.any_instance.stubs(:current_user).returns(user)
-    visit '/api/accounts/new'
+    visit api_accounts_dashboard_path
 
-    expect(page).to have_content('You already have an API key')
-
+    click_on "New Key"
     check 'accept'
     fill_in 'password', with: user.password
     click_on 'Send New API Key'
