@@ -1,12 +1,25 @@
 <div class="container">
   <div class="well">
-    <ul>
+    <table class="table table-striped">
+      <tr>
+        <th>
+          Project Name
+        </th>
+        <th>
+          Sender Name
+        </th>
+      </tr>
       <% @conversations.each do |conversation| %>
-      <li>
-        <%= link_to "#{conversation.job.title} - #{conversation.with.display_name}", messages_path(job: conversation.job.id, with: conversation.with.id) %>
-      </li>
-      <% end %>
-    </ul>
+      <tr>
+        <td>
+          <%= link_to "#{conversation.job.title}", messages_path(job: conversation.job.id, with: conversation.with.id) %>
+        </td>
+        <td>
+          <%= link_to "#{conversation.with.display_name}", messages_path(job: conversation.job.id, with: conversation.with.id) %>
 
+        </td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 </div>
