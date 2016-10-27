@@ -18,10 +18,8 @@ describe "Requester dashboard" do
 
       visit requesters_dashboard_path
 
+      expect(page).to have_link("#{job.id} - #{job.title}")
 
-      within("div.jobs div#open") do
-        expect(page).to have_link("#{job.id} - #{job.title}")
-      end
     end
 
     it "has many jobs" do
@@ -32,10 +30,9 @@ describe "Requester dashboard" do
 
       visit requesters_dashboard_path
 
-      within("div.jobs div#open") do
-        expect(page).to have_link("#{jobs.first.id} - #{jobs.first.title}")
-        expect(page).to have_link("#{jobs.last.id} - #{jobs.last.title}")
-      end
+      expect(page).to have_link("#{jobs.first.id} - #{jobs.first.title}")
+      expect(page).to have_link("#{jobs.last.id} - #{jobs.last.title}")
+
     end
   end
 
@@ -49,9 +46,7 @@ describe "Requester dashboard" do
 
       visit requesters_dashboard_path
 
-      within('div.jobs div#in_progress') do
-        expect(page).to have_link("#{job.id} - #{job.title}")
-      end
+      expect(page).to have_link("#{job.id} - #{job.title}")
     end
   end
 end
