@@ -4,7 +4,7 @@ Acquire A Hire is a Rails-based web application that allows users to post jobs a
 
 ## Installation
 
-Acquire A Hire uses Ruby 2.3.0 and Rails 5.0.0.1. Run the command `bundle install` to install neccesary gems.  
+Acquire A Hire uses Ruby 2.3.0 and Rails 5.0.0.1. Run the command `bundle install` to install necessary gems.  
 NOTE: Do not run `bundle update`, as this will update to a version of Capistrano that is incompatible with our server.
 
 ## Deployment
@@ -22,10 +22,10 @@ First, update the test databases with the command `rake db:test:prepare`. Follow
 ## API
 
 ### OAuth 2.0 Handshake
-Acquire A Hire uses the OAuth 2.0 protocol to recieve a token for API requests.  
-* First, register your application on Acquire A Hire. You will recieve an API key and secret.
+Acquire A Hire uses the OAuth 2.0 protocol to receive a token for API requests.  
+* First, register your application on Acquire A Hire. You will receive an API key and secret.
 * To authorize a user, have them make a GET request to '/api/oauth/authorize' with the parameters:
-  + `api_key` (The key you recieved in step 1)
+  + `api_key` (The key you received in step 1)
   + `redirect_url` (The url that you would like OAuth authorizations to redirect to)
 * The user will then be directed to a page where they can fill in an email and password that are associated with Acquire A Hire.
 * If they successfully login, they will be able to click a button to authorize your application to access their Acquire A Hire account.
@@ -39,13 +39,13 @@ Acquire A Hire uses the OAuth 2.0 protocol to recieve a token for API requests.
 
 ### API Endpoints
 * To send a message, make a POST request to `/api/v1/jobs/:job_id/message.json` with the parameters:
-  + `body` 
+  + `body`
   + `subject`
   + `token`
   + `recipient_id`
 * To see all messages for a user, make a GET request to `/api/v1/jobs/:job_id/messages.json` with the parameter:
   + token
-* If this is successful, you will recieve a response with a status of 200 and an array of all messages for that user.
+* If this is successful, you will receive a response with a status of 200 and an array of all messages for that user.
 
 ## Authors
 Brendan Dillon  
