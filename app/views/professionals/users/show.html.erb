@@ -4,34 +4,34 @@
 
     <table class="table">
       <tr>
-        <td>
+        <td class="col-md-2">
           Member Since:
         </td>
-        <td>
+        <td class="col-md-10">
           <%= @user.created_at.to_s(:long) %>
         </td>
       </tr>
       <tr>
-        <td>
+        <td class="col-md-2">
           Average Rating:
         </td>
-        <td>
+        <td class="col-md-10">
           <%= render partial: 'shared/average_rating', locals: {user: @user} %>
         </td>
       </tr>
       <tr>
-       <td>
+       <td class="col-md-2">
          Business Address:
        </td>
-       <td>
+       <td class="col-md-10">
          <%= render partial: "shared/address", locals: {user: @user} %>
        </td>
      </tr>
      <tr>
-       <td>
+       <td class="col-md-2">
         Skills Offered:
        </td>
-       <td>
+       <td class="col-md-10">
          <ul>
            <% @user.skills.each do |skill| %>
              <li><%= skill.name %></li>
@@ -42,7 +42,7 @@
     </table>
 
     <%= link_to 'Edit Account', edit_professional_path(@user), class:'btn btn-acquire' %>
-    
+
     <div class="row">
       <div class="col-md-6"><h3>In-Progress Jobs</h3></div>
     </div>
