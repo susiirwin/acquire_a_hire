@@ -13,11 +13,11 @@ class User < ApplicationRecord
   has_many :user_skills, dependent: :destroy
   has_many :skills, through: :user_skills
   has_many :jobs, foreign_key: 'requester_id'
+  has_many :pro_jobs, foreign_key: 'professional_id', class_name: 'Job'
   has_many :user_apis
   has_many :user_rejections
 
   enum role: [:requester, :professional, :admin]
-
 
   def full_name
     "#{first_name} #{last_name}"

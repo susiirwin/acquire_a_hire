@@ -11,8 +11,8 @@ describe 'user visits job show page' do
 
       expect(page).to have_content(job.title)
       expect(page).to have_content(job.skill.name)
-      expect(page).to have_content(job.min_price)
-      expect(page).to have_content(job.max_price)
+      expect(page).to have_content(job.min_price / 100)
+      expect(page).to have_content(job.max_price / 100)
       expect(page).to have_content(job.description)
       expect(page).to have_button('Start Conversation')
     end
@@ -36,11 +36,10 @@ describe 'user visits job show page' do
 
       expect(page).to have_content(job.title)
       expect(page).to have_content(job.skill.name)
-      expect(page).to have_content(job.min_price)
-      expect(page).to have_content(job.max_price)
+      expect(page).to have_content(job.min_price / 100)
+      expect(page).to have_content(job.max_price / 100)
       expect(page).to have_content(job.description)
       expect(page).to_not have_button('Send Message')
-      expect(page).to have_button('Edit Job Information')
     end
   end
 

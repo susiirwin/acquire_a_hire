@@ -1,12 +1,15 @@
 <div class='container'>
-  <% @messages.each do |message| %>
-    <div class="message well">
-      <h3><%= message.sender.display_name %></h3>
-      <h5>Average Rating: <%= render partial: 'shared/average_rating', locals: {user: message.sender} %></h5>
-      <h4><%= message.subject %></h4>
-      <p><%= message.body %></p>
-      <p><%= display_attachments(message) %></p>
-    </div>
-  <% end %>
-  <%= render partial: "message_options" %>
+  <div class='well'>
+
+    <% @messages.each do |message| %>
+      <div class="message well">
+        <h3><%= message.sender.display_name %></h3>
+        <h5>Average Rating: <%= render partial: 'shared/average_rating', locals: {user: message.sender} %></h5>
+        <h4><%= message.subject %></h4>
+        <p><%= message.body %></p>
+        <p><%= display_attachments(message) %></p>
+      </div>
+    <% end %>
+    <%= render partial: "message_options" %>
+  </div>
 </div>

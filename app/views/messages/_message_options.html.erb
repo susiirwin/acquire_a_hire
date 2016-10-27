@@ -1,7 +1,10 @@
 <% unless Job.find(@job_id).user_rejections.find_by(user_id: current_user.id) %>
-  <%= button_to 'Reply', new_message_path, method: :get, params: { job_id: @job_id, with: @with_id } %>
+  <%= button_to 'Reply', new_message_path, method: :get, params: { job_id: @job_id, with: @with_id }, class:'btn btn-acquire' %>
 <% end %>
-<% if current_user.requester? %>
-  <%= button_to 'Accept Offer', requesters_accept_offer_path(@job_id.to_i), method: :put, params: {professional: @with_id} %>
-  <%= button_to 'Reject Offer', requesters_reject_offer_path(@job_id.to_i), method: :delete, params: {professional: @with_id} %>
+<% if current_user.requester? && !Job.find(@job_id).professional %>
+  <%= button_to 'Accept Offer', requesters_accept_offer_path(@job_id.to_i), method: :put, params: {professional: @with_id}, class:'btn btn-success' %>
+  <%= button_to 'Reject Offer', requesters_reject_offer_path(@job_id.to_i), method: :delete, params: {professional: @with_id}, class:'btn btn-danger' %>
+<% end %>
+<% if current_user.professional? && Job.find(@job_id).professional == current_user && Job.find(@job_id).status != "closed" %>
+  <%= button_to 'Mark as Complete', job_path(@job_id), method: :put, class: "btn-q" %>
 <% end %>
