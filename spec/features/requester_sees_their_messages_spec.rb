@@ -12,6 +12,6 @@ describe 'A requester views their conversations' do
 
     visit '/conversations'
 
-    expect(page).to have_link("#{job.title} - #{professional.business_name}", href: "/messages?job=#{job.id}&with=#{professional.id}")
+    expect(page).to have_link("#{job.title}", href: "/messages?job=#{job.id}&with=#{professional.id}")
   end
 end

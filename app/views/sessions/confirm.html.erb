@@ -1,4 +1,10 @@
-<h1>Confirm your Key</h1>
-<%= link_to "Send new key", confirmation_path %>
-<%= form_tag('/validate')  %>
-<%= render partial: 'shared/two_auth_confirmation' %>
+<div class="container">
+  <div class="well">
+    <h1>Confirm your Key </h1>
+
+    <%= form_tag('/validate')  %>
+    <%= render partial: 'shared/two_auth_confirmation' %>
+    <%= link_to "Send new key", confirmation_path, class:'btn btn-acquire' %>
+
+  </div>
+</div>
