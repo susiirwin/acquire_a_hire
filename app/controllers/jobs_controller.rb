@@ -26,6 +26,7 @@ class JobsController < ApplicationController
     job = Job.find(params[:id])
     if job.professional == current_user
       job.update(status: "closed")
+      redirect_to job_path(job)
     else
       redirect_to dashboard_by_role(current_user)
     end

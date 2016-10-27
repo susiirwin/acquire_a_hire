@@ -14,11 +14,13 @@ describe 'professional marks a job as complete' do
 
     click_on "Mark as Complete"
 
-    expect(page).to_not have_button("Mark as Complete")
-
     visit professionals_dashboard_path
 
     expect(current_path).to eq('/professionals/dashboard')
     expect(page).to_not have_link("#{job.id} - #{job.title}")
+
+    visit messages_path(job: job.id, with: job.requester.id)
+
+    expect(page).to_not have_button("Mark as Complete")
   end
 end
