@@ -10,9 +10,8 @@ describe "Professional dashboard" do
 
       visit professionals_dashboard_path
 
-      within('div.jobs') do
         expect(page).to have_link("#{job.id} - #{job.title}")
-      end
+
     end
 
     it "only shows assigned jobs" do
@@ -22,9 +21,8 @@ describe "Professional dashboard" do
 
       visit professionals_dashboard_path
 
-      within('div.jobs') do
-        expect(page).to_not have_link("#{job.id} - #{job.title}")
-      end
+      expect(page).to_not have_link("#{job.id} - #{job.title}")
+
     end
   end
 end

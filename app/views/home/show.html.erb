@@ -11,24 +11,26 @@
 
   <div class="col-md-6 well requester">
     <h3>Looking for a Professional?</h3>
-      <!-- <img src="/assets/requester.jpg" alt="requesters"/> -->
     <blockquote>
       Login or Sign Up to post your job and have the thousands of our registered professionals bid for your contract.
     </blockquote>
     <div class="btn-group">
       <%= link_to "Login", login_path, class: "btn btn-acquire" %>
+    </div>
+    <div class="btn-group">
       <%= link_to "Sign Up", new_requester_path, class: "btn btn-acquire-secondary" %>
     </div>
   </div>
 
   <div class="col-md-6 well professional">
     <h3>Looking for Work?</h3>
-      <!-- <img src="/assets/professional.png" alt="professionals" /> -->
     <blockquote>
       Login or Sign Up to bid on the thousands of jobs people are seeking across the country.
     </blockquote>
     <div class="btn-group">
       <%= link_to "Login", login_path, class: "btn btn-acquire" %>
+    </div>
+    <div class="btn-group">
       <%= link_to "Sign Up", new_professional_path, class: "btn btn-acquire-secondary" %>
     </div>
   </div>

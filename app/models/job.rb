@@ -18,4 +18,8 @@ class Job < ApplicationRecord
   def self.for_professional(professional)
     where(state: professional.state).where(skill: [professional.skills.pluck('id')])
   end
+
+  def price_in_dollars(price)
+     '%.2f' % (price / 100.0)
+  end
 end

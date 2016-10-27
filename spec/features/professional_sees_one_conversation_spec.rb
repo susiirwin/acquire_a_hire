@@ -7,7 +7,7 @@ describe 'A professional sees one of their conversations' do
     job = create(:job, requester: requester)
     ApplicationController.any_instance.stubs(:current_user).returns(professional)
 
-    
+
     message1 = Message.create(body: "Build all the things.", subject: "You got the job.", sender_id: requester.id, recipient_id: professional.id, job_id: job.id)
     message2 = Message.create(body: "Give me your money", subject: "I got the job", sender_id: professional.id, recipient_id: requester.id, job_id: job.id)
 

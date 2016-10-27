@@ -1,35 +1,88 @@
-<%= form_for(@user, url: professional_path) do |f| %>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
+<div class="container">
+  <div class="well">
+    <h1>Create a New Professional Account</h1>
+    <%= form_for(@user, url: professional_path, :html => {:class => "form-horizontal center"} ) do |f| %>
+    <div class="form-group">
+      <%= f.label :first_name, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_field :first_name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :last_name, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :business_name, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_field :business_name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :phone, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_field :phone, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :street_address, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_field :street_address, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :city, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :state, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= render partial: "shared/state_dropdown" %><br />
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :zipcode, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.text_field :zipcode, class: "form-control" %>
+      </div>
+    </div>
 
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
+    <div class="form-group">
+      <%= f.label :Skills, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <% @skills.each do |skill| %>
+        <div class="checkbox">
+          <%= check_box_tag(:skill_ids, skill.id, @user.skills.include?(skill), name: 'user[skill_ids][]', id: "skill-#{skill.id}", type: "checkbox" ) %>
+          <%= skill.name %>
+        </div>
+        <% end %>
+      </div>
+    </div>
 
-  <%= f.label :business_name %>
-  <%= f.text_field :business_name %>
+    <div class="form-group">
+      <%= f.label :password, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
+    </div>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <%= f.label :phone %>
-  <%= f.text_field :phone %>
-
-  <%= f.label :street_address %>
-  <%= f.text_field :street_address %>
-
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-
-  <%= f.label :state %>
-  <%= f.text_field :state %>
-
-  <%= f.label :zipcode %>
-  <%= f.text_field :zipcode %>
-
-  <% @skills.each do |skill| %>
-    <%= check_box_tag(:skill_ids, skill.id, @user.skills.include?(skill), name: 'user[skill_ids][]', id: "skill-#{skill.id}") %>
-    <%= skill.name %>
-  <% end %>
-
-  <%= f.submit "Save Changes" %>
-<% end %>
+    <%= f.submit "Save Changes", class: "btn btn-acquire center-block" %>
+    <% end %>
+  </div>
+</div>

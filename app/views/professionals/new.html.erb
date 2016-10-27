@@ -1,6 +1,6 @@
 <div class="container">
-  <h1>Create a New Professional Account</h1>
-  <div class="jumbotron">
+  <div class="well">
+    <h1>Create a New Professional Account</h1>
     <%= form_for(@user, url: professionals_path, :html => {:class => "form-horizontal center"} ) do |f| %>
     <div class="form-group">
       <%= f.label :first_name, class: "col-md-4 control-label" %>
