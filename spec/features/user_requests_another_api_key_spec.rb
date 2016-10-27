@@ -16,16 +16,14 @@ describe 'user requests another api key' do
     old_key = UserApi.last.key
 
     ApplicationController.any_instance.stubs(:current_user).returns(user)
-    visit '/api/accounts/new'
+    visit api_accounts_dashboard_path
 
-    expect(page).to have_content('You already have an API key')
-
+    click_on "New Key"
     check 'accept'
     fill_in 'password', with: user.password
     click_on 'Send New API Key'
-
     expect(page).to have_content(UserApi.last.key)
-    expect(page).to have_content("secret is: #{UserApi.last.secret}")
+    expect(page).to have_content("Secret is: #{UserApi.last.secret}")
     expect(current_path).to eq('/api/accounts/dashboard')
     expect(UserApi.validate_user_key(old_key, user)).to be_falsey
     expect(UserApi.validate_user_key(UserApi.last.key, user)).to eq(true)

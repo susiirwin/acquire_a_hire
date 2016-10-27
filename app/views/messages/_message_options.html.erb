@@ -6,5 +6,5 @@
   <%= button_to 'Reject Offer', requesters_reject_offer_path(@job_id.to_i), method: :delete, params: {professional: @with_id}, class:'btn btn-danger' %>
 <% end %>
 <% if current_user.professional? && Job.find(@job_id).professional == current_user && Job.find(@job_id).status != "closed" %>
-  <%= button_to 'Mark as Complete', job_path(@job_id), method: :put, class: "btn-q" %>
+  <%= button_to 'Mark as Complete', job_path(@job_id), method: :put, class: "btn btn-success" %>
 <% end %>

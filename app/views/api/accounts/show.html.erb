@@ -1,8 +1,23 @@
 <div class="container">
   <div class="well">
-    <p>Thank you for your request</p>
-    <p>Your API Key is: <%= @user_api.key %></p>
-    <p>Your secret is: <%= @user_api.secret %></p>
-    <p>Be sure to write down this key.  You must have this in order to use our API</p>
+    <p>Here are the applications you currently have registered with us</p>
+    <% @user_apis.each do |user_api| %>
+      <div class="well">
+        <h3><%= user_api.app_name %></h3>
+        <p>API Key is: <%= user_api.key %></p>
+        <p>Secret is: <%= user_api.secret %></p>
+        <%= link_to "New Key", edit_api_account_path(@user) %>
+      </div>
+    <% end %>
+    <p>
+      You must have these in order to use our API, and to make use OAuth authentication.
+      Keep these private and generate a new key if you think it has been compromised.
+    </p>
+    <div class="btn-group">
+      <%= link_to "Register a New App", new_api_account_path, class: 'btn btn-acquire' %>
+    </div>
+    <div class="btn-group">
+      <%= link_to "Documentation", api_documentation_path, class: 'btn btn-acquire-secondary' %>
+    </div>
   </div>
 </div>
