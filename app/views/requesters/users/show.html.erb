@@ -1,11 +1,11 @@
-<div class="container">
+<<<<<<< HEAD
+<div  class="container">
   <div class="well">
-    <h1><%= @user.full_name %></h1>
-
-    <table>
+    <h1>Welcome, <%= @user.full_name %></h1>
+    <table class="table">
       <tr>
         <td>
-          Member since:
+          Member Since:
         </td>
         <td>
           <%= @user.created_at.to_s(:long) %>
@@ -20,42 +20,35 @@
         </td>
       </tr>
       <tr>
-        <td>
-          Home Address:
-        </td>
-        <td>
-          <%= render partial: "shared/address", locals: {user: @user} %>
-        </td>
-      </tr>
-
-
+       <td>
+         Home Address:
+       </td>
+       <td>
+         <%= render partial: "shared/address", locals: {user: @user} %>
+       </td>
+     </tr>
     </table>
 
+    <h2>Your Posted Jobs <%= link_to 'Start A Project', new_job_path, class:'btn btn-acquire' %></h2>
 
-    <p>
-      <%= link_to 'Start A Project', new_job_path, class:"btn btn-acquire" %>
-    </p>
 
-    <h3>Your Posted Jobs</h3>
-    <div class="jobs">
-      <div id="open">
-        <h3>Open Jobs</h3>
-        <% @user.open_jobs.each do |job| %>
-        <ul>
-          <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
-        </ul>
-        <% end %>
+    <div class="row">
+      <div class="col-md-6"><h3>Open Jobs</h3></div>
+      <div class="col-md-6"><h3>In-Progress Jobs</h3></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6"><% @user.open_jobs.each do |job| %>
+      <ul>
+        <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
+      </ul>
+      <% end %>
       </div>
-
-      <div id="in_progress">
-        <h3>In-Progress Jobs</h3>
-        <% @user.in_progress_jobs.each do |job| %>
+      <div class="col-md-6">  <% @user.in_progress_jobs.each do |job| %>
         <ul>
           <li><%= link_to "#{job.id} - #{job.title}", job_path(job) %></li>
         </ul>
         <% end %>
       </div>
     </div>
-
   </div>
 </div>

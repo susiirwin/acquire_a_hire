@@ -1,15 +1,21 @@
 <div class="well review">
   <% if review.reviewee_role == "requester" %>
-    <h2>Review for <%= User.find(review.requester_id).full_name %></h2>
-    <h2>Written by <%= User.find(review.professional_id).business_name %></h2>
+    <h3>Review for <%= User.find(review.requester_id).full_name %></h3>
+    <h3>Written by <%= User.find(review.professional_id).business_name %></h3>
   <% elsif review.reviewee_role == "professional" %>
-    <h2>Review for <%= User.find(review.professional_id).business_name %></h2>
-    <h2>Written by <%= User.find(review.requester_id).full_name %></h2>
+    <h3>Review for <%= User.find(review.professional_id).business_name %></h3>
+    <h3>Written by <%= User.find(review.requester_id).full_name %></h2>
   <% end  %>
 
-  <h3>Review:</h3>
-  <%= review.review %>
+  <table>
+    <tr>
+      <td class="col-md-2"><h4>Review:</h4></td>
+      <td class="col-md-10"><%= review.review %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2"><h4>Rating:</h4></td>
+      <td class="col-md-10"><%= review.rating %></td>
+    </tr>
+  </table>
 
-  <h3>Rating: </h3>
-  <%= review.rating %>
 </div>

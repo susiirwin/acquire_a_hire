@@ -1,27 +1,28 @@
-<h1><%= @job.title %></h1>
-<% if @job.professional %>
-  <h3>Assigned To: <%= @job.professional.business_name %></h3>
-<% end %>
-<table>
-  <tr>
-    <th>Description</th>
-    <td><%= @job.description %></td>
-  </tr>
-  <tr>
-    <th>Skill</th>
-    <td><%= @job.skill.name %></td>
-  </tr>
-  <tr>
-    <th>Requester Rating</th>
-    <td><%= render partial: 'shared/average_rating', locals: {user: @job.requester} %></td>
-    </tr>
-  <tr>
-    <th>Minimum Price</th>
-    <td>$<%= @job.min_price %></td>
-  </tr>
-  <tr>
-    <th>Maximum Price</th>
-    <td>$<%= @job.max_price %></td>
-  </tr>
-</table>
-<%= display_authorized_job_options %>
+<div class="container">
+  <div class="well">
+    <h1><%= @job.title %></h1>
+    <table class="table">
+      <tr>
+        <th>Description</th>
+        <td><%= @job.description %></td>
+      </tr>
+      <tr>
+        <th>Skill</th>
+        <td><%= @job.skill.name %></td>
+      </tr>
+      <tr>
+        <th>Requester Rating</th>
+        <td><%= render partial: 'shared/average_rating', locals: {user: @job.requester} %></td>
+        </tr>
+      <tr>
+        <th>Minimum Price</th>
+        <td>$<%= @job.price_in_dollars(@job.min_price) %></td>
+      </tr>
+      <tr>
+        <th>Maximum Price</th>
+        <td>$<%= @job.price_in_dollars(@job.max_price) %></td>
+      </tr>
+    </table>
+    <%= display_authorized_job_options %>
+  </div>
+</div>
