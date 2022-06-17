@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/capistrano/rbenv.git
-  revision: e056efc0c361cc15b76ff961d6c5f65ed5e2c57e
+  remote: https://github.com/capistrano/rbenv.git
+  revision: 1fdb93a6dd4a4ab3fb786c995055cf6949daf7a4
   specs:
-    capistrano-rbenv (2.0.4)
+    capistrano-rbenv (2.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
 
@@ -114,7 +114,8 @@ GEM
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     hashdiff (0.3.0)
-    i18n (0.7.0)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
